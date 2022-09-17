@@ -2,7 +2,7 @@
 
 #include "../DragObjectIDs.h"
 #include "../Editor.h"
-#include "../GridLayer.h"
+#include "../Layer/Layer.h"
 #include "../GUI/Window.h"
 #include "../GUI/WindowManager.h"
 #include "../Level.h"
@@ -31,11 +31,11 @@ void LayerList::Update() {
                 if(clickindex < g_editor->m_level->m_layercount) {
                     printf("right click on index %i, layer address %p\n", clickindex, g_editor->m_level->GetLayer(clickindex));
 
-                    bool needcreation = true;
+                    bool needcreation = true;   //does the window need to be created ?
 
                     for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
                         Window* win = g_editor->m_winmanager->Get(i);
-                        if(win->m_id == WINID_LAYERINFO) {
+                        if(win->m_id == WINID_LAYERINFO) {      //the window exist
                             if(((LayerInfoWindow*)win)->m_layerpointer == g_editor->m_level->GetLayer(clickindex)) {
                                 //the window already exist
                                 g_editor->m_winmanager->BringOnTop(win);
@@ -44,12 +44,13 @@ void LayerList::Update() {
                             }
                         }
                     }
-                    if(needcreation) {
+                    if(needcreation) {      //the window don't exist
                         g_editor->m_winmanager->Add(new LayerInfoWindow(g_editor->m_winmanager ,g_editor->m_level->GetLayer(clickindex)));
                     }
                 }
             }
 
+            //Drag&drop with left click
             if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 int clickindex = (g_mouse->m_y-m_y)/30 + m_firstelementindex;
                 if(clickindex < g_editor->m_level->m_layercount) {

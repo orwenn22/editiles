@@ -1,7 +1,9 @@
 #include "Level.h"
 
 #include "Editor.h"
-#include "GridLayer.h"
+#include "Layer/GridLayer.h"
+#include "Layer/Layer.h"
+#include"Layer/LayerIDs.h"
 #include "Mouse/MouseObject.h"
 
 #include <raylib.h>
@@ -129,7 +131,10 @@ void Level::Update() {
 
     if(m_ispainting) {
         //printf("%i %i\n", m_overredboxx, m_overredboxy);
-        GetLayer(m_selectedlayer)->SetBoxValue(m_overredboxx, m_overredboxy, m_selectednumber);
+        Layer* curlayer = GetLayer(m_selectedlayer);
+        if(curlayer->m_type == LAYERID_GRID) {
+            ((GridLayer*)curlayer)->SetBoxValue(m_overredboxx, m_overredboxy, m_selectednumber);
+        }
     }
     ////////////////
 
@@ -185,14 +190,14 @@ void Level::AddLayer(std::string name) {
     m_layercount++;
 }
 
-GridLayer* Level::GetLayer(int index) {
+Layer* Level::GetLayer(int index) {
     if(index >= 0 && index < m_layercount) {
         return m_layers[index];
     }
     return NULL;
 }
 
-void Level::RemoveLayer(GridLayer* layerptr) {
+void Level::RemoveLayer(Layer* layerptr) {
     for(int i = 0; i < m_layercount; i++) {
         if(m_layers[i] == layerptr) {
             delete m_layers[i];
@@ -206,7 +211,7 @@ void Level::RemoveLayer(GridLayer* layerptr) {
 void Level::SwapLayers(int index1, int index2) {
     if(index1 >= 0 && index1 < m_layercount
     && index2 >= 0 && index2 < m_layercount) {
-        GridLayer* temp = GetLayer(index1);
+        Layer* temp = GetLayer(index1);
         m_layers[index1] = GetLayer(index2);
         m_layers[index2] = temp;
     }

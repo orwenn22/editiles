@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-class GridLayer;
+class Layer;
 
 class Level {
     public:
@@ -16,8 +16,8 @@ class Level {
     void Draw();
 
     void AddLayer(std::string name);
-    GridLayer* GetLayer(int index);
-    void RemoveLayer(GridLayer* layerptr);
+    Layer* GetLayer(int index);
+    void RemoveLayer(Layer* layerptr);
 
     void SwapLayers(int index1, int index2);
 
@@ -38,7 +38,7 @@ class Level {
     //Layer 0 is on top
     //Layer 1 is behind
     //etc
-    std::vector<GridLayer*> m_layers;
+    std::vector<Layer*> m_layers;
     int m_layercount;
 
     //user selection

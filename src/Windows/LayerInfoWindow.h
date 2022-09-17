@@ -3,13 +3,13 @@
 
 #include "../GUI/Window.h"
 
-class GridLayer;
+class Layer;
 
 class LayerInfoWindow : public Window {
     public:
-    LayerInfoWindow(WindowManager* winmanager, GridLayer* layerptr);
+    LayerInfoWindow(WindowManager* winmanager, Layer* layerptr);
 
-    GridLayer* m_layerpointer;
+    Layer* m_layerpointer;
 };
 
 #endif

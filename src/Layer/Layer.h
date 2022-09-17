@@ -1,31 +1,34 @@
-#ifndef GRID_LAYER_H
-#define GRID_LAYER_H
+#ifndef LAYER_H
+#define LAYER_H
 
 #include <string>
 
 class Level;
 class TextureObject;
 
-class GridLayer {
+class Layer {
     public:
-    GridLayer(short gridwidth, short gridheight, Level* level);
-    ~GridLayer();
+    Layer(short gridwidth, short gridheight, Level* level);
+    virtual ~Layer();
 
-    void Update();
-    void Draw(int x, int y);
-    void DrawNumbers(int x, int y);
+    virtual void Update();
+    virtual void Draw(int x, int y);
+    virtual void DrawNumbers(int x, int y);
 
-    void SetBoxValue(unsigned int xpos, unsigned int yps, unsigned short value);
-    
     void SetBoxSize(unsigned short width, unsigned short height);
+
     //private:
+
+    //type of layer
+    int m_type;
+
+    //size of the grid in box count
     unsigned short m_width;
     unsigned short m_height;
 
+    //size of a single box in pixel
     unsigned short m_boxwidth;
     unsigned short m_boxheight;
-
-    unsigned short* m_griddata;
 
     Level* m_parrent;
 
@@ -33,6 +36,7 @@ class GridLayer {
 
     bool m_havetexture;
     TextureObject* m_textureobj;
+
 };
 
 #endif

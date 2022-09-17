@@ -1,7 +1,7 @@
 #include "TextureInfoWindow.h"
 
 #include "../Editor.h"
-#include "../GridLayer.h"
+#include "../Layer/Layer.h"
 #include "../GUI/Widget/Button.h"
 #include "../GUI/Widget/CppStringField.h"
 #include "../GUI/Widget/Label.h"
@@ -21,7 +21,7 @@ void DeleteTextureButton(Button* but) {
 
     //check if texture is used by layer
     for(int i = 0; i < g_editor->m_level->m_layercount; i++) {
-        GridLayer* layer = g_editor->m_level->GetLayer(i);
+        Layer* layer = g_editor->m_level->GetLayer(i);
         if(layer->m_havetexture && layer->m_textureobj == textureobject) {
             layer->m_havetexture = false;
             layer->m_textureobj = NULL;

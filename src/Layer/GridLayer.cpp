@@ -1,7 +1,8 @@
 #include "GridLayer.h"
 
-#include "Level.h"
-#include "TextureManager/TextureObject.h"
+#include "../Level.h"
+#include "../TextureManager/TextureObject.h"
+#include "LayerIDs.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,24 +13,16 @@ extern int g_winwidth;
 extern int g_winheight;
 
 
-GridLayer::GridLayer(short gridwidth, short gridheight, Level* level) {
-    m_parrent = level;
+GridLayer::GridLayer(short gridwidth, short gridheight, Level* level) : Layer(gridwidth, gridheight, level) {
+    m_type = LAYERID_GRID;
 
     m_griddata = (unsigned short*) malloc(sizeof(unsigned short) * gridwidth * gridheight);
-    m_width = gridwidth;
-    m_height = gridheight;
-
-    m_boxwidth = 16;
-    m_boxheight = 16;
 
     for(int i = 0; i < m_width * m_height; i++) {
         m_griddata[i] = 0;
     }
     printf("allocated grid\n");
 
-    m_name = "Layer";
-
-    m_havetexture = false;
 }
 
 GridLayer::~GridLayer() {
@@ -102,9 +95,4 @@ void GridLayer::SetBoxValue(unsigned int xpos, unsigned int ypos, unsigned short
     && ypos >= 0 && ypos < m_height) {
         m_griddata[ypos*m_width+xpos] = value;
     }
-}
-
-void GridLayer::SetBoxSize(unsigned short width, unsigned short height) {
-    m_boxwidth = width;
-    m_boxheight = height;
 }

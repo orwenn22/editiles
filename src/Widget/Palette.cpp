@@ -1,7 +1,7 @@
 #include "Palette.h"
 
 #include "../Editor.h"
-#include "../GridLayer.h"
+#include "../Layer/Layer.h"
 #include "../Level.h"
 #include "../Mouse/MouseObject.h"
 #include "../TextureManager/TextureObject.h"
@@ -61,7 +61,7 @@ void Palette::Update() {
 }
 
 void Palette::Draw() {
-    GridLayer* selectedlayer = g_editor->m_level->GetLayer(g_editor->m_level->m_selectedlayer);
+    Layer* selectedlayer = g_editor->m_level->GetLayer(g_editor->m_level->m_selectedlayer);
 
     if(selectedlayer->m_havetexture) {
         TextureObject* textrobj = selectedlayer->m_textureobj;
