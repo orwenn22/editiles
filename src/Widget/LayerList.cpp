@@ -117,7 +117,8 @@ void LayerList::Draw() {
     }
 
     //outline arount selected layer
-    if(g_editor->m_level->m_selectedlayer >= m_firstelementindex && g_editor->m_level->m_selectedlayer < g_editor->m_level->m_layercount) {
+    //                                                                                                   g_editor->m_level->m_layercount      
+    if(g_editor->m_level->m_selectedlayer >= m_firstelementindex && g_editor->m_level->m_selectedlayer < m_firstelementindex+(m_height/30)) {
         int yorigin = (g_editor->m_level->m_selectedlayer - m_firstelementindex) * 30 + 2;
         DrawRectangleLines(m_x+2, m_y+yorigin, m_width-10, 25, RED);
     }

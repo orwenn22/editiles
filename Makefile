@@ -3,6 +3,7 @@ raylib = raylib/src
 srcdirs = ./src/*.cpp \
 		  ./src/GUI/*.cpp \
 		  ./src/GUI/Widget/*.cpp \
+		  ./src/Layer/*.cpp \
 		  ./src/Mouse/*.cpp \
 		  ./src/TextureManager/*.cpp \
 		  ./src/Windows/*.cpp \
