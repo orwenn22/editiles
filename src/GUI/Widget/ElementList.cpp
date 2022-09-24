@@ -32,18 +32,18 @@ void ElementList::Update() {
             }
             //Right Release
             if(IsMouseButtonReleased(MOUSE_BUTTON_RIGHT)) {
-                int clickindex = (g_mouse->m_y-m_y) / m_elementheight + m_firstelementindex;
-                if(clickindex < GetElementCount()) {    //click is valid
-                    printf("right release on index %i\n", clickindex);
-                    RightReleaseOn(clickindex);
+                int releaseindex = (g_mouse->m_y-m_y) / m_elementheight + m_firstelementindex;
+                if(releaseindex < GetElementCount()) {    //click is valid
+                    printf("right release on index %i\n", releaseindex);
+                    RightReleaseOn(releaseindex);
                 }
             }
             //Left Release
             if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-                int clickindex = (g_mouse->m_y-m_y) / m_elementheight + m_firstelementindex;
-                if(clickindex < GetElementCount()) {    //click is valid
-                    printf("left release on index %i\n", clickindex);
-                    LeftReleaseOn(clickindex);
+                int releaseindex = (g_mouse->m_y-m_y) / m_elementheight + m_firstelementindex;
+                if(releaseindex < GetElementCount()) {    //click is valid
+                    printf("left release on index %i\n", releaseindex);
+                    LeftReleaseOn(releaseindex);
                 }
             }
 
@@ -72,13 +72,15 @@ void ElementList::Draw() {
     int paintery = m_y;
 
     for(int i = m_firstelementindex; (i < GetElementCount()) && (i < m_firstelementindex + (m_height/30)); i++) {
-        DrawElement(painterx, paintery);
+        DrawElement(painterx, paintery, i);
         DrawLine(m_x, paintery+m_elementheight-1, m_x+m_width-6, paintery+m_elementheight-1, WHITE);
+        
+        DrawLine(m_x, paintery+29, m_x+m_width-6, paintery+29, WHITE);
         paintery += m_elementheight;
     }
 
     if(m_canselectelement) {
-        //outline arount selected layer
+        //outline arount selected element
         if(GetSelectedElement() >= m_firstelementindex && GetSelectedElement() < m_firstelementindex+(m_height/m_elementheight)) {
             int yorigin = (GetSelectedElement() - m_firstelementindex) * 30 + 2;
             DrawRectangleLines(m_x+2, m_y+yorigin, m_width-10, 25, RED);
@@ -112,12 +114,12 @@ void ElementList::RightClickOn(int clickindex) { printf("rightclick | clickindex
 //called when an element in the list is left clicked.
 void ElementList::LeftClickOn(int clickindex) { printf("leftclick | clickindex %i\n", clickindex); }
 //called when an element in the list is right released.
-void ElementList::RightReleaseOn(int clickindex) { printf("rightrelease | clickindex %i\n", clickindex); }
+void ElementList::RightReleaseOn(int releaseindex) { printf("rightrelease | releaseindex %i\n", releaseindex); }
 //called when an element in the list is left released.
-void ElementList::LeftReleaseOn(int clickindex) { printf("leftrelease | clickindex %i\n", clickindex); }
+void ElementList::LeftReleaseOn(int releaseindex) { printf("leftrelease | releaseindex %i\n", releaseindex); }
 
 //called when drawing an element of the list
-void ElementList::DrawElement(int painterx, int paintery) {
+void ElementList::DrawElement(int painterx, int paintery, int elementindex) {
     DrawText("Element lol", painterx+3, paintery+10, 10, WHITE);
 }
 
