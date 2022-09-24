@@ -1,0 +1,8 @@
+.vscode
+executable
+test
+test.c
+test.cpp
+*.png
+*.aseprite
+*.gif
