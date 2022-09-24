@@ -19,8 +19,10 @@ class ElementList : public Widget {
 
     virtual int GetElementCount();
 
-    virtual int GetSelectedElement();
-    virtual void SetSelectedElement(int newselection);
+    virtual int GetSelectedElement();                   //return the selected element, needs to be overrided.
+    virtual void SetSelectedElement(int newselection);  //set the selected element, needs to be overrided.
+
+    virtual void PreInputCheck();   //called when mouse is over the widget. Override to add custom behavior to widget.
 
     int m_firstelementindex;
     int m_elementheight;

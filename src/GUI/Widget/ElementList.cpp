@@ -14,6 +14,8 @@ void ElementList::Update() {
     if(g_mouse->m_havebeenused == false) {
         if(g_mouse->m_x >= m_x && g_mouse->m_x < m_x+m_width
         && g_mouse->m_y >= m_y && g_mouse->m_y < m_y+m_height) {    //mouse on widget
+            PreInputCheck();
+
             //Right Click
             if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
                 int clickindex = (g_mouse->m_y-m_y) / m_elementheight + m_firstelementindex;
@@ -130,5 +132,10 @@ int ElementList::GetSelectedElement() {
 
 //need to be overrided
 void ElementList::SetSelectedElement(int newselection) {
+    return;
+}
+
+//called when mouse is over the widget. Override to add custom behavior to widget.
+void ElementList::PreInputCheck() {
     return;
 }

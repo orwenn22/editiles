@@ -1,23 +1,21 @@
 #ifndef TEXTURE_LIST_H
 #define TEXTURE_LIST_H
 
-#include "../GUI/Widget/Widget.h"
+#include "../GUI/Widget/ElementList.h"
 
-class WidgetManager;
-
-class TextureList : public Widget {
+class TextureList : public ElementList {
     public:
     TextureList(WidgetManager* wm, int x, int y, int w, int h);
 
-    void Update() override;
-    void Draw() override;
 
-    int m_firstelementindex;
+    void RightClickOn(int clickindex) override;
+    void LeftClickOn(int clickindex) override;
 
-    //for double clicking
-    /*bool m_issomethingclicked;
-    int m_clickedelement;
-    int m_timesinceclick;*/
+    void DrawElement(int painterx, int paintery, int elementindex) override;
+
+    int GetElementCount() override;
+
+    void PreInputCheck() override;
 };
 
 #endif
