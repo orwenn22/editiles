@@ -63,37 +63,41 @@ void ObjectPropertiesList::RightClickOn(int elementindex) {
     ObjectProperty* prop = m_objptr->GetProperty(elementindex);
 
     if(g_mouse->m_x < m_x+separatorx) {     //rename property
-        bool needcreation = true;
-        for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
-            Window* win = g_editor->m_winmanager->Get(i);
+        if(prop->obligatory == false) {
+            bool needcreation = true;
+            for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
+                Window* win = g_editor->m_winmanager->Get(i);
 
-            if(win->m_id == WINID_RENAMEPROPERTY) {
-                if(((RenamePropertyWindow*)win)->m_propptr == prop) {   //window already exist
-                    needcreation = false;
-                    g_editor->m_winmanager->BringOnTop(win);
-                    break;
+                if(win->m_id == WINID_RENAMEPROPERTY) {
+                    if(((RenamePropertyWindow*)win)->m_propptr == prop) {   //window already exist
+                        needcreation = false;
+                        g_editor->m_winmanager->BringOnTop(win);
+                        break;
+                    }
                 }
             }
+            if(needcreation) {
+                g_editor->m_winmanager->Add(new RenamePropertyWindow(g_editor->m_winmanager, m_objptr, prop));
+            }
         }
-        if(needcreation) {
-            g_editor->m_winmanager->Add(new RenamePropertyWindow(g_editor->m_winmanager, m_objptr, prop));
-        }
+        
     } else {                //change value
+        if(prop->havedefaultvalue) {
+            bool needcreation = true;
+            for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
+                Window* win = g_editor->m_winmanager->Get(i);
 
-        bool needcreation = true;
-        for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
-            Window* win = g_editor->m_winmanager->Get(i);
-
-            if(win->m_id == WINID_CHANGEPROPERTY) {
-                if(((ChangePropertyWindow*)win)->m_propptr == prop) {   //window already exist
-                    needcreation = false;
-                    g_editor->m_winmanager->BringOnTop(win);
-                    break;
+                if(win->m_id == WINID_CHANGEPROPERTY) {
+                    if(((ChangePropertyWindow*)win)->m_propptr == prop) {   //window already exist
+                        needcreation = false;
+                        g_editor->m_winmanager->BringOnTop(win);
+                        break;
+                    }
                 }
             }
-        }
-        if(needcreation) {
-            g_editor->m_winmanager->Add(new ChangePropertyWindow(g_editor->m_winmanager, prop));
+            if(needcreation) {
+                g_editor->m_winmanager->Add(new ChangePropertyWindow(g_editor->m_winmanager, prop));
+            }
         }
         
     }
