@@ -8,6 +8,7 @@
 #include "TextureManager/TextureObject.h"
 #include "Windows/LayerListWindow.h"
 #include "Windows/NewLevelWindow.h"
+#include "Windows/Object/ObjectListWindow.h"
 #include "Windows/PaletteWindow.h"
 #include "Windows/TextureListWindow.h"
 #include "Windows/WinIDs.h"
@@ -100,6 +101,16 @@ void Editor::KeyBinds() {
             }
         }
 
+        if(IsKeyPressed(KEY_O) && m_havelevel) {                   //OBJECT LIST WINDOW
+            Window* winptr = m_winmanager->FindWithID(WINID_OBJECTLIST);
+            if(winptr == NULL) {
+                m_winmanager->Add(new ObjectListWindow(m_winmanager));
+            }
+            else {
+                m_winmanager->BringOnTop(winptr);
+            }
+        }
+
         if(IsKeyPressed(KEY_N)) {                   //NEW LEVEL WINDOW
             Window* winptr = m_winmanager->FindWithID(WINID_NEWLEVEL);
             if(winptr == NULL) {
@@ -109,6 +120,7 @@ void Editor::KeyBinds() {
                 m_winmanager->BringOnTop(winptr);
             }
         }
+
     }
 
     if(IsKeyPressed(KEY_KP_0) && m_havelevel) {
@@ -129,6 +141,10 @@ void Editor::CreateNewLevel(int width, int height, int boxwidth, int boxheight) 
 
     m_level = new Level(width, height, boxwidth, boxheight);
     printf("Allocated level at %p, layer count : %i\n", m_level, m_level->m_layercount);
+
+    while(m_winmanager->m_wincount > 0) {
+        m_winmanager->Remove(m_winmanager->Get(0));
+    }
 
     m_havelevel = true;
 }

@@ -73,11 +73,11 @@ void ElementList::Draw() {
     int painterx = m_x;
     int paintery = m_y;
 
-    for(int i = m_firstelementindex; (i < GetElementCount()) && (i < m_firstelementindex + (m_height/30)); i++) {
+    for(int i = m_firstelementindex; (i < GetElementCount()) && (i < m_firstelementindex + (m_height/m_elementheight)); i++) {
         DrawElement(painterx, paintery, i);
         DrawLine(m_x, paintery+m_elementheight-1, m_x+m_width-6, paintery+m_elementheight-1, WHITE);
         
-        DrawLine(m_x, paintery+29, m_x+m_width-6, paintery+29, WHITE);
+        //DrawLine(m_x, paintery+29, m_x+m_width-6, paintery+29, WHITE);
         paintery += m_elementheight;
     }
 
@@ -94,7 +94,7 @@ void ElementList::Draw() {
 
     //scrollbar
     if(GetElementCount() > 0) {
-        int scrollbarx = m_x+m_width-4;
+        int scrollbarx = m_x+m_width-5;
         int scrollbary = m_y+2+(((m_height-4)/GetElementCount()))*m_firstelementindex;
         
         //                                                                   V number of elements that can be displayed
@@ -104,7 +104,7 @@ void ElementList::Draw() {
             scrollbarheight = (m_y+m_height-2) - scrollbary;    //don't cross the bottom of the scrollbar area
         }
 
-        DrawRectangle(scrollbarx, scrollbary, 2, scrollbarheight, WHITE);
+        DrawRectangle(scrollbarx, scrollbary, 3, scrollbarheight, WHITE);
     }
 }
 

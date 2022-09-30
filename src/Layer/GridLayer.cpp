@@ -43,7 +43,7 @@ void GridLayer::Draw(int x, int y) {
     if(firstxbox < 0) firstxbox = 0;
     if(firstybox < 0) firstybox = 0;
 
-    int lastxbox = firstxbox + (g_winwidth / (m_boxwidth * zoom)) + 1;
+    int lastxbox = firstxbox + (g_winwidth  / (m_boxwidth * zoom) ) + 2;
     int lastybox = firstybox + (g_winheight / (m_boxheight * zoom)) + 2;
 
     if(lastxbox > m_width) lastxbox = m_width;

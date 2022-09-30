@@ -5,7 +5,7 @@
 #include <vector>
 
 class Layer;
-
+class ObjectManager;
 class Level {
     public:
     Level();
@@ -40,6 +40,10 @@ class Level {
     //etc
     std::vector<Layer*> m_layers;
     int m_layercount;
+    /////////////////
+
+    //Object templates
+    ObjectManager* m_objectmanager;
 
     //user selection
     int m_selectedlayer;

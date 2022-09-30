@@ -3,11 +3,16 @@
 #include "Editor.h"
 #include "Layer/GridLayer.h"
 #include "Layer/Layer.h"
-#include"Layer/LayerIDs.h"
+#include "Layer/LayerIDs.h"
 #include "Mouse/MouseObject.h"
+#include "ObjectManager/ObjectManager.h"
+//#include "ObjectManager/ObjectTemplate.h"
 
 #include <raylib.h>
 #include <stdio.h>
+
+extern int g_winwidth;
+extern int g_winheight;
 
 extern MouseObject* g_mouse;
 
@@ -36,6 +41,8 @@ Level::Level() {
 
     m_selectednumber = 1;
     m_ispainting = false;
+
+    m_objectmanager = new ObjectManager(this);
 }
 
 Level::Level(int width, int height, int boxwidth, int boxheight) {
@@ -66,13 +73,18 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
 
     m_selectednumber = 1;
     m_ispainting = false;
+
+    m_objectmanager = new ObjectManager(this);
+    //m_objectmanager->Add(new ObjectTemplate("MyObject"));
 }
 
 Level::~Level() {
+    delete m_objectmanager;
     int vecsize = m_layers.size();
     for(int i = 0; i < vecsize; i++) {
         delete m_layers[i];
     }
+    m_layers.clear();
     m_layercount = 0;
     m_selectedlayer = -1;
 }
@@ -157,12 +169,22 @@ void Level::Draw() {
 
     //draw grid
     if(m_layercount > 0) {
-        for(int i = 0; i < m_height; i++) { //Y
-            for(int j = 0; j < m_height; j++) { //X
+        int firstxbox = -m_x / (m_boxwidth * m_zoom);
+        int firstybox = -m_y / (m_boxheight * m_zoom);
+        if(firstxbox < 0) firstxbox = 0;
+        if(firstybox < 0) firstybox = 0;
+
+        int lastxbox = firstxbox + (g_winwidth  / (m_boxwidth * m_zoom) ) + 2;
+        int lastybox = firstybox + (g_winheight / (m_boxheight * m_zoom)) + 2;
+        if(lastxbox > m_width) lastxbox = m_width;
+        if(lastybox > m_height) lastybox = m_height;
+
+        for(int i = firstybox; i < lastybox; i++) { //Y
+            for(int j = firstxbox; j < lastxbox; j++) { //X
                 DrawRectangleLines(m_x + j * (m_boxwidth*m_zoom), m_y + i * (m_boxheight*m_zoom), m_boxwidth*m_zoom, m_boxheight*m_zoom, GRAY);
             }
         }
-
+    
         GetLayer(m_selectedlayer)->DrawNumbers(m_x, m_y);
     }
 

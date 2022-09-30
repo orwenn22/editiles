@@ -5,8 +5,10 @@ srcdirs = ./src/*.cpp \
 		  ./src/GUI/Widget/*.cpp \
 		  ./src/Layer/*.cpp \
 		  ./src/Mouse/*.cpp \
+		  ./src/ObjectManager/*.cpp \
 		  ./src/TextureManager/*.cpp \
 		  ./src/Windows/*.cpp \
+		  ./src/Windows/Object/*.cpp \
 		  ./src/Widget/*.cpp
 
 executable: ${srcdirs}
