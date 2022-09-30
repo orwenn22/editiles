@@ -5,14 +5,21 @@
 
 int g_maxfps = 120000;
 
-//int g_winwidth = 960;
-//int g_winheight = 540;
-
-int g_winwidth = 1860;
-int g_winheight = 930;
+int g_winwidth = 960;
+int g_winheight = 540;
 
 Editor* g_editor;
 MouseObject* g_mouse;
+
+void MyResizeWindow(int w, int h) {
+    if(w != g_winwidth || h != g_winheight) {
+        SetWindowSize(w, h);
+    }
+
+    g_winwidth = w;
+    g_winheight = h;
+
+}
 
 int main() {
     InitWindow(g_winwidth, g_winheight, "levedit");

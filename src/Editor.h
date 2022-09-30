@@ -4,6 +4,7 @@
 class Level;
 class MouseObject;
 class TextureManager;
+class WindowCorner;
 class WindowManager;
 
 class Editor {
@@ -23,6 +24,8 @@ class Editor {
     MouseObject* m_mouse;
     TextureManager* m_texturemanager;
     WindowManager* m_winmanager;
+
+    WindowCorner* m_corner;
 
     bool m_havelevel;
 };
