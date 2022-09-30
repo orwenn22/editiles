@@ -6,7 +6,7 @@
 #include "../Mouse/MouseObject.h"
 #include "../TextureManager/TextureManager.h"
 #include "../TextureManager/TextureObject.h"
-#include "../Windows/TextureInfoWindow.h"
+#include "../Windows/Texture/TextureInfoWindow.h"
 #include "../Windows/WinIDs.h"
 
 #include <raylib.h>

@@ -8,7 +8,7 @@
 #include "../Level.h"
 #include "../Mouse/DragAndDropObject.h"
 #include "../Mouse/MouseObject.h"
-#include "../Windows/LayerInfoWindow.h"
+#include "../Windows/Layer/LayerInfoWindow.h"
 #include "../Windows/WinIDs.h"
 
 #include <stdio.h>

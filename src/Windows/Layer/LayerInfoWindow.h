@@ -1,7 +1,7 @@
 #ifndef LAYER_INFO_WINDOW_H
 #define LAYER_INFO_WINDOW_H
 
-#include "../GUI/Window.h"
+#include "../../GUI/Window.h"
 
 class Layer;
 

@@ -1,7 +1,7 @@
 #ifndef TEXTURE_INFO_WINDOW_H
 #define TEXTURE_INFO_WINDOW_H
 
-#include "../GUI/Window.h"
+#include "../../GUI/Window.h"
 
 class TextureObject;
 

@@ -1,11 +1,11 @@
 #include "LayerListWindow.h"
 
-#include "../Editor.h"
-#include "../GUI/Widget/Button.h"
-#include "../GUI/Widget/WidgetManager.h"
-#include "../Level.h"
-#include "../Widget/LayerList.h"
-#include "WinIDs.h"
+#include "../../Editor.h"
+#include "../../GUI/Widget/Button.h"
+#include "../../GUI/Widget/WidgetManager.h"
+#include "../../Level.h"
+#include "../../Widget/LayerList.h"
+#include "../WinIDs.h"
 
 extern Editor* g_editor;
 

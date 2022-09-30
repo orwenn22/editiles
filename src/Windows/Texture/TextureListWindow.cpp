@@ -1,12 +1,12 @@
 #include "TextureListWindow.h"
 
-#include "../Editor.h"
-#include "../GUI/Widget/Button.h"
-#include "../GUI/Widget/WidgetManager.h"
-#include "../GUI/WindowManager.h"
-#include "../Widget/TextureList.h"
-#include "../Windows/NewTextureWindow.h"
-#include "WinIDs.h"
+#include "../../Editor.h"
+#include "../../GUI/Widget/Button.h"
+#include "../../GUI/Widget/WidgetManager.h"
+#include "../../GUI/WindowManager.h"
+#include "../../Widget/TextureList.h"
+#include "../WinIDs.h"
+#include "NewTextureWindow.h"
 
 extern Editor* g_editor;
 

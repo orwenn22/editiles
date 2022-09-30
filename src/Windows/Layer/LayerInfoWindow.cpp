@@ -1,14 +1,14 @@
 #include "LayerInfoWindow.h"
 
-#include "../Editor.h"
-#include "../Layer/Layer.h"
-#include "../Level.h"
-#include "../GUI/Widget/Button.h"
-#include "../GUI/Widget/CppStringField.h"
-#include "../GUI/Widget/Label.h"
-#include "../GUI/Widget/WidgetManager.h"
-#include "../GUI/WindowManager.h"
-#include "WinIDs.h"
+#include "../../Editor.h"
+#include "../../Layer/Layer.h"
+#include "../../Level.h"
+#include "../../GUI/Widget/Button.h"
+#include "../../GUI/Widget/CppStringField.h"
+#include "../../GUI/Widget/Label.h"
+#include "../../GUI/Widget/WidgetManager.h"
+#include "../../GUI/WindowManager.h"
+#include "../WinIDs.h"
 
 extern Editor* g_editor;
 

@@ -1,8 +1,8 @@
 #include "NewTextureWindow.h"
 
-#include "../GUI/Widget/WidgetManager.h"
-#include "../Widget/ImageFileReceiver.h"
-#include "WinIDs.h"
+#include "../../GUI/Widget/WidgetManager.h"
+#include "../../Widget/ImageFileReceiver.h"
+#include "../WinIDs.h"
 
 NewTextureWindow::NewTextureWindow(WindowManager* winmanager) : Window(winmanager) {
     m_id = WINID_NEWTEXTURE;

@@ -8,7 +8,9 @@ srcdirs = ./src/*.cpp \
 		  ./src/ObjectManager/*.cpp \
 		  ./src/TextureManager/*.cpp \
 		  ./src/Windows/*.cpp \
+		  ./src/Windows/Layer/*.cpp \
 		  ./src/Windows/Object/*.cpp \
+		  ./src/Windows/Texture/*.cpp \
 		  ./src/Widget/*.cpp
 
 executable: ${srcdirs}
