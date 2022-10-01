@@ -13,8 +13,13 @@ extern int g_winwidth;
 extern int g_winheight;
 
 
-GridLayer::GridLayer(short gridwidth, short gridheight, Level* level) : Layer(gridwidth, gridheight, level) {
+GridLayer::GridLayer(short gridwidth, short gridheight, Level* level) : Layer(level) {
     m_type = LAYERID_GRID;
+
+    m_width = gridwidth;
+    m_height = gridheight;
+    m_boxwidth = 16;
+    m_boxheight = 16;
 
     m_griddata = (unsigned short*) malloc(sizeof(unsigned short) * gridwidth * gridheight);
 
@@ -89,6 +94,11 @@ void GridLayer::DrawNumbers(int x, int y) {
             DrawText(TextFormat("%i", m_griddata[i*m_width+j]),x + j * (m_boxwidth*zoom) +2, y + i * (m_boxheight*zoom) +2, 10, WHITE);
         }
     }
+}
+
+void GridLayer::SetBoxSize(unsigned short width, unsigned short height) {
+    m_boxwidth = width;
+    m_boxheight = height;
 }
 
 void GridLayer::SetBoxValue(unsigned int xpos, unsigned int ypos, unsigned short value) {

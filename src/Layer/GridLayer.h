@@ -15,12 +15,21 @@ class GridLayer : public Layer {
 
     void DrawNumbers(int x, int y);
 
+    void SetBoxSize(unsigned short width, unsigned short height);
     void SetBoxValue(unsigned int xpos, unsigned int yps, unsigned short value);
 
     //private:
     unsigned short* m_griddata;
 
     std::string m_tilemapname;      //timemap name saved into file
+
+    //size of the grid in box count
+    unsigned short m_width;
+    unsigned short m_height;
+
+    //size of a single box in pixel
+    unsigned short m_boxwidth;
+    unsigned short m_boxheight;
 };
 
 #endif
