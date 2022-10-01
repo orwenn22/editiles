@@ -3,6 +3,8 @@
 
 #include "Layer.h"
 
+#include <string>
+
 class GridLayer : public Layer {
     public:
     GridLayer(short gridwidth, short gridheight, Level* level);
@@ -17,6 +19,8 @@ class GridLayer : public Layer {
 
     //private:
     unsigned short* m_griddata;
+
+    std::string m_tilemapname;      //timemap name saved into file
 };
 
 #endif

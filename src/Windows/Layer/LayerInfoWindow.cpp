@@ -1,7 +1,9 @@
 #include "LayerInfoWindow.h"
 
 #include "../../Editor.h"
+#include "../../Layer/GridLayer.h"
 #include "../../Layer/Layer.h"
+#include "../../Layer/LayerIDs.h"
 #include "../../Level.h"
 #include "../../GUI/Widget/Button.h"
 #include "../../GUI/Widget/CppStringField.h"
@@ -41,8 +43,15 @@ LayerInfoWindow::LayerInfoWindow(WindowManager* winmanager, Layer* layerptr) : W
     //Type
     m_widgetmanager->Add(new Label(m_widgetmanager, 5, 46, TextFormat("Layer type : %i", m_layerpointer->m_type)));
 
+    if(m_layerpointer->m_type == LAYERID_GRID) {
+        m_widgetmanager->Add(new Label(m_widgetmanager, 5, 63, "tilemap name"));
+        m_widgetmanager->Add(new CppStringField(m_widgetmanager, 70, 60, 77, &(((GridLayer*)m_layerpointer)->m_tilemapname)));
+    }
+    else {
+    }
+
     //Delete button
-    Button* deletebutton = new Button(m_widgetmanager, 5, 60, 50, 15);
+    Button* deletebutton = new Button(m_widgetmanager, 5, 132, 50, 15);
     deletebutton->SetText("Delete");
     deletebutton->SetAction(DeleteLayerButton);
     m_widgetmanager->Add(deletebutton);

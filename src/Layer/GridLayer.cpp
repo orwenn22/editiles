@@ -23,6 +23,7 @@ GridLayer::GridLayer(short gridwidth, short gridheight, Level* level) : Layer(gr
     }
     printf("allocated grid\n");
 
+    m_tilemapname = "";
 }
 
 GridLayer::~GridLayer() {
