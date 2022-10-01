@@ -26,6 +26,7 @@ RenameObjectWindow::RenameObjectWindow(WindowManager* winmanager, ObjectTemplate
     m_objptr = objptr;
     m_newname = objptr->m_name;
 
+    m_titlebarcolor = {46, 41, 78, 255};
     m_titlebartext = "Rename object";
 
     m_widgetmanager->Add(new CppStringField(m_widgetmanager, 5, 15, 60, &m_newname));

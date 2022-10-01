@@ -32,6 +32,7 @@ ChangePropertyWindow::ChangePropertyWindow(WindowManager* winmanager, ObjectProp
     m_intval = 0;
     m_strval = "";
 
+    m_titlebarcolor = {46, 41, 78, 255};
     m_titlebartext = TextFormat("Change prop value %p", m_propptr);
 
     if(m_propptr->type == OPT_INT) {

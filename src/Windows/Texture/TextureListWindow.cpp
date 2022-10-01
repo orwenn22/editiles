@@ -26,6 +26,7 @@ TextureListWindow::TextureListWindow(WindowManager* winmanager) : Window(winmana
     m_width = 200;
     m_height = 200;
 
+    m_titlebarcolor = RED;
     m_titlebartext = "Texture list";
 
     m_widgetmanager->Add(new TextureList(m_widgetmanager, 3, 15, 194, 150));

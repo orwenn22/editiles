@@ -66,6 +66,7 @@ ObjectInfoWindow::ObjectInfoWindow(WindowManager* winmanager, ObjectTemplate* ob
     m_id = WINID_OBJECTINFO;
     m_objptr = objptr;
 
+    m_titlebarcolor = {46, 41, 78, 255};
     m_titlebartext = TextFormat("Object %p", objptr);
 
     m_width = 200;

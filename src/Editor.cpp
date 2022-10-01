@@ -1,7 +1,6 @@
 #include "Editor.h"
 
 #include "GUI/Mouse/MouseObject.h"
-#include "GUI/Window.h"
 #include "GUI/WindowCorner.h"
 #include "GUI/WindowManager.h"
 #include "Level.h"
@@ -27,7 +26,7 @@ Editor::Editor() {
     m_texturemanager = new TextureManager(this);
 
     m_winmanager = new WindowManager();
-    m_winmanager->Add(new Window(m_winmanager));
+    //m_winmanager->Add(new Window(m_winmanager));
 
     m_corner = new WindowCorner(500, 500);
 }

@@ -30,6 +30,7 @@ NewPropertyWindow::NewPropertyWindow(WindowManager* winmanager, ObjectTemplate* 
 
     m_newpropertyname = "property";
 
+    m_titlebarcolor = {46, 41, 78, 255};
     m_titlebartext = "New prop";
 
     m_widgetmanager->Add(new CppStringField(m_widgetmanager, 5, 15, 75, &m_newpropertyname));

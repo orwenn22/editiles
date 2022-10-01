@@ -23,6 +23,8 @@ void DeleteLayerButton(Button* but) {
 
 LayerInfoWindow::LayerInfoWindow(WindowManager* winmanager, Layer* layerptr) : Window(winmanager) {
     m_id = WINID_LAYERINFO;
+
+    m_titlebarcolor = {52, 98, 63, 255};
     m_titlebartext = TextFormat("Layer %p", layerptr);
 
     m_height = 150;

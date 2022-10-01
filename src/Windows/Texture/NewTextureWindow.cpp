@@ -8,6 +8,8 @@ NewTextureWindow::NewTextureWindow(WindowManager* winmanager) : Window(winmanage
     m_id = WINID_NEWTEXTURE;
     m_titlebartext = "New Texture";
 
+    m_titlebarcolor = RED;
+
     m_width = 82;
     m_height = 94;    
 

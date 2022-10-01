@@ -18,6 +18,7 @@ LayerListWindow::LayerListWindow(WindowManager* winmanager) : Window(winmanager)
 
     SetPosition(100, 100);
 
+    m_titlebarcolor = {52, 98, 63, 255};
     m_titlebartext = "Layer list";
 
     m_width = 200;

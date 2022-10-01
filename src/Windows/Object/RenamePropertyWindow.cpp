@@ -26,6 +26,7 @@ RenamePropertyWindow::RenamePropertyWindow(WindowManager* winmanager,  ObjectTem
 
     m_newname = m_propptr->name;
 
+    m_titlebarcolor = {46, 41, 78, 255};
     m_titlebartext = TextFormat("Rename prop %p", propptr);
 
     m_widgetmanager->Add(new CppStringField(m_widgetmanager, 5, 15, 60, &m_newname));

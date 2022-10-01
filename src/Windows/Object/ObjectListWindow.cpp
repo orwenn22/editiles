@@ -25,6 +25,7 @@ ObjectListWindow::ObjectListWindow(WindowManager* winmanager) : Window(winmanage
     m_id = WINID_OBJECTLIST;
     SetPosition(100, 100);
 
+    m_titlebarcolor = {46, 41, 78, 255};
     m_titlebartext = "Object list";
 
     m_width = 200;

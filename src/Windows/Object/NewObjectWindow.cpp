@@ -28,7 +28,10 @@ void CreateNewObjectButton(Button* but) {
 
 NewObjectWindow::NewObjectWindow(WindowManager* winmanager) : Window(winmanager) {
     m_id = WINID_NEWOBJECT;
+
+    m_titlebarcolor = {46, 41, 78, 255};
     m_titlebartext = "New object";
+    
     m_newobjname = "newobject";
     
     m_height = 60;

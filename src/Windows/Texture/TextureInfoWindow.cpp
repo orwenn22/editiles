@@ -41,6 +41,7 @@ TextureInfoWindow::TextureInfoWindow(WindowManager* winmanager, TextureObject* t
     m_width = 150;
     m_height = 200;
 
+    m_titlebarcolor = RED;
 
     m_textureobjectptr = textureobjectptr;
 
