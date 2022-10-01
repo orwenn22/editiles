@@ -1,9 +1,9 @@
 #include "Palette.h"
 
 #include "../Editor.h"
+#include "../GUI/Mouse/MouseObject.h"
 #include "../Layer/Layer.h"
 #include "../Level.h"
-#include "../Mouse/MouseObject.h"
 #include "../TextureManager/TextureObject.h"
 
 #include <raylib.h>

@@ -1,6 +1,6 @@
 #include "ElementList.h"
 
-#include "../../Mouse/MouseObject.h"
+#include "../Mouse/MouseObject.h"
 
 extern MouseObject* g_mouse;
 

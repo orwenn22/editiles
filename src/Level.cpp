@@ -1,10 +1,10 @@
 #include "Level.h"
 
 #include "Editor.h"
+#include "GUI/Mouse/MouseObject.h"
 #include "Layer/GridLayer.h"
 #include "Layer/Layer.h"
 #include "Layer/LayerIDs.h"
-#include "Mouse/MouseObject.h"
 #include "ObjectManager/ObjectManager.h"
 //#include "ObjectManager/ObjectTemplate.h"
 

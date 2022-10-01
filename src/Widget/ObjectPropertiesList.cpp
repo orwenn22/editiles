@@ -1,8 +1,8 @@
 #include "ObjectPropertiesList.h"
 
 #include "../Editor.h"
+#include "../GUI/Mouse/MouseObject.h"
 #include "../GUI/WindowManager.h"
-#include "../Mouse/MouseObject.h"
 #include "../ObjectManager/ObjectTemplate.h"
 #include "../ObjectManager/ObjectProperty.h"
 #include "../Windows/Object/ChangePropertyWindow.h"

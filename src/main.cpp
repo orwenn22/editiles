@@ -1,7 +1,7 @@
 #include <raylib.h>
 
 #include "Editor.h"
-#include "Mouse/MouseObject.h"
+#include "GUI/Mouse/MouseObject.h"
 
 int g_maxfps = 120000;
 

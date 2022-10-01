@@ -1,6 +1,6 @@
 #include "WindowCorner.h"
 
-#include "../Mouse/MouseObject.h"
+#include "Mouse/MouseObject.h"
 
 //TODO: make this non global
 extern int g_winwidth;

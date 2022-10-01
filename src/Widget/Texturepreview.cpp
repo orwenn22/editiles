@@ -1,6 +1,6 @@
 #include "TexturePreview.h"
 
-#include "../Mouse/MouseObject.h"
+#include "../GUI/Mouse/MouseObject.h"
 #include "../TextureManager/TextureObject.h"
 
 #include <raylib.h>

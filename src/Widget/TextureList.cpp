@@ -2,8 +2,8 @@
 
 #include "../DragObjectIDs.h"
 #include "../Editor.h"
+#include "../GUI/Mouse/MouseObject.h"
 #include "../GUI/WindowManager.h"
-#include "../Mouse/MouseObject.h"
 #include "../TextureManager/TextureManager.h"
 #include "../TextureManager/TextureObject.h"
 #include "../Windows/Texture/TextureInfoWindow.h"

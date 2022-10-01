@@ -1,7 +1,7 @@
 #include "Window.h"
 
 #include "../Editor.h"
-#include "../Mouse/MouseObject.h"
+#include "Mouse/MouseObject.h"
 #include "Widget/IntField.h"
 #include "Widget/WidgetManager.h"
 #include "Widget/Widget.h"

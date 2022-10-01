@@ -1,6 +1,6 @@
 #include "CppStringField.h"
 
-#include "../../Mouse/MouseObject.h"
+#include "../Mouse/MouseObject.h"
 
 #include <raylib.h>
 

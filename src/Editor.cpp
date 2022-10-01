@@ -1,10 +1,10 @@
 #include "Editor.h"
 
+#include "GUI/Mouse/MouseObject.h"
 #include "GUI/Window.h"
 #include "GUI/WindowCorner.h"
 #include "GUI/WindowManager.h"
 #include "Level.h"
-#include "Mouse/MouseObject.h"
 #include "TextureManager/TextureManager.h"
 #include "TextureManager/TextureObject.h"
 #include "Windows/Layer/LayerListWindow.h"

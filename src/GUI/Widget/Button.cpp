@@ -1,7 +1,7 @@
 #include "Button.h"
 
 #include "../../Editor.h"
-#include "../../Mouse/MouseObject.h"
+#include "../Mouse/MouseObject.h"
 
 #include <raylib.h>
 #include <stdio.h>

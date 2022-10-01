@@ -3,11 +3,11 @@
 #include "../DragObjectIDs.h"
 #include "../Editor.h"
 #include "../Layer/Layer.h"
+#include "../GUI/Mouse/DragAndDropObject.h"
+#include "../GUI/Mouse/MouseObject.h"
 #include "../GUI/Window.h"
 #include "../GUI/WindowManager.h"
 #include "../Level.h"
-#include "../Mouse/DragAndDropObject.h"
-#include "../Mouse/MouseObject.h"
 #include "../Windows/Layer/LayerInfoWindow.h"
 #include "../Windows/WinIDs.h"
 
