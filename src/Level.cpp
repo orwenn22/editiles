@@ -171,11 +171,13 @@ void Level::Draw() {
     if(m_layercount > 0) {
         int firstxbox = -m_x / (m_boxwidth * m_zoom);
         int firstybox = -m_y / (m_boxheight * m_zoom);
-        if(firstxbox < 0) firstxbox = 0;
-        if(firstybox < 0) firstybox = 0;
 
         int lastxbox = firstxbox + (g_winwidth  / (m_boxwidth * m_zoom) ) + 2;
         int lastybox = firstybox + (g_winheight / (m_boxheight * m_zoom)) + 2;
+
+        if(firstxbox < 0) firstxbox = 0;
+        if(firstybox < 0) firstybox = 0;
+
         if(lastxbox > m_width) lastxbox = m_width;
         if(lastybox > m_height) lastybox = m_height;
 

@@ -48,7 +48,7 @@ class Level {
     //user selection
     int m_selectedlayer;
 
-    bool m_ispainting;
+    bool m_ispainting;      //if set to true, change the values of the tiles below the mouse.
     int m_selectednumber;
     /////////////
 

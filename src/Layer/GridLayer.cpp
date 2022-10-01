@@ -70,11 +70,11 @@ void GridLayer::DrawNumbers(int x, int y) {
     int firstxbox = -x / (m_boxwidth * zoom);
     int firstybox = -y / (m_boxheight * zoom);
 
-    if(firstxbox < 0) firstxbox = 0;
-    if(firstybox < 0) firstybox = 0;
-
     int lastxbox = firstxbox + (g_winwidth / (m_boxwidth * zoom)) + 2;
     int lastybox = firstybox + (g_winheight / (m_boxheight * zoom)) + 2;
+
+    if(firstxbox < 0) firstxbox = 0;
+    if(firstybox < 0) firstybox = 0;
 
     if(lastxbox > m_width) lastxbox = m_width;
     if(lastybox > m_height) lastybox = m_height;
