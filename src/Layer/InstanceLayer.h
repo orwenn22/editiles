@@ -3,6 +3,7 @@
 
 #include "Layer.h"
 
+#include <string>
 #include <vector>
 
 class Instance;
@@ -26,6 +27,8 @@ class InstanceLayer : public Layer {
     void RemoveWithPtr(Instance* instanceptr);
 
     void AddPropertyToAllInstances(ObjectTemplate* instancestype, ObjectProperty* newproperty);
+    void ChangePropertyToAllInstances(ObjectTemplate* instancestype, int propertyindex, int oldpropertytype, int oldpropertyvalue, int newpropertyvalue);
+    void ChangePropertyToAllInstances(ObjectTemplate* instancestype, int propertyindex, int oldpropertytype, std::string oldpropertyvalue, std::string newpropertyvalue);
     void RemovePropertyFromInstances(ObjectTemplate* instancestype, int indextoremove);
 
     std::vector<Instance*> m_instances;

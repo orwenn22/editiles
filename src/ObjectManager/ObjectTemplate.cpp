@@ -99,6 +99,7 @@ int ObjectTemplate::GetPropertyIndex(std::string name) {
 }
 
 void ObjectTemplate::SetPropertyValue(std::string name, int value) {
+    //get the index of the property in m_properties
     int propindex = GetPropertyIndex(name);
 
     //save informations before the change
@@ -122,26 +123,11 @@ void ObjectTemplate::SetPropertyValue(std::string name, int value) {
                 //get the layer
                 InstanceLayer* layer = (InstanceLayer*)(level->GetLayer(i));
 
-                //loop throught the instances of the layer
-                for(int j = 0; j < layer->m_instancecount; j++) {
-                    Instance* instance = layer->Get(j);
-
-                    //check if the instance correspond to the current object
-                    if(instance->m_objtemplateptr == this) {
-                        if(previouspropertytype == OPT_INT) {   //previous prop type was the same as the new
-                            //check if the value of the instance is the old default value...
-                            if(instance->m_properties[propindex].as_int == previousdefaultvalue) {
-                                instance->m_properties[propindex].as_int = value;   //...if so replace it by the new one.
-                            }
-                        }
-                        else {      //old default value type is different as the new one
-                            instance->m_properties[propindex].as_int = value;
-                        }
-                    }   //if(instancetype == this)
-                }   //loop throught instances
-            }   //if(layertype == LAYERID_INSTANCE)
-        }   //loop throught layers
-    }   //if(changeresult == 0)
+                //apply the change to all the instances
+                layer->ChangePropertyToAllInstances(this, propindex, previouspropertytype, previousdefaultvalue, value);
+            }
+        }
+    }
 }
 
 void ObjectTemplate::SetPropertyValue(std::string name, std::string value) {
@@ -167,30 +153,8 @@ void ObjectTemplate::SetPropertyValue(std::string name, std::string value) {
                 //get the layer
                 InstanceLayer* layer = (InstanceLayer*)(level->GetLayer(i));
 
-                //loop throught the instances of the layer
-                for(int j = 0; j < layer->m_instancecount; j++) {
-                    Instance* instance = layer->Get(j);
-
-                    //check if the instance correspond to the current object
-                    if(instance->m_objtemplateptr == this) {
-                        if(previouspropertytype == OPT_STR) {   //previous prop type was the same as the new
-                            //check if the value of the instance is the old default value...
-                            if(previousdefaultvalue == std::string(instance->m_properties[propindex].as_str)) {
-                                //...if so replace it by the new one.
-                                for(int k = 0; k < 255; k++) {
-                                    instance->m_properties[propindex].as_str[k] = value[k];
-                                    if(value[k] == 0) break;    //end of string
-                                }
-                            }
-                        }
-                        else {      //old default value type is different as the new one
-                            for(int k = 0; k < 255; k++) {
-                                instance->m_properties[propindex].as_str[k] = value[k];
-                                if(value[k] == 0) break;    //end of string
-                            }
-                        }
-                    }   //if(instancetype == this)
-                }   //loop throught instances
+                layer->ChangePropertyToAllInstances(this, propindex, previouspropertytype, previousdefaultvalue, value);
+                
             }   //if(layertype == LAYERID_INSTANCE)
         }   //loop throught layers
     }
