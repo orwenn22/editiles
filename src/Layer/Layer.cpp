@@ -2,12 +2,12 @@
 
 #include "LayerIDs.h"
 
-Layer::Layer(Level* level) {
+Layer::Layer(Level* level, std::string name) {
     m_type = LAYERID_STANDARD;
 
     m_parrent = level;
 
-    m_name = "Layer";
+    m_name = name;
 
     m_havetexture = false;
 }
@@ -16,7 +16,7 @@ Layer::~Layer() {
 
 }
 
-void Layer::Update() {
+void Layer::Update(int x, int y) {
 
 }
 

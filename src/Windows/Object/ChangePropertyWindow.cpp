@@ -7,27 +7,29 @@
 #include "../../GUI/Widget/WidgetManager.h"
 #include "../../GUI/WindowManager.h"
 #include "../../ObjectManager/ObjectProperty.h"
+#include "../../ObjectManager/ObjectTemplate.h"
 #include "../WinIDs.h"
 
 void ChangePropertyDefaultValueint(Button* but) {
     ChangePropertyWindow* win = (ChangePropertyWindow*) but->m_parrent->m_window;
-    win->m_propptr->SetValue(win->m_intval);
+    win->m_objptr->SetPropertyValue(win->m_propptr->name, win->m_intval);
     win->m_parrent->Remove(win);
 }
 
 void ChangePropertyDefaultValuestring(Button* but) {
     ChangePropertyWindow* win = (ChangePropertyWindow*) but->m_parrent->m_window;
-    win->m_propptr->SetValue(win->m_strval);
+    win->m_objptr->SetPropertyValue(win->m_propptr->name, win->m_strval);
     win->m_parrent->Remove(win);
 }
 
-ChangePropertyWindow::ChangePropertyWindow(WindowManager* winmanager, ObjectProperty* propptr) : Window(winmanager) {
+ChangePropertyWindow::ChangePropertyWindow(WindowManager* winmanager, ObjectProperty* propptr, ObjectTemplate* objptr) : Window(winmanager) {
     m_id = WINID_CHANGEPROPERTY;
     
     m_width = 200;
     m_height = 100;
 
     m_propptr = propptr;
+    m_objptr = objptr;
 
     m_intval = 0;
     m_strval = "";

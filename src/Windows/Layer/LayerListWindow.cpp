@@ -3,6 +3,7 @@
 #include "../../Editor.h"
 #include "../../GUI/Widget/Button.h"
 #include "../../GUI/Widget/WidgetManager.h"
+#include "../../Layer/GridLayer.h"
 #include "../../Level.h"
 #include "../../Widget/LayerList.h"
 #include "../WinIDs.h"
@@ -10,7 +11,8 @@
 extern Editor* g_editor;
 
 void NewLayerButtonAction(Button* but) {
-    g_editor->m_level->AddLayer("New layer");
+    Level* level = g_editor->m_level;
+    level->AddLayer(new GridLayer(level->m_width, level->m_height, level, "newlayer"));
 }
 
 LayerListWindow::LayerListWindow(WindowManager* winmanager) : Window(winmanager) {

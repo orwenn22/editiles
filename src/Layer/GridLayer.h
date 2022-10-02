@@ -7,10 +7,9 @@
 
 class GridLayer : public Layer {
     public:
-    GridLayer(short gridwidth, short gridheight, Level* level);
+    GridLayer(short gridwidth, short gridheight, Level* level, std::string name);
     virtual ~GridLayer();
 
-    void Update() override;
     void Draw(int x, int y) override;
 
     void DrawNumbers(int x, int y);

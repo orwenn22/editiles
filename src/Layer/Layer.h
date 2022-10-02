@@ -8,10 +8,10 @@ class TextureObject;
 
 class Layer {
     public:
-    Layer(Level* level);
+    Layer(Level* level, std::string name);
     virtual ~Layer();
 
-    virtual void Update();
+    virtual void Update(int x, int y);
     virtual void Draw(int x, int y);
     virtual void DrawNumbers(int x, int y);
 

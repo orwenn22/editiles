@@ -1,8 +1,12 @@
 #include "Level.h"
 
+#include "DragObjectIDs.h"
 #include "Editor.h"
+#include "GUI/Mouse/DragAndDropObject.h"
 #include "GUI/Mouse/MouseObject.h"
 #include "Layer/GridLayer.h"
+#include "Layer/InstanceLayer.h"
+#include "Layer/Instance.h"
 #include "Layer/Layer.h"
 #include "Layer/LayerIDs.h"
 #include "ObjectManager/ObjectManager.h"
@@ -36,7 +40,7 @@ Level::Level() {
     int m_overredboxy = 0;
 
     m_layercount = 0;
-    AddLayer("Default layer");
+    AddLayer(new GridLayer(m_width, m_height, this, "defaultlayer"));
     m_selectedlayer = 0;
 
     m_selectednumber = 1;
@@ -68,7 +72,8 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
 
 
     m_layercount = 0;
-    AddLayer("Default layer");
+    AddLayer(new GridLayer(m_width, m_height, this, "defaultlayer"));
+    AddLayer(new InstanceLayer(this, "entitylayer"));
     m_selectedlayer = 0;
 
     m_selectednumber = 1;
@@ -99,7 +104,7 @@ void Level::Update() {
     }
     /////////////////
 
-    // DRAG & DROP
+    // Moving the level around with the mouse
     if(IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE) && g_mouse->m_havebeenused == false) {
         m_xmouseoffset = m_x - g_mouse->m_x;
         m_ymouseoffset = m_y - g_mouse->m_y;
@@ -132,30 +137,42 @@ void Level::Update() {
     }
     //////////////////
 
-    //Handle click  // painting
-    if(g_mouse->m_havebeenused == false && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        m_ispainting = true;
-    }
 
-    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-        m_ispainting = false;
-    }
-
-    if(m_ispainting) {
-        //printf("%i %i\n", m_overredboxx, m_overredboxy);
-        Layer* curlayer = GetLayer(m_selectedlayer);
-        if(curlayer->m_type == LAYERID_GRID) {
-            ((GridLayer*)curlayer)->SetBoxValue(m_overredboxx, m_overredboxy, m_selectednumber);
-        }
-    }
-    ////////////////
-
-    //Updating layers (?)
+    //Updating layers
     int vecsize = m_layers.size();
     for(int i = 0; i < vecsize; i++) {
-        m_layers[i]->Update();
+        m_layers[i]->Update(m_x, m_y);
     }
     ////////////////
+
+    //Handle mouse interraction
+    Layer* curlayer = GetLayer(m_selectedlayer);
+    if(curlayer->m_type == LAYERID_GRID) {  //painting
+        if(g_mouse->m_havebeenused == false && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            m_ispainting = true;
+        }
+
+        if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+            m_ispainting = false;
+        }
+
+        if(m_ispainting) {
+            if(curlayer->m_type == LAYERID_GRID) {
+                ((GridLayer*)curlayer)->SetBoxValue(m_overredboxx, m_overredboxy, m_selectednumber);
+            }
+        }
+    }
+    else if(curlayer->m_type == LAYERID_INSTANCE) {     //instance
+        if(g_mouse->m_havebeenused == false && IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && g_mouse->m_havedragobject) {
+            if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_OBJECTTEMPLATE) {
+                //spawn new instance of object                   ptr given by ObjectList
+                ((InstanceLayer*)curlayer)->Add(new Instance((ObjectTemplate*)(g_mouse->m_dragobject.m_data.as_ptr), m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight));
+            }
+        }
+        ((InstanceLayer*)curlayer)->CheckMouseInput();
+    }
+    ////////////////
+
 }
 
 void Level::Draw() {
@@ -205,11 +222,18 @@ void Level::Draw() {
     }
 }
 
-void Level::AddLayer(std::string name) {
-    GridLayer* newlayer = new GridLayer(m_width, m_height, this);
-    newlayer->SetBoxSize(m_boxwidth, m_boxheight);
-    newlayer->m_name = name;
+//void Level::AddLayer(std::string name) {
+//    GridLayer* newlayer = new GridLayer(m_width, m_height, this, name);
+//    newlayer->SetBoxSize(m_boxwidth, m_boxheight);
+//
+//    m_layers.push_back(newlayer);
+//    m_layercount++;
+//}
 
+void Level::AddLayer(Layer* newlayer) {
+    if(newlayer->m_type == LAYERID_GRID) {
+        ((GridLayer*)newlayer)->SetBoxSize(m_boxwidth, m_boxheight);
+    }
     m_layers.push_back(newlayer);
     m_layercount++;
 }

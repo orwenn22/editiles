@@ -15,7 +15,8 @@ class Level {
     void Update();
     void Draw();
 
-    void AddLayer(std::string name);
+    //void AddLayer(std::string name);
+    void AddLayer(Layer* newlayer);
     Layer* GetLayer(int index);
     void RemoveLayer(Layer* layerptr);
 

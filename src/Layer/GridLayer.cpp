@@ -13,7 +13,7 @@ extern int g_winwidth;
 extern int g_winheight;
 
 
-GridLayer::GridLayer(short gridwidth, short gridheight, Level* level) : Layer(level) {
+GridLayer::GridLayer(short gridwidth, short gridheight, Level* level, std::string name) : Layer(level, name) {
     m_type = LAYERID_GRID;
 
     m_width = gridwidth;
@@ -34,10 +34,6 @@ GridLayer::GridLayer(short gridwidth, short gridheight, Level* level) : Layer(le
 GridLayer::~GridLayer() {
     free(m_griddata);
     printf("unallocated grid\n");
-}
-
-void GridLayer::Update() {
-
 }
 
 void GridLayer::Draw(int x, int y) {

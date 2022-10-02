@@ -2,11 +2,13 @@
 
 #include "../../Editor.h"
 #include "../../Layer/GridLayer.h"
+#include "../../Layer/InstanceLayer.h"
 #include "../../Layer/Layer.h"
 #include "../../Layer/LayerIDs.h"
 #include "../../Level.h"
 #include "../../GUI/Widget/Button.h"
 #include "../../GUI/Widget/CppStringField.h"
+#include "../../GUI/Widget/IntValue.h"
 #include "../../GUI/Widget/Label.h"
 #include "../../GUI/Widget/WidgetManager.h"
 #include "../../GUI/WindowManager.h"
@@ -46,6 +48,10 @@ LayerInfoWindow::LayerInfoWindow(WindowManager* winmanager, Layer* layerptr) : W
     if(m_layerpointer->m_type == LAYERID_GRID) {
         m_widgetmanager->Add(new Label(m_widgetmanager, 5, 63, "tilemap name"));
         m_widgetmanager->Add(new CppStringField(m_widgetmanager, 70, 60, 77, &(((GridLayer*)m_layerpointer)->m_tilemapname)));
+    }
+    else if(m_layerpointer->m_type == LAYERID_INSTANCE) {
+        m_widgetmanager->Add(new Label(m_widgetmanager, 5, 63, "Instance count :"));
+        m_widgetmanager->Add(new IntValue(m_widgetmanager, 100, 63, &(((InstanceLayer*)m_layerpointer)->m_instancecount)));
     }
     else {
     }

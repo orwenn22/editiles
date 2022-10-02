@@ -1,6 +1,9 @@
 #include "ObjectList.h"
 
+#include "../DragObjectIDs.h"
 #include "../Editor.h"
+#include "../GUI/Mouse/DragAndDropObject.h"
+#include "../GUI/Mouse/MouseObject.h"
 #include "../GUI/WindowManager.h"
 #include "../Level.h"
 #include "../ObjectManager/ObjectManager.h"
@@ -11,6 +14,7 @@
 #include <raylib.h>
 
 extern Editor* g_editor;
+extern MouseObject* g_mouse;
 
 ObjectList::ObjectList(WidgetManager* widgetmanager, int x, int y, int w, int h) : ElementList(widgetmanager, x, y, w, h) {
     m_elementheight = 30;
@@ -34,6 +38,13 @@ void ObjectList::RightClickOn(int clickindex) {
     if(needcreation) {
         g_editor->m_winmanager->Add(new ObjectInfoWindow(g_editor->m_winmanager, objptr));
     }
+}
+
+void ObjectList::LeftClickOn(int clickindex) {
+    ObjectTemplate* objptr = g_editor->m_level->m_objectmanager->Get(clickindex);
+    DragAndDropObject dndobj = DragAndDropObject(DRAG_OBJECT_OBJECTTEMPLATE, objptr, TextFormat("Object %s", objptr->m_name.c_str()));
+
+    g_mouse->GiveDragObject(dndobj);
 }
 
 void ObjectList::DrawElement(int painterx, int paintery, int elementindex) {

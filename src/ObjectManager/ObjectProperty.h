@@ -19,8 +19,6 @@ struct ObjectProperty {
     //if this value is set to false, the property can't have a default value
     bool havedefaultvalue;
 
-    
-
     union {
         int as_int;                 //type 0
         char as_str[255];           //type 1
@@ -28,8 +26,8 @@ struct ObjectProperty {
 
     ObjectProperty(std::string pname);
 
-    void SetValue(int nval);
-    void SetValue(std::string nval);
+    int SetValue(int nval);
+    int SetValue(std::string nval);
 };
 
 #endif

@@ -3,7 +3,8 @@
 
 enum LayerIDs {
     LAYERID_STANDARD = 0,
-    LAYERID_GRID = 1
+    LAYERID_GRID,
+    LAYERID_INSTANCE,
 };
 
 #endif

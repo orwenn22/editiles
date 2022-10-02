@@ -18,6 +18,12 @@ void RenameObjectProperty(Button* but) {
 
 }
 
+void DeleteObjectProperty(Button* but) {
+    RenamePropertyWindow* win = (RenamePropertyWindow*)(but->m_parrent->m_window);
+    win->m_objptr->RemoveProperty(win->m_propptr->name);
+    g_editor->m_winmanager->Remove(win);
+}
+
 RenamePropertyWindow::RenamePropertyWindow(WindowManager* winmanager,  ObjectTemplate* objptr, ObjectProperty* propptr) : Window(winmanager) {
     m_id = WINID_RENAMEPROPERTY;
 
@@ -35,4 +41,9 @@ RenamePropertyWindow::RenamePropertyWindow(WindowManager* winmanager,  ObjectTem
     renamebut->SetText("Confirm");
     renamebut->SetAction(RenameObjectProperty);
     m_widgetmanager->Add(renamebut);
+
+    Button* deletebut = new Button(m_widgetmanager, 83, 35, 65, 13);
+    deletebut->SetText("Delete");
+    deletebut->SetAction(DeleteObjectProperty);
+    m_widgetmanager->Add(deletebut);
 }
