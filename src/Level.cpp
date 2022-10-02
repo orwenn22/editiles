@@ -168,6 +168,10 @@ void Level::Update() {
                 //spawn new instance of object                   ptr given by ObjectList
                 ((InstanceLayer*)curlayer)->Add(new Instance((ObjectTemplate*)(g_mouse->m_dragobject.m_data.as_ptr), m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight));
             }
+            else if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_INSTANCE) {
+                //Move the instance in dragobject at the correct position
+                ((Instance*)(g_mouse->m_dragobject.m_data.as_ptr))->MoveTo(m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight);
+            }
         }
         ((InstanceLayer*)curlayer)->CheckMouseInput();
     }

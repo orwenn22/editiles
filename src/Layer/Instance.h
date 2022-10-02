@@ -18,6 +18,8 @@ class Instance {
     void CheckMouseInput();
     void Draw();
 
+    void MoveTo(int x, int y);
+
     ObjectTemplate* m_objtemplateptr;
 
     std::vector<InstancePropertyValue> m_properties;

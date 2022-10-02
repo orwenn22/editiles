@@ -1,5 +1,6 @@
 #include "Instance.h"
 
+#include "../DragObjectIDs.h"
 #include "../GUI/Mouse/MouseObject.h"
 #include "../ObjectManager/ObjectProperty.h"
 #include "../ObjectManager/ObjectTemplate.h"
@@ -53,12 +54,15 @@ void Instance::Update(int levelx, int levely, int zoom) {
 
 void Instance::CheckMouseInput() {
     if(g_mouse->m_havebeenused == false) {
-        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if(g_mouse->m_x >= m_x && g_mouse->m_x < m_x+m_width
-            && g_mouse->m_y >= m_y && g_mouse->m_y < m_y+m_height) {
-                printf("WOW\n");
-                printf("property count : %li\n", m_properties.size());
+        if(g_mouse->m_x >= m_x && g_mouse->m_x < m_x+m_width
+        && g_mouse->m_y >= m_y && g_mouse->m_y < m_y+m_height) {
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                    printf("WOW\n");
+                    printf("property count : %li\n", m_properties.size());
+
+                    g_mouse->GiveDragObject(DragAndDropObject(DRAG_OBJECT_INSTANCE, this, "Instance"));
             }
+            g_mouse->m_havebeenused = false;
         }
     }
 }
@@ -67,4 +71,10 @@ void Instance::Draw() {
     if(m_drawonscreen) {
         DrawRectangle(m_x, m_y, m_width, m_height, RED);
     }
+}
+
+
+void Instance::MoveTo(int x, int y) {
+    m_properties[m_objtemplateptr->GetPropertyIndex("x")].as_int = x;
+    m_properties[m_objtemplateptr->GetPropertyIndex("y")].as_int = y;
 }
