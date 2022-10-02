@@ -8,6 +8,8 @@
 #include "../../GUI/Widget/WidgetManager.h"
 #include "../../GUI/WindowManager.h"
 #include "../../Level.h"
+#include "../../ObjectManager/ObjectManager.h"
+#include "../../ObjectManager/ObjectTemplate.h"
 #include "../../TextureManager/TextureManager.h"
 #include "../../TextureManager/TextureObject.h"
 #include "../../Widget/TexturePreview.h"
@@ -19,13 +21,21 @@ void DeleteTextureButton(Button* but) {
     TextureInfoWindow* win = ((TextureInfoWindow*)(but->m_parrent->m_window));
     TextureObject* textureobject = win->m_textureobjectptr;
 
-    //check if texture is used by layer
+    //check if texture is used by layers
     for(int i = 0; i < g_editor->m_level->m_layercount; i++) {
         Layer* layer = g_editor->m_level->GetLayer(i);
         if(layer->m_havetexture && layer->m_textureobj == textureobject) {
             layer->m_havetexture = false;
             layer->m_textureobj = NULL;
-            break;
+        }
+    }
+
+    //check if texture is used by object templates
+    for(int i = 0; i < g_editor->m_level->m_objectmanager->m_objectcount; i++) {
+        ObjectTemplate* object = g_editor->m_level->m_objectmanager->Get(i);
+        if(object->m_havetexture && object->m_textureobj == textureobject) {
+            object->m_havetexture = false;
+            object->m_textureobj = NULL;
         }
     }
 

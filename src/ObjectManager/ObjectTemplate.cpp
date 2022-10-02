@@ -14,6 +14,8 @@ ObjectTemplate::ObjectTemplate(std::string name) {
     m_propertycount = 0;
     m_name = name;
 
+    m_havetexture = false;
+
     //add some basic and required properties
     ObjectProperty* xpos = new ObjectProperty("x");
     xpos->obligatory = true;

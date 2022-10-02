@@ -4,6 +4,7 @@
 #include "../GUI/Mouse/MouseObject.h"
 #include "../ObjectManager/ObjectProperty.h"
 #include "../ObjectManager/ObjectTemplate.h"
+#include "../TextureManager/TextureObject.h"
 
 #include <raylib.h>
 
@@ -69,7 +70,21 @@ void Instance::CheckMouseInput() {
 
 void Instance::Draw() {
     if(m_drawonscreen) {
-        DrawRectangle(m_x, m_y, m_width, m_height, RED);
+        if(m_objtemplateptr->m_havetexture) {
+            //get the textureobject from the objecttemplate
+            TextureObject* textr = m_objtemplateptr->m_textureobj;
+            DrawTexturePro(
+                textr->m_texture,       //raylib texture
+                {0, 0, (float)(textr->m_texture.width), (float)(textr->m_texture.height)},  //select all the texture
+                {(float)m_x, (float)m_y, (float)m_width, (float)m_height},      //destination
+                {0.0f, 0.0f},   //rotation center / center
+                0.0f,           //rotation
+                WHITE
+            );
+        }
+        else {
+            DrawRectangle(m_x, m_y, m_width, m_height, RED);
+        }
     }
 }
 

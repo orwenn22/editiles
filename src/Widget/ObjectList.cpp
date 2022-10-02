@@ -47,6 +47,17 @@ void ObjectList::LeftClickOn(int clickindex) {
     g_mouse->GiveDragObject(dndobj);
 }
 
+void ObjectList::LeftReleaseOn(int releaseindex) {
+    ObjectTemplate* objptr = g_editor->m_level->m_objectmanager->Get(releaseindex);
+
+    if(g_mouse->m_havedragobject /* && g_mouse->m_havebeenused == false */) {
+        if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_TEXTURE) {
+            objptr->m_havetexture = true;
+            objptr->m_textureobj = (TextureObject*)(g_mouse->m_dragobject.m_data.as_ptr);
+        }
+    }
+}
+
 void ObjectList::DrawElement(int painterx, int paintery, int elementindex) {
     DrawText(g_editor->m_level->m_objectmanager->Get(elementindex)->m_name.c_str(), painterx+3, paintery+10, 10, WHITE);
 }

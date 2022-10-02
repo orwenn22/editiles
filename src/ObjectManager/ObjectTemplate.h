@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+class TextureObject;
 struct ObjectProperty;
 
 class ObjectTemplate {
@@ -29,7 +30,9 @@ class ObjectTemplate {
     std::vector<ObjectProperty*> m_properties;
     int m_propertycount;
 
-    //TODO : make it so an object have a texture.
+    //make it so an object have a texture.
+    bool m_havetexture;
+    TextureObject* m_textureobj;
 };
 
 #endif

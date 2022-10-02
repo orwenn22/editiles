@@ -9,6 +9,7 @@ class ObjectList : public ElementList {
 
     void RightClickOn(int clickindex) override;
     void LeftClickOn(int clickindex) override;
+    void LeftReleaseOn(int releaseindex) override;
 
     void DrawElement(int painterx, int paintery, int elementindex);
 
