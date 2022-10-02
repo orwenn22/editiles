@@ -74,27 +74,7 @@ int ObjectTemplate::AddProperty(ObjectProperty* newproperty) {
             //get the layer
             InstanceLayer* layer = (InstanceLayer*)(level->GetLayer(i));
 
-            //loop throught the instances of the layer
-            for(int j = 0; j < layer->m_instancecount; j++) {
-                Instance* instance = layer->Get(j);
-
-                //check if the instance correspond to the current object
-                if(instance->m_objtemplateptr == this) {
-                    //add the property to the instance with the default value
-                    InstancePropertyValue newvalue;
-                    if(newproperty->type == OPT_INT) {
-                        newvalue.as_int = newproperty->defaultvalue.as_int;
-                    }
-                    else if(newproperty->type == OPT_STR) {
-                        for(int k = 0; k < 255; k++) {
-                            char c = newproperty->defaultvalue.as_str[k];
-                            newvalue.as_str[k] = c;
-                            if(c == 0) break;;
-                        }
-                    }
-                    instance->m_properties.push_back(newvalue);
-                }
-            }
+            layer->AddPropertyToAllInstances(this, newproperty);
         }
     }
 
@@ -264,17 +244,8 @@ void ObjectTemplate::RemoveProperty(std::string name) {
             if(level->GetLayer(i)->m_type == LAYERID_INSTANCE) {    //instance layer
                 //get the layer
                 InstanceLayer* layer = (InstanceLayer*)(level->GetLayer(i));
-
-                //loop throught the instances of the layer
-                for(int j = 0; j < layer->m_instancecount; j++) {
-                    Instance* instance = layer->Get(j);
-
-                    //check if the instance correspond to the current object
-                    if(instance->m_objtemplateptr == this) {
-                        //remove the property
-                        instance->m_properties.erase(instance->m_properties.begin() + indexofremovedprop);
-                    }
-                }
+                //remove properties from instances
+                layer->RemovePropertyFromInstances(this, indexofremovedprop);
             }
         }
     }

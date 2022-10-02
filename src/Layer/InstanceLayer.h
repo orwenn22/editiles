@@ -6,6 +6,8 @@
 #include <vector>
 
 class Instance;
+class ObjectTemplate;
+class ObjectProperty;
 
 class InstanceLayer : public Layer {
     public:
@@ -13,13 +15,18 @@ class InstanceLayer : public Layer {
     virtual ~InstanceLayer();
 
     void Update(int x, int y) override;
+    void CheckMouseInput();
+
     void Draw(int x, int y) override;
+
 
     void Add(Instance* newinstance);
     Instance* Get(int index);
     void RemoveWithIndex(int index);
     void RemoveWithPtr(Instance* instanceptr);
-    void CheckMouseInput();
+
+    void AddPropertyToAllInstances(ObjectTemplate* instancestype, ObjectProperty* newproperty);
+    void RemovePropertyFromInstances(ObjectTemplate* instancestype, int indextoremove);
 
     std::vector<Instance*> m_instances;
     int m_instancecount;

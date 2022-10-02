@@ -1,6 +1,7 @@
 #include "InstanceLayer.h"
 
 #include "../Level.h"
+#include "../ObjectManager/ObjectProperty.h"
 #include "Instance.h"
 #include "LayerIDs.h"
 
@@ -61,5 +62,42 @@ void InstanceLayer::CheckMouseInput() {
 void InstanceLayer::Draw(int x, int y) {
     for(int i = 0; i < m_instancecount; i++) {
         m_instances[i]->Draw();
+    }
+}
+
+void InstanceLayer::AddPropertyToAllInstances(ObjectTemplate* instancestype, ObjectProperty* newproperty) {
+    //loop throught the instances of the layer
+    for(int i = 0; i < m_instancecount; i++) {
+        Instance* instance = m_instances[i];
+
+        //check if the instance correspond to the current object
+        if(instance->m_objtemplateptr == instancestype) {
+            //add the property to the instance with the default value
+            InstancePropertyValue newvalue;
+            if(newproperty->type == OPT_INT) {
+                newvalue.as_int = newproperty->defaultvalue.as_int;
+            }
+            else if(newproperty->type == OPT_STR) {
+                for(int k = 0; k < 255; k++) {
+                    char c = newproperty->defaultvalue.as_str[k];
+                    newvalue.as_str[k] = c;
+                    if(c == 0) break;
+                }
+            }
+            instance->m_properties.push_back(newvalue);
+        }
+    }
+}
+
+void InstanceLayer::RemovePropertyFromInstances(ObjectTemplate* instancestype, int indextoremove) {
+    //loop throught the instances of the layer
+    for(int i = 0; i < m_instancecount; i++) {
+        Instance* instance = m_instances[i];
+
+        //check if the instance correspond to the current object
+        if(instance->m_objtemplateptr == instancestype) {
+            //remove the property
+            instance->m_properties.erase(instance->m_properties.begin() + indextoremove);
+        }
     }
 }
