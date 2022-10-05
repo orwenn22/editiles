@@ -3,6 +3,7 @@
 
 #include <vector>
 
+class InstanceLayer;
 class ObjectTemplate;
 
 union InstancePropertyValue {
@@ -12,7 +13,7 @@ union InstancePropertyValue {
 
 class Instance {
     public:
-    Instance(ObjectTemplate* objtemplate, int x, int y);
+    Instance(ObjectTemplate* objtemplate, InstanceLayer* parrent, int x, int y);
 
     void Update(int levelx, int levely, int zoom);
     void CheckMouseInput();
@@ -24,6 +25,7 @@ class Instance {
 
     std::vector<InstancePropertyValue> m_properties;
 
+    InstanceLayer* m_parrent;
 
     int m_x;
     int m_y;
