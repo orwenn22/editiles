@@ -100,6 +100,15 @@ int ObjectTemplate::GetPropertyIndex(std::string name) {
     return -1;
 }
 
+int ObjectTemplate::GetPropertyIndex(ObjectProperty* propertyptr) {
+    for(int i = 0; i < m_propertycount; i++) {
+        if(m_properties[i] == propertyptr) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void ObjectTemplate::SetPropertyValue(std::string name, int value) {
     //get the index of the property in m_properties
     int propindex = GetPropertyIndex(name);

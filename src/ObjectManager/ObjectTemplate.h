@@ -14,6 +14,7 @@ class ObjectTemplate {
 
     ObjectProperty* GetProperty(int index);
     int GetPropertyIndex(std::string name);
+    int GetPropertyIndex(ObjectProperty* propertyptr);
 
     int AddProperty(ObjectProperty* newproperty);
 

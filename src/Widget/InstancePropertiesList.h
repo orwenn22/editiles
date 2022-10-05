@@ -12,6 +12,8 @@ class InstancePropertiesList : public ElementList {
     int GetElementCount() override;
     void DrawElement(int painterx, int paintery, int elementindex) override;
 
+    void RightClickOn(int elementindex) override;
+
     Instance* m_instanceptr;
 };
 
