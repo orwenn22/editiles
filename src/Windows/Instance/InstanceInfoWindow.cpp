@@ -5,6 +5,7 @@
 #include "../../GUI/WindowManager.h"
 #include "../../Layer/InstanceLayer.h"
 #include "../../Layer/Instance.h"
+#include "../../Widget/InstancePropertiesList.h"
 #include "../WinIDs.h"
 
 void Deleteinstance(Button* but) {
@@ -28,4 +29,6 @@ InstanceInfoWindow::InstanceInfoWindow(WindowManager* winmanager, Instance* inst
     deletebut->SetText("Delete");
     deletebut->SetAction(Deleteinstance);
     m_widgetmanager->Add(deletebut);
+
+    m_widgetmanager->Add(new InstancePropertiesList(m_widgetmanager, m_instanceptr, 5, 50, 190, 120));
 }

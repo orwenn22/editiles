@@ -75,9 +75,11 @@ void Instance::CheckMouseInput() {
                 for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
                     Window* win = g_editor->m_winmanager->Get(i);
                     if(win->m_id == WINID_INSTANCEINFO) {
-                        g_editor->m_winmanager->BringOnTop(win);
-                        needcreation = false;
-                        break;
+                            if(((InstanceInfoWindow*)win)->m_instanceptr == this) {
+                            g_editor->m_winmanager->BringOnTop(win);
+                            needcreation = false;
+                            break;
+                        }
                     }
                     
                 }
