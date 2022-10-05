@@ -1,16 +1,21 @@
 #include "Instance.h"
 
 #include "../DragObjectIDs.h"
+#include "../Editor.h"
 #include "../GUI/Mouse/MouseObject.h"
+#include "../GUI/WindowManager.h"
 #include "../ObjectManager/ObjectProperty.h"
 #include "../ObjectManager/ObjectTemplate.h"
 #include "../TextureManager/TextureObject.h"
+#include "../Windows/Instance/InstanceInfoWindow.h"
+#include "../Windows/WinIDs.h"
 
 #include <raylib.h>
 
 extern int g_winwidth;
 extern int g_winheight;
 
+extern Editor* g_editor;
 extern MouseObject* g_mouse;
 
 Instance::Instance(ObjectTemplate* objtemplate, InstanceLayer* parrent, int x, int y) {
@@ -63,6 +68,22 @@ void Instance::CheckMouseInput() {
                     printf("property count : %li\n", m_properties.size());
 
                     g_mouse->GiveDragObject(DragAndDropObject(DRAG_OBJECT_INSTANCE, this, "Instance"));
+            }
+
+            if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+                bool needcreation = true;
+                for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
+                    Window* win = g_editor->m_winmanager->Get(i);
+                    if(win->m_id == WINID_INSTANCEINFO) {
+                        g_editor->m_winmanager->BringOnTop(win);
+                        needcreation = false;
+                        break;
+                    }
+                    
+                }
+                if(needcreation) {
+                    g_editor->m_winmanager->Add(new InstanceInfoWindow(g_editor->m_winmanager, this));
+                }
             }
             g_mouse->m_havebeenused = false;
         }
