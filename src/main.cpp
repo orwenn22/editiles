@@ -1,28 +1,14 @@
 #include <raylib.h>
 
 #include "Editor.h"
+#include "GUI/MainWindow.h"
 #include "GUI/Mouse/MouseObject.h"
-
-int g_maxfps = 120000;
-
-int g_winwidth = 960;
-int g_winheight = 540;
 
 Editor* g_editor;
 
-void MyResizeWindow(int w, int h) {
-    if(w != g_winwidth || h != g_winheight) {
-        SetWindowSize(w, h);
-    }
-
-    g_winwidth = w;
-    g_winheight = h;
-
-}
-
 int main() {
-    InitWindow(g_winwidth, g_winheight, "levedit");
-    SetTargetFPS(g_maxfps);
+    InitMainWindow(960, 540, "levedit");
+    SetMainFPS(120000);
 
     Editor* editor = new Editor();
     g_editor = editor;

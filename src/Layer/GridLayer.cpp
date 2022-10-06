@@ -1,5 +1,6 @@
 #include "GridLayer.h"
 
+#include "../GUI/MainWindow.h"
 #include "../Level.h"
 #include "../TextureManager/TextureObject.h"
 #include "LayerIDs.h"
@@ -8,9 +9,6 @@
 #include <stdlib.h>
 
 #include <raylib.h>
-
-extern int g_winwidth;
-extern int g_winheight;
 
 
 GridLayer::GridLayer(short gridwidth, short gridheight, Level* level, std::string name) : Layer(level, name) {

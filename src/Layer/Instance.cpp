@@ -2,6 +2,7 @@
 
 #include "../DragObjectIDs.h"
 #include "../Editor.h"
+#include "../GUI/MainWindow.h"
 #include "../GUI/Mouse/MouseObject.h"
 #include "../GUI/WindowManager.h"
 #include "../ObjectManager/ObjectProperty.h"
@@ -11,9 +12,6 @@
 #include "../Windows/WinIDs.h"
 
 #include <raylib.h>
-
-extern int g_winwidth;
-extern int g_winheight;
 
 extern Editor* g_editor;
 

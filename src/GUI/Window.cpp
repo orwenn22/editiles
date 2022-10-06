@@ -1,5 +1,6 @@
 #include "Window.h"
 
+#include "MainWindow.h"
 #include "Mouse/MouseObject.h"
 #include "Widget/IntField.h"
 #include "Widget/WidgetManager.h"
@@ -9,9 +10,6 @@
 #include <stdio.h>
 
 #include <raylib.h>
-
-extern int g_winwidth;
-extern int g_winheight;
 
 
 Window::Window(WindowManager* winmanager) {

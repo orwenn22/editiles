@@ -2,6 +2,7 @@
 
 #include "DragObjectIDs.h"
 #include "Editor.h"
+#include "GUI/MainWindow.h"
 #include "GUI/Mouse/DragAndDropObject.h"
 #include "GUI/Mouse/MouseObject.h"
 #include "Layer/GridLayer.h"
@@ -14,9 +15,6 @@
 
 #include <raylib.h>
 #include <stdio.h>
-
-extern int g_winwidth;
-extern int g_winheight;
 
 Level::Level() {
     m_boxwidth = 16;

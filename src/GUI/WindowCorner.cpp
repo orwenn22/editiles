@@ -1,13 +1,7 @@
 #include "WindowCorner.h"
 
+#include "MainWindow.h"
 #include "Mouse/MouseObject.h"
-
-//TODO: make this non global
-extern int g_winwidth;
-extern int g_winheight;
-
-//TODO: make this non global
-extern void MyResizeWindow(int w, int h);
 
 WindowCorner::WindowCorner(int minwidth, int minheight) {
     m_x = g_winwidth - 20;
@@ -44,7 +38,7 @@ void WindowCorner::Update() {
             m_y = m_minheight-20;
         }
 
-        MyResizeWindow(m_x+20, m_y+20);
+        ResizeMainWindow(m_x+20, m_y+20);
     }
 
     if(g_mouse->m_x > m_x && g_mouse->m_y > m_y) {
