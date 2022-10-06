@@ -135,7 +135,10 @@ void Editor::KeyBinds() {
     }
 
     if(IsKeyDown(KEY_LEFT_CONTROL) && m_mouse->m_havebeenused == false) {
-        Zoom((int)GetMouseWheelMove(), m_mouse->m_x, m_mouse->m_y);
+        int wheelmovement = (int)GetMouseWheelMove();
+        if(wheelmovement != 0) {
+            Zoom(wheelmovement, m_mouse->m_x, m_mouse->m_y);
+        }
     }
 }
 
