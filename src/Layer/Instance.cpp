@@ -16,7 +16,6 @@ extern int g_winwidth;
 extern int g_winheight;
 
 extern Editor* g_editor;
-extern MouseObject* g_mouse;
 
 Instance::Instance(ObjectTemplate* objtemplate, InstanceLayer* parrent, int x, int y) {
     m_objtemplateptr = objtemplate;

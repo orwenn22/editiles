@@ -1,14 +1,10 @@
 #include "IntField.h"
 
-#include "../../Editor.h"
 #include "../Mouse/MouseObject.h"
 #include "../Window.h"
 #include "WidgetManager.h"
 
 #include <raylib.h>
-
-extern Editor* g_editor;
-extern MouseObject* g_mouse;
 
 IntField::IntField(WidgetManager* wm, int x, int y, int w, int* variableptr) : Widget(wm, x, y, w, 16) {
     m_varriableptr = variableptr;

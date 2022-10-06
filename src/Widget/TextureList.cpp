@@ -13,7 +13,6 @@
 
 extern int g_maxfps;
 
-extern MouseObject* g_mouse;
 extern Editor* g_editor;
 
 TextureList::TextureList(WidgetManager* wm, int x, int y, int w, int h) : ElementList(wm, x, y, w, h) {

@@ -1,6 +1,5 @@
 #include "Window.h"
 
-#include "../Editor.h"
 #include "Mouse/MouseObject.h"
 #include "Widget/IntField.h"
 #include "Widget/WidgetManager.h"
@@ -10,9 +9,6 @@
 #include <stdio.h>
 
 #include <raylib.h>
-
-extern Editor* g_editor;
-extern MouseObject* g_mouse;
 
 extern int g_winwidth;
 extern int g_winheight;

@@ -18,8 +18,6 @@
 extern int g_winwidth;
 extern int g_winheight;
 
-extern MouseObject* g_mouse;
-
 Level::Level() {
     m_boxwidth = 16;
     m_boxheight = 16;

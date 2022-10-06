@@ -6,8 +6,6 @@
 
 #include <string>
 
-extern MouseObject* g_mouse;
-
 CppStringField::CppStringField(WidgetManager* wm, int x, int y, int w, std::string* variableptr) : Widget(wm, x, y, w, 16) {
     m_variableptr = variableptr;
     m_isselected = false;

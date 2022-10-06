@@ -21,7 +21,7 @@ Editor::Editor() {
     m_havelevel = false;
     //m_havelevel = true;
     //m_level = new Level(this);
-    m_mouse = new MouseObject();
+    m_mouse = InitMouseGlobal();
 
     m_texturemanager = new TextureManager(this);
 

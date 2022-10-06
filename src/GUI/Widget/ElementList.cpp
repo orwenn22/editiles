@@ -2,8 +2,6 @@
 
 #include "../Mouse/MouseObject.h"
 
-extern MouseObject* g_mouse;
-
 ElementList::ElementList(WidgetManager* widgetmanager, int x, int y, int w, int h) : Widget(widgetmanager, x, y, w, h) {
     m_firstelementindex = 0;
     m_elementheight = 30;

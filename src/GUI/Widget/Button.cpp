@@ -7,7 +7,6 @@
 #include <stdio.h>
 
 extern Editor* g_editor;
-extern MouseObject* g_mouse;
 
 void DefaultButtonAction(Button* but) {
     printf("Defaut button action\n");

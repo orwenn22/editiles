@@ -9,7 +9,6 @@ int g_winwidth = 960;
 int g_winheight = 540;
 
 Editor* g_editor;
-MouseObject* g_mouse;
 
 void MyResizeWindow(int w, int h) {
     if(w != g_winwidth || h != g_winheight) {
@@ -27,7 +26,6 @@ int main() {
 
     Editor* editor = new Editor();
     g_editor = editor;
-    g_mouse = editor->m_mouse;
 
     while (!WindowShouldClose()) {
         editor->Update();

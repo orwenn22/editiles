@@ -14,7 +14,6 @@
 #include <stdio.h>
 
 extern Editor* g_editor;
-extern MouseObject* g_mouse;
 
 LayerList::LayerList(WidgetManager* widgetmanager, int x, int y, int w, int h) : ElementList(widgetmanager, x, y, w, h) {
     m_firstelementindex = 0;

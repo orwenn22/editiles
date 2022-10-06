@@ -10,7 +10,6 @@
 #include <raylib.h>
 
 extern Editor* g_editor;
-extern MouseObject* g_mouse;
 
 ImageFileReceiver::ImageFileReceiver(WidgetManager* widgetmanager, int x, int y, int w, int h) : Widget(widgetmanager, x, y, w, h) {
 

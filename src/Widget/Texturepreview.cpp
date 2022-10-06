@@ -5,8 +5,6 @@
 
 #include <raylib.h>
 
-extern MouseObject* g_mouse;
-
 TexturePreview::TexturePreview(WidgetManager* widgetmanager, int x, int y, int w, int h, TextureObject* textureobject) : Widget(widgetmanager, x, y, w, h) {
     m_textureobj = textureobject;
 

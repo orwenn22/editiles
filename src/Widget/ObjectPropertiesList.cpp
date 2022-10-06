@@ -12,7 +12,6 @@
 #include <raylib.h>
 
 extern Editor* g_editor;
-extern MouseObject* g_mouse;
 
 ObjectPropertiesList::ObjectPropertiesList(WidgetManager* widgetmanager, int x, int y, int w, int h, ObjectTemplate* objptr)
 : ElementList(widgetmanager, x, y, w, h) {

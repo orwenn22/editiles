@@ -3,6 +3,9 @@
 #include <raylib.h>
 #include <stdio.h>
 
+//global mouse
+MouseObject* g_mouse;
+
 MouseObject::MouseObject() {
     m_havebeenused = false;
 
@@ -47,4 +50,9 @@ void MouseObject::Draw() {
 void MouseObject::GiveDragObject(DragAndDropObject dndobj) {
     m_havedragobject = true;
     m_dragobject = dndobj;
+}
+
+MouseObject* InitMouseGlobal() {
+    g_mouse = new MouseObject();
+    return g_mouse;
 }

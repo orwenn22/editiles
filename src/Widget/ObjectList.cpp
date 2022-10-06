@@ -14,7 +14,6 @@
 #include <raylib.h>
 
 extern Editor* g_editor;
-extern MouseObject* g_mouse;
 
 ObjectList::ObjectList(WidgetManager* widgetmanager, int x, int y, int w, int h) : ElementList(widgetmanager, x, y, w, h) {
     m_elementheight = 30;

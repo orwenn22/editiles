@@ -33,4 +33,8 @@ class MouseObject {
     DragAndDropObject m_dragobject;
 };
 
+extern MouseObject* g_mouse;
+
+MouseObject* InitMouseGlobal();
+
 #endif

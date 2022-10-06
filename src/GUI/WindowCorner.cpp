@@ -6,8 +6,6 @@
 extern int g_winwidth;
 extern int g_winheight;
 
-extern MouseObject* g_mouse;
-
 //TODO: make this non global
 extern void MyResizeWindow(int w, int h);
 
