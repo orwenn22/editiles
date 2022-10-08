@@ -19,6 +19,8 @@ class ObjectManager {
 
     int RenameObject(std::string oldname, std::string newname);     //return 0 if the object was renamed correctly
 
+    void Save(FILE* fileptr);
+
     Level* m_parrent;
 
     //object templates have unique names

@@ -1,6 +1,7 @@
 #include "ObjectTemplate.h"
 
 #include "../Editor.h"
+#include "../FileUtil/FileUtil.h"
 #include "../Layer/Instance.h"
 #include "../Layer/InstanceLayer.h"
 #include "../Layer/Layer.h"
@@ -222,6 +223,45 @@ void ObjectTemplate::RemoveProperty(std::string name) {
                 //remove properties from instances
                 layer->RemovePropertyFromInstances(this, indexofremovedprop);
             }
+        }
+    }
+}
+
+
+void ObjectTemplate::Save(FILE* fileptr) {
+    //printf("TODO : implement saving object\n");
+
+    //name of the object
+    for(int i = 0; i < m_name.size(); i++) {
+        putc(m_name[i], fileptr);
+    }
+    putc(0, fileptr);   //null-termination
+
+    //number of properties on the object
+    WriteShort(fileptr, (short) m_propertycount);
+
+    //save all the properties
+    for(int i = 0; i < m_propertycount; i++) {
+        ObjectProperty* prop = m_properties[i];
+
+        //name of the property
+        for(int j = 0; j < prop->name.size(); j++) {
+            putc(prop->name[j], fileptr);
+        }
+        putc(0, fileptr);   //null-termination
+
+        //property type
+        WriteShort(fileptr, (short) (prop->type));
+
+        //property default value
+        if(prop->type == OPT_INT) {     //int property
+            WriteInt(fileptr, prop->defaultvalue.as_int);
+        } 
+        else if(prop->type == OPT_STR) {    //string property
+            for(int j = 0; prop->defaultvalue.as_str[j] != 0 && j < 255; j++) {
+                putc(prop->defaultvalue.as_str[j], fileptr);
+            }
+            putc(0, fileptr);   //null-termination
         }
     }
 }

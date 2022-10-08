@@ -2,9 +2,12 @@
 
 #include "../DragObjectIDs.h"
 #include "../Editor.h"
+#include "../FileUtil/FileUtil.h"
 #include "../GUI/MainWindow.h"
 #include "../GUI/Mouse/MouseObject.h"
 #include "../GUI/WindowManager.h"
+#include "../Level.h"
+#include "../ObjectManager/ObjectManager.h"
 #include "../ObjectManager/ObjectProperty.h"
 #include "../ObjectManager/ObjectTemplate.h"
 #include "../TextureManager/TextureObject.h"
@@ -105,6 +108,30 @@ void Instance::Draw() {
         }
         else {
             DrawRectangle(m_x, m_y, m_width, m_height, RED);
+        }
+    }
+}
+
+void Instance::Save(FILE* fileptr) {
+    unsigned short objtemplateindex = g_editor->m_level->m_objectmanager->GetIndex(m_objtemplateptr);
+
+    WriteShort(fileptr, objtemplateindex);
+
+    int propertycount = m_objtemplateptr->m_propertycount;
+
+    //save all property values of the instance
+    for(int i = 0; i < propertycount; i++) {
+        
+        int propertytype = m_objtemplateptr->GetProperty(i)->type;
+
+        if(propertytype == OPT_INT) {   //property is int
+            WriteInt(fileptr, m_properties[i].as_int);
+        }
+        else if(propertytype == OPT_STR) {  //property is str
+            for(int j = 0; m_properties[i].as_str[j] != 0; j++) {
+                putc(m_properties[i].as_str[j], fileptr);
+            }
+            putc(0, fileptr);   //null-terminator
         }
     }
 }

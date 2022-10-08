@@ -25,6 +25,8 @@ class ObjectTemplate {
 
     void RemoveProperty(std::string name);
 
+    void Save(FILE* fileptr);
+
     std::string m_name;
 
     //Properties have unique names.

@@ -140,6 +140,11 @@ void Editor::KeyBinds() {
             Zoom(wheelmovement, m_mouse->m_x, m_mouse->m_y);
         }
     }
+
+    if(IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_S) && m_havelevel) {
+        m_level->Save("out.lvl");
+        printf("Level saved !\n");
+    }
 }
 
 

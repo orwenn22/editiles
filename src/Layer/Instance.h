@@ -2,6 +2,7 @@
 #define INSTANCE_H
 
 #include <vector>
+#include <stdio.h>
 
 class InstanceLayer;
 class ObjectTemplate;
@@ -18,6 +19,8 @@ class Instance {
     void Update(int levelx, int levely, int zoom);
     void CheckMouseInput();
     void Draw();
+
+    void Save(FILE* fileptr);
 
     void MoveTo(int x, int y);
 

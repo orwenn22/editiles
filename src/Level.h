@@ -22,16 +22,18 @@ class Level {
 
     void SwapLayers(int index1, int index2);
 
+    void Save(std::string filename);
+
     //private:
     int m_x;
     int m_y;
 
     //Levels info
-    unsigned short m_boxwidth;
-    unsigned short m_boxheight;
+    unsigned short m_boxwidth;      //width of a box in pixel
+    unsigned short m_boxheight;     //height of a box in pixel
 
-    unsigned short m_width;
-    unsigned short m_height;
+    unsigned short m_width;         //number of box horizontally
+    unsigned short m_height;        //number of box vertically
     ////////////
 
     unsigned char m_zoom;

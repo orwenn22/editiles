@@ -20,6 +20,7 @@ class InstanceLayer : public Layer {
 
     void Draw(int x, int y) override;
 
+    void Save(FILE* fileptr) override;
 
     void Add(Instance* newinstance);
     Instance* Get(int index);

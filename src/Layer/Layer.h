@@ -15,6 +15,8 @@ class Layer {
     virtual void Draw(int x, int y);
     virtual void DrawNumbers(int x, int y);
 
+    virtual void Save(FILE* fileptr);
+
     //private:
 
     //type of layer

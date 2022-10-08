@@ -2,6 +2,7 @@
 
 #include "DragObjectIDs.h"
 #include "Editor.h"
+#include "FileUtil/FileUtil.h"
 #include "GUI/MainWindow.h"
 #include "GUI/Mouse/DragAndDropObject.h"
 #include "GUI/Mouse/MouseObject.h"
@@ -263,4 +264,29 @@ void Level::SwapLayers(int index1, int index2) {
         m_layers[index1] = GetLayer(index2);
         m_layers[index2] = temp;
     }
+}
+
+void Level::Save(std::string filename) {
+    FILE* savefile = fopen(filename.c_str(), "w");
+
+    fprintf(savefile, "LVL");
+
+    //write level infos
+    WriteShort(savefile, m_width);
+    WriteShort(savefile, m_height);
+    WriteShort(savefile, m_boxwidth);
+    WriteShort(savefile, m_boxheight);
+
+    //level objects
+    m_objectmanager->Save(savefile);
+
+    //layer count
+    WriteShort(savefile, (short)m_layercount);
+
+    //save all layers
+    for(int i = 0; i < m_layercount; i++) {
+        m_layers[i]->Save(savefile);
+    }
+
+    fclose(savefile);
 }

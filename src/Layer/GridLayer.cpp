@@ -1,5 +1,6 @@
 #include "GridLayer.h"
 
+#include "../FileUtil/FileUtil.h"
 #include "../GUI/MainWindow.h"
 #include "../Level.h"
 #include "../TextureManager/TextureObject.h"
@@ -99,5 +100,19 @@ void GridLayer::SetBoxValue(unsigned int xpos, unsigned int ypos, unsigned short
     if(xpos >= 0 && xpos < m_width
     && ypos >= 0 && ypos < m_height) {
         m_griddata[ypos*m_width+xpos] = value;
+    }
+}
+
+void GridLayer::Save(FILE* fileptr) {
+    Layer::Save(fileptr);
+
+    //tilemap name
+    fputs(m_tilemapname.c_str(), fileptr);
+    putc(0, fileptr);
+
+    //actual layer data
+    int datalen = m_width*m_height;
+    for(int i = 0; i < datalen; i++) {
+        WriteShort(fileptr, m_griddata[i]);
     }
 }

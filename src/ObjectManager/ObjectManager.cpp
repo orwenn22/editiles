@@ -1,5 +1,6 @@
 #include "ObjectManager.h"
 
+#include "../FileUtil/FileUtil.h"
 #include "../Layer/Instance.h"
 #include "../Layer/InstanceLayer.h"
 #include "../Layer/Layer.h"
@@ -90,4 +91,14 @@ int ObjectManager::RenameObject(std::string oldname, std::string newname) {
         }
     }
     return 1;  //object with the old name not found
+}
+
+void ObjectManager::Save(FILE* fileptr) {
+    // Even tho the type of m_objectcount is int, it is improbable
+    // that the ObjectManager contain more than 65535(?) objects,
+    // So we save it as a short.
+    WriteShort(fileptr, (short)m_objectcount);
+    for(int i = 0; i < m_objectcount; i++) {
+        m_objects[i]->Save(fileptr);
+    }
 }

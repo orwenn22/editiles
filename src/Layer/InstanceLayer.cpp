@@ -1,5 +1,6 @@
 #include "InstanceLayer.h"
 
+#include "../FileUtil/FileUtil.h"
 #include "../Level.h"
 #include "../ObjectManager/ObjectProperty.h"
 #include "Instance.h"
@@ -28,6 +29,17 @@ Instance* InstanceLayer::Get(int index) {
         return m_instances[index];
     }
     return NULL;
+}
+
+void InstanceLayer::Save(FILE* fileptr) {
+    Layer::Save(fileptr);
+
+    //number of instance
+    WriteInt(fileptr, m_instancecount);
+
+    for(int i = 0; i < m_instancecount; i++) {
+        m_instances[i]->Save(fileptr);
+    }
 }
 
 void InstanceLayer::RemoveWithIndex(int index) {

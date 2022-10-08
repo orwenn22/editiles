@@ -17,6 +17,8 @@ class GridLayer : public Layer {
     void SetBoxSize(unsigned short width, unsigned short height);
     void SetBoxValue(unsigned int xpos, unsigned int yps, unsigned short value);
 
+    void Save(FILE* fileptr) override;
+
     //private:
     unsigned short* m_griddata;
 
