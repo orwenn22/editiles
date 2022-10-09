@@ -19,6 +19,8 @@ class Editor {
 
     void CreateNewLevel(int width, int height, int boxwidth, int boxheight);
 
+    void LoadFromFile(const char* filename);
+
     //private:
     Level* m_level;
     MouseObject* m_mouse;

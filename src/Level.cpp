@@ -69,8 +69,8 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
 
 
     m_layercount = 0;
-    AddLayer(new GridLayer(m_width, m_height, this, "defaultlayer"));
-    AddLayer(new InstanceLayer(this, "entitylayer"));
+    //AddLayer(new GridLayer(m_width, m_height, this, "defaultlayer"));
+    //AddLayer(new InstanceLayer(this, "entitylayer"));
     m_selectedlayer = 0;
 
     m_selectednumber = 1;

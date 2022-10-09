@@ -6,12 +6,16 @@
 
 Editor* g_editor;
 
-int main() {
+int main(int argc, const char* argv[]) {
     InitMainWindow(960, 540, "levedit");
     SetMainFPS(120000);
 
     Editor* editor = new Editor();
     g_editor = editor;
+
+    if(argc == 2) {
+        editor->LoadFromFile(argv[1]);
+    }
 
     while (!WindowShouldClose()) {
         editor->Update();
