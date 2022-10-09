@@ -3,6 +3,7 @@
 #include "../DragObjectIDs.h"
 #include "../Editor.h"
 #include "../Layer/Layer.h"
+#include "../Layer/LayerIDs.h"
 #include "../GUI/Mouse/DragAndDropObject.h"
 #include "../GUI/Mouse/MouseObject.h"
 #include "../GUI/Window.h"
@@ -57,23 +58,40 @@ void LayerList::LeftClickOn(int clickindex) {
 
 void LayerList::LeftReleaseOn(int releaseindex) {
     //type layer
-    if(g_mouse->m_dragobject.m_type == 1) {
+    if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_LAYER) {
         printf("swapping %i and %i\n", releaseindex, g_mouse->m_dragobject.m_data.as_int);
         g_editor->m_level->SwapLayers(releaseindex, g_mouse->m_dragobject.m_data.as_int);
         g_editor->m_level->m_selectedlayer = releaseindex;
     }
     //type texture
-    else if(g_mouse->m_dragobject.m_type == 2) {
+    else if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_TEXTURE) {
         g_editor->m_level->GetLayer(releaseindex)->m_havetexture = true;
         g_editor->m_level->GetLayer(releaseindex)->m_textureobj = (TextureObject*) g_mouse->m_dragobject.m_data.as_ptr;
     }
 }
 
 void LayerList::DrawElement(int painterx, int paintery, int elementindex) {
-    if(g_editor->m_level->GetLayer(elementindex)->m_name.empty()) {
-        DrawText("[no name]", painterx+3, paintery+10, 10, WHITE);
+    Layer* curlayer = g_editor->m_level->GetLayer(elementindex);
+
+    switch (curlayer->m_type)
+    {
+        case LAYERID_GRID:
+            DrawText("[T]", painterx+5, paintery+10, 10, RED);
+        break;
+        
+        case LAYERID_INSTANCE:
+            DrawText("[I]", painterx+5, paintery+10, 10, {159, 187, 204, 255});
+        break;
+
+        default:
+            DrawText("[?]", painterx+5, paintery+10, 10, GRAY);
+        break;
+    }
+
+    if(curlayer->m_name.empty()) {
+        DrawText("[no name]", painterx+23, paintery+10, 10, WHITE);
     } else {
-        DrawText(g_editor->m_level->GetLayer(elementindex)->m_name.c_str(), painterx+3, paintery+10, 10, WHITE);
+        DrawText(curlayer->m_name.c_str(), painterx+23, paintery+10, 10, WHITE);
     }
 }
 
