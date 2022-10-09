@@ -143,34 +143,36 @@ void Level::Update() {
     ////////////////
 
     //Handle mouse interraction
-    Layer* curlayer = GetLayer(m_selectedlayer);
-    if(curlayer->m_type == LAYERID_GRID) {  //painting
-        if(g_mouse->m_havebeenused == false && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            m_ispainting = true;
-        }
+    if(m_layercount >= 1) {
+        Layer* curlayer = GetLayer(m_selectedlayer);
+        if(curlayer->m_type == LAYERID_GRID) {  //painting
+            if(g_mouse->m_havebeenused == false && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                m_ispainting = true;
+            }
 
-        if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-            m_ispainting = false;
-        }
+            if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+                m_ispainting = false;
+            }
 
-        if(m_ispainting) {
-            if(curlayer->m_type == LAYERID_GRID) {
-                ((GridLayer*)curlayer)->SetBoxValue(m_overredboxx, m_overredboxy, m_selectednumber);
+            if(m_ispainting) {
+                if(curlayer->m_type == LAYERID_GRID) {
+                    ((GridLayer*)curlayer)->SetBoxValue(m_overredboxx, m_overredboxy, m_selectednumber);
+                }
             }
         }
-    }
-    else if(curlayer->m_type == LAYERID_INSTANCE) {     //instance
-        if(g_mouse->m_havebeenused == false && IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && g_mouse->m_havedragobject) {
-            if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_OBJECTTEMPLATE) {
-                //spawn new instance of object                   ptr given by ObjectList
-                ((InstanceLayer*)curlayer)->Add(new Instance((ObjectTemplate*)(g_mouse->m_dragobject.m_data.as_ptr), (InstanceLayer*)curlayer,m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight));
+        else if(curlayer->m_type == LAYERID_INSTANCE) {     //instance
+            if(g_mouse->m_havebeenused == false && IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && g_mouse->m_havedragobject) {
+                if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_OBJECTTEMPLATE) {
+                    //spawn new instance of object                   ptr given by ObjectList
+                    ((InstanceLayer*)curlayer)->Add(new Instance((ObjectTemplate*)(g_mouse->m_dragobject.m_data.as_ptr), (InstanceLayer*)curlayer,m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight));
+                }
+                else if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_INSTANCE) {
+                    //Move the instance in dragobject at the correct position
+                    ((Instance*)(g_mouse->m_dragobject.m_data.as_ptr))->MoveTo(m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight);
+                }
             }
-            else if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_INSTANCE) {
-                //Move the instance in dragobject at the correct position
-                ((Instance*)(g_mouse->m_dragobject.m_data.as_ptr))->MoveTo(m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight);
-            }
+            ((InstanceLayer*)curlayer)->CheckMouseInput();
         }
-        ((InstanceLayer*)curlayer)->CheckMouseInput();
     }
     ////////////////
 
