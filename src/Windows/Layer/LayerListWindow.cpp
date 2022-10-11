@@ -4,15 +4,21 @@
 #include "../../GUI/Widget/Button.h"
 #include "../../GUI/Widget/WidgetManager.h"
 #include "../../Layer/GridLayer.h"
+#include "../../Layer/InstanceLayer.h"
 #include "../../Level.h"
 #include "../../Widget/LayerList.h"
 #include "../WinIDs.h"
 
 extern Editor* g_editor;
 
-void NewLayerButtonAction(Button* but) {
+void NewGridLayerButtonAction(Button* but) {
     Level* level = g_editor->m_level;
     level->AddLayer(new GridLayer(level->m_width, level->m_height, level, "newlayer"));
+}
+
+void NewInstLayerButtonAction(Button* but) {
+    Level* level = g_editor->m_level;
+    level->AddLayer(new InstanceLayer(level, "newlayer"));
 }
 
 LayerListWindow::LayerListWindow(WindowManager* winmanager) : Window(winmanager) {
@@ -28,8 +34,13 @@ LayerListWindow::LayerListWindow(WindowManager* winmanager) : Window(winmanager)
 
     m_widgetmanager->Add(new LayerList(m_widgetmanager, 3, 15, 194, 150));
 
-    Button* newbut = new Button(m_widgetmanager, 3, 168, 50, 15);
-    newbut->SetText("New");
-    newbut->SetAction(NewLayerButtonAction);
-    m_widgetmanager->Add(newbut);
+    Button* newgridbut = new Button(m_widgetmanager, 3, 168, 50, 15);
+    newgridbut->SetText("Grid");
+    newgridbut->SetAction(NewGridLayerButtonAction);
+    m_widgetmanager->Add(newgridbut);
+
+    Button* newinstbut = new Button(m_widgetmanager, 56, 168, 50, 15);
+    newinstbut->SetText("Instance");
+    newinstbut->SetAction(NewInstLayerButtonAction);
+    m_widgetmanager->Add(newinstbut);
 }

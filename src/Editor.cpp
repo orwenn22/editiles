@@ -232,7 +232,7 @@ void Editor::LoadFromFile(const char* filename) {
             }
             else if(proptype == OPT_STR) {      //str
                 std::string propvalue = ReadString(infile);
-                objprop->SetValue(propname);
+                objprop->SetValue(propvalue);
             }
 
             //Add property to object
