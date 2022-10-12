@@ -13,6 +13,7 @@ extern Editor* g_editor;
 
 ObjectTemplate::ObjectTemplate(std::string name) {
     m_propertycount = 0;
+    m_childrencount = 0;
     m_name = name;
 
     m_havetexture = false;
@@ -47,6 +48,16 @@ ObjectTemplate::~ObjectTemplate() {
     }
     m_properties.clear();
     m_propertycount = 0;
+
+    //delete all the instances in the level that uses this object
+    while(m_childrencount != 0) {
+        Instance* inst = m_children[0];
+        inst->m_parrent->RemoveWithPtr(inst);   //this will also deallocate the instance and remove it from m_children
+    }
+
+    //Do this just in case
+    m_children.clear();
+    m_childrencount = 0;
 }
 
 int ObjectTemplate::AddProperty(ObjectProperty* newproperty) {
@@ -69,16 +80,21 @@ int ObjectTemplate::AddProperty(ObjectProperty* newproperty) {
     ////////////////////
     //Add the property to all the instances
 
-    Level* level = g_editor->m_level;
-
-    //loop throught all the layers
-    for(int i = 0; i < level->m_layercount; i++) {
-        if(level->GetLayer(i)->m_type == LAYERID_INSTANCE) {    //instance layer
-            //get the layer
-            InstanceLayer* layer = (InstanceLayer*)(level->GetLayer(i));
-
-            layer->AddPropertyToAllInstances(this, newproperty);
+    for(int i = 0; i < m_childrencount; i++) {
+        Instance* instance = m_children[i];
+        //add the property to the instance with the default value
+        InstancePropertyValue newvalue;
+        if(newproperty->type == OPT_INT) {
+            newvalue.as_int = newproperty->defaultvalue.as_int;
         }
+        else if(newproperty->type == OPT_STR) {
+            for(int k = 0; k < 255; k++) {
+                char c = newproperty->defaultvalue.as_str[k];
+                newvalue.as_str[k] = c;
+                if(c == 0) break;
+            }
+        }
+        instance->m_properties.push_back(newvalue);
     }
 
     //printf("SUCCESS\n");
@@ -125,18 +141,20 @@ void ObjectTemplate::SetPropertyValue(std::string name, int value) {
     int changeresult = m_properties[propindex]->SetValue(value);
 
     if(changeresult == 0) {     //change successful
-        //get a pointer to the level
-        Level* level = g_editor->m_level;
+        //update all instances
+        for(int i = 0; i < m_childrencount; i++) {
+            Instance* instance = m_children[i];
 
-        
-        //loop throught all the layers
-        for(int i = 0; i < level->m_layercount; i++) {
-            if(level->GetLayer(i)->m_type == LAYERID_INSTANCE) {    //instance layer
-                //get the layer
-                InstanceLayer* layer = (InstanceLayer*)(level->GetLayer(i));
-
-                //apply the change to all the instances
-                layer->ChangePropertyToAllInstances(this, propindex, previouspropertytype, previousdefaultvalue, value);
+            if(previouspropertytype == OPT_INT) {   //previous prop type was the same as the new
+                //check if the value of the instance is the old default value...
+                if(instance->m_properties[propindex].as_int == previousdefaultvalue) {
+                    instance->m_properties[propindex].as_int = value;   //...if so replace it by the new one.
+                    printf("instance value updated\n");
+                }
+            }
+            else {      //old default value type is different as the new one so replace default value
+                instance->m_properties[propindex].as_int = value;
+                printf("instance value updated\n");
             }
         }
     }
@@ -155,20 +173,31 @@ void ObjectTemplate::SetPropertyValue(std::string name, std::string value) {
     int changeresult = m_properties[propindex]->SetValue(value);
 
     if(changeresult == 0) {
-        //get a pointer to the level
-        Level* level = g_editor->m_level;
+        //update all instances
+        for(int i = 0; i < m_childrencount; i++) {
+            Instance* instance = m_children[i];
 
-        
-        //loop throught all the layers
-        for(int i = 0; i < level->m_layercount; i++) {
-            if(level->GetLayer(i)->m_type == LAYERID_INSTANCE) {    //instance layer
-                //get the layer
-                InstanceLayer* layer = (InstanceLayer*)(level->GetLayer(i));
-
-                layer->ChangePropertyToAllInstances(this, propindex, previouspropertytype, previousdefaultvalue, value);
-                
-            }   //if(layertype == LAYERID_INSTANCE)
-        }   //loop throught layers
+            if(previouspropertytype == OPT_STR) {   //previous prop type was the same as the new
+                //check if the value of the instance is the old default value...
+                if(previousdefaultvalue == std::string(instance->m_properties[propindex].as_str)) {
+                    //...if so replace it by the new one.
+                    for(int k = 0; k < 255; k++) {
+                        char c = value[k];
+                        instance->m_properties[propindex].as_str[k] = c;
+                        if(c == 0) break;    //end of string
+                    }
+                    printf("instance value updated\n");
+                }
+            }
+            else {      //old default value type is different as the new one so replace default value
+                for(int k = 0; k < 255; k++) {
+                    char c = value[k];
+                    instance->m_properties[propindex].as_str[k] = c;
+                    if(c == 0) break;    //end of string
+                }
+                printf("instance value updated\n");
+            }
+        }
     }
 }
 
@@ -213,20 +242,30 @@ void ObjectTemplate::RemoveProperty(std::string name) {
 
     //check if a property was removed
     if(indexofremovedprop != -1) {
-        Level* level = g_editor->m_level;
-
-        //loop throught all the layers
-        for(int i = 0; i < level->m_layercount; i++) {
-            if(level->GetLayer(i)->m_type == LAYERID_INSTANCE) {    //instance layer
-                //get the layer
-                InstanceLayer* layer = (InstanceLayer*)(level->GetLayer(i));
-                //remove properties from instances
-                layer->RemovePropertyFromInstances(this, indexofremovedprop);
-            }
+        //remove the property from all the instances
+        for(int i = 0; i < m_childrencount; i++) {
+            Instance* instance = m_children[i];
+            instance->m_properties.erase(instance->m_properties.begin() + indexofremovedprop);
         }
     }
 }
 
+//this is called from the Instance constructor
+void ObjectTemplate::AddChildren(Instance* inst) {
+    m_children.push_back(inst);
+    m_childrencount += 1;
+}
+
+//this is called from the Instance destructor
+void ObjectTemplate::RemoveChildren(Instance* inst) {
+    for(int i = 0; i < m_childrencount; i++) {
+        if(m_children[i] == inst) {
+            m_children.erase(m_children.begin() + i);
+            m_childrencount--;
+            return;
+        }
+    }
+}
 
 void ObjectTemplate::Save(FILE* fileptr) {
     //printf("TODO : implement saving object\n");

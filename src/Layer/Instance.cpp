@@ -20,6 +20,7 @@ extern Editor* g_editor;
 
 Instance::Instance(ObjectTemplate* objtemplate, InstanceLayer* parrent, int x, int y) {
     m_objtemplateptr = objtemplate;
+    m_objtemplateptr->AddChildren(this);
     m_parrent = parrent;
 
     for(int i = 0; i < m_objtemplateptr->m_propertycount; i++) {
@@ -47,6 +48,11 @@ Instance::Instance(ObjectTemplate* objtemplate, InstanceLayer* parrent, int x, i
             m_properties.push_back(instanceprop);
         }
     }
+}
+
+Instance::~Instance() {
+    printf("Destroyed instance\n");
+    m_objtemplateptr->RemoveChildren(this);
 }
 
 void Instance::Update(int levelx, int levely, int zoom) {

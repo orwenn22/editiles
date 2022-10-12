@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+class Instance;
 class TextureObject;
 struct ObjectProperty;
 
@@ -25,6 +26,9 @@ class ObjectTemplate {
 
     void RemoveProperty(std::string name);
 
+    void AddChildren(Instance* inst);
+    void RemoveChildren(Instance* inst);
+
     void Save(FILE* fileptr);
 
     std::string m_name;
@@ -32,6 +36,10 @@ class ObjectTemplate {
     //Properties have unique names.
     std::vector<ObjectProperty*> m_properties;
     int m_propertycount;
+
+    //Contain all the instances created from the object
+    std::vector<Instance*> m_children;
+    int m_childrencount;
 
     //make it so an object have a texture.
     bool m_havetexture;

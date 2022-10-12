@@ -15,6 +15,7 @@ union InstancePropertyValue {
 class Instance {
     public:
     Instance(ObjectTemplate* objtemplate, InstanceLayer* parrent, int x, int y);
+    ~Instance();
 
     void Update(int levelx, int levely, int zoom);
     void CheckMouseInput();

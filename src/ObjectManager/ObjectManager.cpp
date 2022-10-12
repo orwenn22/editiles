@@ -34,21 +34,6 @@ int ObjectManager::Add(ObjectTemplate* newobject) {
 }
 
 void ObjectManager::Delete(ObjectTemplate* objectptr) {
-    //DELETE ALL OBJECTS IN THE LAYERS OF THE MAP
-    for(int i = 0; i < m_parrent->m_layercount; i++) {
-        if(m_parrent->GetLayer(i)->m_type == LAYERID_INSTANCE) {
-            InstanceLayer* layer = (InstanceLayer*)(m_parrent->GetLayer(i));
-            
-            for(int j = 0; j < layer->m_instancecount; j++) {
-                Instance* inst = layer->Get(j);
-                if(inst->m_objtemplateptr == objectptr) {
-                    layer->RemoveWithIndex(j);
-                    j--;
-                }
-            }
-        }
-    }
-
     //delete object from manager
     for(int i = 0; i < m_objectcount; i++) {
         if(m_objects[i] == objectptr) {
