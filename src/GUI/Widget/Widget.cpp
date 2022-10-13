@@ -27,8 +27,8 @@ void Widget::Update() {
 }
 
 void Widget::UpdatePos() {
-    m_x = m_parrent->m_window->m_x + m_xoffset;
-    m_y = m_parrent->m_window->m_y + m_yoffset;
+    m_x = m_parrent->m_baseposx + m_xoffset;
+    m_y = m_parrent->m_baseposy + m_yoffset;
 }
 
 void Widget::Draw() {

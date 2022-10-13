@@ -73,7 +73,7 @@ void IntField::Update() {
             }
         }
 
-        m_parrent->UpdateAllPos();
+        //m_parrent->UpdateAllPos();
     }
 }
 

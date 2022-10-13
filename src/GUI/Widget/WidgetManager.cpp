@@ -5,7 +5,19 @@
 
 WidgetManager::WidgetManager(Window* win) {
     m_window = win;
+    m_isinwindow = true;
     m_count = 0;
+
+    m_baseposx = m_window->m_x;
+    m_baseposy = m_window->m_y;
+}
+
+WidgetManager::WidgetManager() {
+    m_isinwindow = false;
+    m_count = 0;
+
+    m_baseposx = 0;
+    m_baseposy = 0;
 }
 
 WidgetManager::~WidgetManager() {
@@ -19,6 +31,12 @@ void WidgetManager::Update() {
     for(int i = 0; i < m_count; i++) {
         m_widgets[i]->Update();
     }
+}
+
+void WidgetManager::ChangeBasePos(int x, int y) {
+    m_baseposx = x;
+    m_baseposy = y;
+    UpdateAllPos();
 }
 
 void WidgetManager::UpdateAllPos() {

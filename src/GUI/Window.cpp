@@ -68,7 +68,7 @@ bool Window::PreUpdate() {
         m_x = g_mouse->m_x + m_xmouseoffset;
         m_y = g_mouse->m_y + m_ymouseoffset;
     
-        m_widgetmanager->UpdateAllPos();
+        m_widgetmanager->ChangeBasePos(m_x, m_y);
     }
 
     if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
@@ -115,5 +115,5 @@ void Window::SetPosition(int x, int y) {
     m_x = x;
     m_y = y;
 
-    m_widgetmanager->UpdateAllPos();
+    m_widgetmanager->ChangeBasePos(m_x, m_y);
 }
