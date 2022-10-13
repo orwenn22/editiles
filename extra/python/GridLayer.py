@@ -12,11 +12,11 @@ class GridLayer(BaseLayer.Layer):
         self.griddata : list[int] = [0] * width * height
     
     def GetBox(self, x: int, y: int) -> int:
-        if x >= 0 and x < self.width and y >= 0 and y < self.height:
+        if 0 <= x < self.width and 0 <= y < self.height:
             return self.griddata[x + y*self.width]
         return -1
     
     def SetBox(self, x: int, y: int, value: int):
         if 0 <= value <= 65535:
-            if x >= 0 and x < self.width and y >= 0 and y < self.height:
+            if 0 <= x < self.width and 0 <= y < self.height:
                 self.griddata[x + y*self.width] = value

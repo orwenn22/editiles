@@ -28,7 +28,7 @@ class Level(object):
 
 
 def LoadlevelFromFile(filename: str) -> Level:
-    loadfile : BufferedReader = open(filename, "rb");
+    loadfile : BufferedReader = open(filename, "rb")
     if loadfile.read(3) == b'LVL':
         #Level size infos
         levwidth = FileUtil.ReadUShort(loadfile)

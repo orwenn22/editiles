@@ -23,7 +23,7 @@ def load(args: list[str]):
     global g_havelevel
     if len(args) == 2:
         g_level = Level.LoadlevelFromFile(args[1])
-        g_havelevel = True;
+        g_havelevel = True
 
 def addlayer(args: list[str]):
     global g_level
