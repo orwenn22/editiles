@@ -1,10 +1,12 @@
 raylib = raylib/src
 
+
+guisrcdir = ./src/GUI/*.cpp \
+		    ./src/GUI/Mouse/*.cpp \
+		    ./src/GUI/Widget/*.cpp \
+
 srcdirs = ./src/*.cpp \
 		  ./src/FileUtil/*.cpp \
-		  ./src/GUI/*.cpp \
-		  ./src/GUI/Mouse/*.cpp \
-		  ./src/GUI/Widget/*.cpp \
 		  ./src/Layer/*.cpp \
 		  ./src/ObjectManager/*.cpp \
 		  ./src/TextureManager/*.cpp \
@@ -15,5 +17,11 @@ srcdirs = ./src/*.cpp \
 		  ./src/Windows/Texture/*.cpp \
 		  ./src/Widget/*.cpp
 
-executable: ${srcdirs}
-	g++ ${srcdirs} -o executable -I${raylib} -L${raylib} -lraylib -ldl -lpthread
+executable_static: ${srcdirs} ${guisrcdir}
+	g++ ${srcdirs} ${guisrcdir} -o executable_static -I${raylib} ./raylib/src/libraylib.a -ldl -lpthread
+
+executable_shared: ${srcdirs} lib/libGUI.so
+	g++ ${srcdirs} -o executable_shared -I${raylib} -L${raylib} -L./lib lib/libraylib.so lib/libGUI.so -ldl -lpthread
+
+lib/libGUI.so: ${guisrcdir}
+	g++ ${guisrcdir} -shared -fPIC -o lib/libGUI.so -I${raylib} -L${raylib} -lraylib -ldl -lpthread
