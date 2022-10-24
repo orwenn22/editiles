@@ -1,5 +1,5 @@
 #ifndef TEXTURE_OBJECT_H
-#define TEXUTRE_OBJECT_H
+#define TEXTURE_OBJECT_H
 
 #include <raylib.h>
 #include <string>

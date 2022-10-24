@@ -11,7 +11,7 @@ class ObjectList : public ElementList {
     void LeftClickOn(int clickindex) override;
     void LeftReleaseOn(int releaseindex) override;
 
-    void DrawElement(int painterx, int paintery, int elementindex);
+    void DrawElement(int painterx, int paintery, int elementindex) override;
 
     int GetElementCount() override;
 };

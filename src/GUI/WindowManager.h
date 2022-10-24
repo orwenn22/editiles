@@ -1,5 +1,5 @@
 #ifndef WINDOW_MANAGER_H
-#define WINDOW_MANADER_H
+#define WINDOW_MANAGER_H
 
 #include <vector>
 

@@ -12,7 +12,7 @@ class GridLayer : public Layer {
 
     void Draw(int x, int y) override;
 
-    void DrawNumbers(int x, int y);
+    void DrawNumbers(int x, int y) override;
 
     void SetBoxSize(unsigned short width, unsigned short height);
     void SetBoxValue(unsigned int xpos, unsigned int yps, unsigned short value);
