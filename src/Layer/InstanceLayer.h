@@ -8,7 +8,8 @@
 
 class Instance;
 class ObjectTemplate;
-class ObjectProperty;
+
+struct ObjectProperty;
 
 class InstanceLayer : public Layer {
     public:

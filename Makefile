@@ -18,7 +18,7 @@ srcdirs = ./src/*.cpp \
 		  ./src/Widget/*.cpp
 
 executable_static: ${srcdirs} ${guisrcdir}
-	clang++ ${srcdirs} ${guisrcdir} -o executable_static -I${raylib} ./raylib/src/libraylib.a -ldl -lpthread
+	clang++ ${srcdirs} ${guisrcdir} -o executable_static -Wall -I${raylib} ./raylib/src/libraylib.a -ldl -lpthread
 
 executable_shared: ${srcdirs} lib/libGUI.so
 	g++ ${srcdirs} -o executable_shared -I${raylib} -L${raylib} -L./lib lib/libraylib.so lib/libGUI.so -ldl -lpthread

@@ -6,6 +6,7 @@
 
 class Instance;
 class TextureObject;
+
 struct ObjectProperty;
 
 class ObjectTemplate {

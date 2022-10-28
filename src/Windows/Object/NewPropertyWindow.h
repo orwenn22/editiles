@@ -5,7 +5,7 @@
 
 #include <string>
 
-struct ObjectTemplate;
+class ObjectTemplate;
 
 class NewPropertyWindow : public Window {
     public:
