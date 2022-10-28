@@ -271,7 +271,7 @@ void ObjectTemplate::Save(FILE* fileptr) {
     //printf("TODO : implement saving object\n");
 
     //name of the object
-    for(int i = 0; i < m_name.size(); i++) {
+    for(size_t i = 0; i < m_name.size(); i++) {
         putc(m_name[i], fileptr);
     }
     putc(0, fileptr);   //null-termination
@@ -284,7 +284,7 @@ void ObjectTemplate::Save(FILE* fileptr) {
         ObjectProperty* prop = m_properties[i];
 
         //name of the property
-        for(int j = 0; j < prop->name.size(); j++) {
+        for(size_t j = 0; j < prop->name.size(); j++) {
             putc(prop->name[j], fileptr);
         }
         putc(0, fileptr);   //null-termination

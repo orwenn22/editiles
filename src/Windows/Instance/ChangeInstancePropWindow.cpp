@@ -23,7 +23,7 @@ void ChangeInstancePropertyValue(Button* but) {
             }
             else if(win->m_proptype == OPT_STR) {
                 //copy the string
-                int i;
+                size_t i;
                 for(i = 0; i < win->m_strval.length(); i++) {
                     char c = win->m_strval[i];
                     win->m_instanceptr->m_properties[propindex].as_str[i] = c;

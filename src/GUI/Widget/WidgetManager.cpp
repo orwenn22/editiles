@@ -21,14 +21,15 @@ WidgetManager::WidgetManager() {
 }
 
 WidgetManager::~WidgetManager() {
-    for(int i = 0; i < m_count; i++) {
-        delete m_widgets[i];
+    for(Widget* w : m_widgets) {
+        delete w;
     }
+    m_widgets.clear();
     m_count = 0;
 }
 
 void WidgetManager::Update() {
-    for(int i = 0; i < m_count; i++) {
+    for(unsigned int i = 0; i < m_count; i++) {
         m_widgets[i]->Update();
     }
 }
@@ -40,7 +41,7 @@ void WidgetManager::ChangeBasePos(int x, int y) {
 }
 
 void WidgetManager::UpdateAllPos() {
-    for(int i = 0; i < m_count; i++) {
+    for(unsigned int i = 0; i < m_count; i++) {
         m_widgets[i]->UpdatePos();
     }
 }
@@ -57,7 +58,7 @@ void WidgetManager::Add(Widget* newwidget) {
 }
 
 void WidgetManager::Remove(Widget* widgetptr) {
-    for(int i = 0; i < m_count; i++) {
+    for(unsigned int i = 0; i < m_count; i++) {
         if(m_widgets[i] == widgetptr) {
             m_widgets.erase(m_widgets.begin() + i);
             delete widgetptr;

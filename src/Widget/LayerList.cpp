@@ -29,7 +29,7 @@ void LayerList::RightClickOn(int clickindex) {
 
     bool needcreation = true;   //does the window need to be created ?
 
-    for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
+    for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
         Window* win = g_editor->m_winmanager->Get(i);
         if(win->m_id == WINID_LAYERINFO) {      //the window exist
             if(((LayerInfoWindow*)win)->m_layerpointer == g_editor->m_level->GetLayer(clickindex)) {

@@ -20,7 +20,7 @@ void DeleteObjectTemplate(Button* but) {
     ObjectInfoWindow* win = (ObjectInfoWindow*)(but->m_parrent->m_window);
     g_editor->m_level->m_objectmanager->Delete(win->m_objptr);
 
-    for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
+    for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
         Window* currentwin = g_editor->m_winmanager->Get(i);
         //TODO : better way to do this ? Only close the windows that contains the pointer to the corresponding object ?
         if(currentwin->m_id >= WINID_RENAMEOBJECT && currentwin->m_id <= WINID_CHANGEPROPERTY) {
@@ -37,7 +37,7 @@ void OpenRenameWindow(Button* but) {
 
     bool needcreation = true;
 
-    for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
+    for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
         Window* currentwin = g_editor->m_winmanager->Get(i);
         if(currentwin->m_id == WINID_RENAMEOBJECT) {
             if(((RenameObjectWindow*)currentwin)->m_objptr == win->m_objptr) {
@@ -57,7 +57,7 @@ void OpenNewPropertyWindow(Button* but) {
 
     bool needcreation = true;
 
-    for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
+    for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
         Window* currentwin = g_editor->m_winmanager->Get(i);
         if(currentwin->m_id == WINID_NEWPROPERTY) {
             if(((NewPropertyWindow*)currentwin)->m_objptr == win->m_objptr) {

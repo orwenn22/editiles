@@ -17,8 +17,8 @@ class ChangeInstancePropWindow : public Window {
     Instance* m_instanceptr;
     ObjectProperty* m_propertyptr;
 
-    int m_intval;
-    std::string m_strval;
+    int m_intval;           // new value of the property m_propertyptr if it is an int
+    std::string m_strval;   // new value of the property m_propertyptr if it is a string
 };
 
 #endif

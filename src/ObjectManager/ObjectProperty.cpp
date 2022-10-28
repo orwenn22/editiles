@@ -37,7 +37,7 @@ int ObjectProperty::SetValue(std::string nval) {
         if(obligatory) {        //type can't be changed if obligatory
             if(type == OPT_STR) {   //check if the type is correct
                 //change the value
-                int i;
+                size_t i;
                 for(i = 0; i < nval.length() && i < 255; i++) {
                     defaultvalue.as_str[i] = nval[i];
                 }
@@ -49,7 +49,7 @@ int ObjectProperty::SetValue(std::string nval) {
         } else {         //property added by user, so type can be changed
             type = OPT_STR;     //change type
             //change value
-            int i;
+            size_t i;
             for(i = 0; i < nval.length() && i < 255; i++) {
                 defaultvalue.as_str[i] = nval[i];
             }

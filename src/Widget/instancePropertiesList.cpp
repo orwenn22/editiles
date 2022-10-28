@@ -43,7 +43,7 @@ void InstancePropertiesList::RightClickOn(int elementindex) {
     ObjectProperty* propintemplate = m_instanceptr->m_objtemplateptr->GetProperty(elementindex);
 
     bool needcreation = true;
-    for(int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
+    for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
         printf("%i\n", i);
         Window* win = g_editor->m_winmanager->Get(i);
         if(win->m_id == WINID_CHANGEINSTANCEPROP) {

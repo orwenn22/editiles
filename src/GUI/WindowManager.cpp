@@ -7,13 +7,15 @@ WindowManager::WindowManager() {
 }
 
 WindowManager::~WindowManager() {
-    for(int i = 0; i < m_wincount; i++) {
-        delete m_windows[i];
+    for(Window* w : m_windows) {
+        delete w;
     }
+    m_windows.clear();
+    m_wincount = 0;
 }
 
 void WindowManager::Update() {
-    for(int i = 0; i < m_wincount; i++) {
+    for(unsigned int i = 0; i < m_wincount; i++) {
         m_windows[i]->MUpdate();
     }
 }
@@ -31,7 +33,7 @@ void WindowManager::Add(Window* newwindow) {
 }
 
 void WindowManager::Remove(Window* windowptr) {
-    for(int i = 0; i < m_wincount; i++) {
+    for(unsigned int i = 0; i < m_wincount; i++) {
         if(m_windows[i] == windowptr) {
             delete m_windows[i];
             m_windows.erase(m_windows.begin() + i);
@@ -41,7 +43,8 @@ void WindowManager::Remove(Window* windowptr) {
     }
 }
 
-Window* WindowManager::Get(int index) {
+//Previously : Window* WindowManager::Get( int index) {
+Window* WindowManager::Get(unsigned int index) {
     if(index>=0 && index<m_wincount) {
         return m_windows[index];
     }
@@ -49,7 +52,7 @@ Window* WindowManager::Get(int index) {
 }
 
 void WindowManager::BringOnTop(Window* windowptr) {
-    for(int i = 0; i < m_wincount; i++) {
+    for(unsigned int i = 0; i < m_wincount; i++) {
         if(m_windows[i] == windowptr) {
             for(int j = i-1; j >= 0; j--) {
                 m_windows[j+1] = m_windows[j];
@@ -62,7 +65,7 @@ void WindowManager::BringOnTop(Window* windowptr) {
 }
 
 Window* WindowManager::FindWithID(int id) {
-    for(int i = 0; i < m_wincount; i++) {
+    for(unsigned int i = 0; i < m_wincount; i++) {
         if(m_windows[i]->m_id == id) {
             return m_windows[i];
         }

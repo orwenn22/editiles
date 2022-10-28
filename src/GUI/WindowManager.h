@@ -15,14 +15,16 @@ class WindowManager {
 
     void Add(Window* newwindow);
     void Remove(Window* windowptr);
-    Window* Get(int index);
+
+    //Previously : Window* Get(int index);
+    Window* Get(unsigned int index);
 
     void BringOnTop(Window* windowptr);
 
     Window* FindWithID(int id);
 
-    std::vector<Window*> m_windows;
-    unsigned int m_wincount;
+    std::vector<Window*> m_windows;     //contain the pointers to all the Windows in the WindowManager
+    unsigned int m_wincount;            //number of windows in the WindowManager
 };
 
 #endif

@@ -10,7 +10,7 @@ MouseObject::MouseObject() {
     m_havebeenused = false;
 
     m_havefiles = false;
-    m_fileslist = { 0 };
+    m_fileslist = { 0, 0, 0 };
 
     m_havedragobject = false;
     m_dragobject = DragAndDropObject();

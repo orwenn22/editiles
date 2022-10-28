@@ -304,7 +304,7 @@ void Editor::LoadFromFile(const char* filename) {
                             else if(proptype == OPT_STR) {
                                 std::string propvalue = ReadString(infile);
                                 
-                                int l;
+                                unsigned long l;
                                 for(l = 0; l < propvalue.size(); l++) {
                                     newinstance->m_properties[k].as_str[l] = propvalue[l];
                                 }
