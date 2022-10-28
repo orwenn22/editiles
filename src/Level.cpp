@@ -30,11 +30,11 @@ Level::Level() {
 
     m_followmouse = false;
 
-    int m_relativemouseposx = 0;
-    int m_relativemouseposy = 0;
+    m_relativemouseposx = 0;
+    m_relativemouseposy = 0;
 
-    int m_overredboxx = 0;
-    int m_overredboxy = 0;
+    m_overredboxx = 0;
+    m_overredboxy = 0;
 
     m_layercount = 0;
     AddLayer(new GridLayer(m_width, m_height, this, "defaultlayer"));
@@ -61,11 +61,11 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
 
     m_followmouse = false;
 
-    int m_relativemouseposx = 0;
-    int m_relativemouseposy = 0;
+    m_relativemouseposx = 0;
+    m_relativemouseposy = 0;
 
-    int m_overredboxx = 0;
-    int m_overredboxy = 0;
+    m_overredboxx = 0;
+    m_overredboxy = 0;
 
 
     m_layercount = 0;
