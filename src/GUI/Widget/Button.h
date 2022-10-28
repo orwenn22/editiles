@@ -10,6 +10,9 @@ class Button;
 
 typedef void (*ButtonAction) (Button*);
 
+//Button is a Widget on which the user can click.
+//it uses the information of g_mouse.
+//If the Button is clicked, it can execute a function.
 class Button : public Widget {
     public:
     Button(WidgetManager* wm, int x, int y, int w, int h);
@@ -17,12 +20,13 @@ class Button : public Widget {
     void Update() override;
     void Draw() override;
 
-    void SetAction(ButtonAction action);
-    void SetText(std::string text);
+    void SetAction(ButtonAction action);    //change the action of the button
+    void SetText(std::string text);         //change the text on the button
 
-    ButtonAction m_action;
+    private:    //Maybe other classes need to access these ?
+    ButtonAction m_action;  //Action executed when the user click on the button.
 
-    std::string m_text;
+    std::string m_text; //text written on the button.
 };
 
 #endif

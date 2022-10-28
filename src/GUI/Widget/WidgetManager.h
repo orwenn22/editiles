@@ -12,13 +12,19 @@ class WidgetManager {
     WidgetManager(Window* win);
     ~WidgetManager();
 
-    void Update();                      //Call Widget::Update() on all widgets in m_widgets
-    void ChangeBasePos(int x, int y);   //change the base position of the widget manager. Will call UpdateAllPos().
-    void UpdateAllPos();                //recalculate all the absolute position of the widgets in m_widgets.
-    void Draw();                        //draw all the widgets in m_widgets.
+    //Call Widget::Update() on all widgets in m_widgets
+    void Update();
+    //Change the base (absolute) position of the widget manager. Will call UpdateAllPos().
+    void ChangeBasePos(int x, int y);
+    //Recalculate all the absolute position of the widgets in m_widgets. m_baseposx ant m_baseposy are used to do it.
+    void UpdateAllPos();
+    //Draw all the widgets in m_widgets (call Widget::Draw() on each of them).
+    void Draw();
 
-    void Add(Widget* newwidget);        //Add a widget with its pointer.
-    void Remove(Widget* widgetptr);     //Remove a widget with its pointer.
+    //Add a widget with its pointer.
+    void Add(Widget* newwidget);
+    //Remove a widget with its pointer.
+    void Remove(Widget* widgetptr);
 
     //x and y position of the WidgetManager
     //these value are used to calculate the

@@ -15,8 +15,8 @@ class Label : public Widget {
     void SetText(std::string newtext);
     void SetColor(Color newcolor);
 
-    std::string m_text;
-    Color m_color;
+    std::string m_text; //Text of the label.
+    Color m_color;      //Color of the text.
 };
 
 #endif
