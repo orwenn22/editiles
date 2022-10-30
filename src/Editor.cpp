@@ -175,6 +175,11 @@ void Editor::CreateNewLevel(int width, int height, int boxwidth, int boxheight) 
 void Editor::LoadFromFile(const char* filename) {
     FILE* infile = fopen(filename, "r");
 
+    if(infile == NULL) {
+        printf("File don't exist :(\n");
+        return;
+    }
+
     //check for signature
     if(!(getc(infile) == 'L' && getc(infile) == 'V' && getc(infile) == 'L')) {
         fclose(infile);
