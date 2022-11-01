@@ -19,6 +19,8 @@ class CppStringField : public Widget {
 
     private:
     bool m_isselected;          //If set to true, the CppStrihgField will read the imput from the keyboard and update the string stored at the pointer.
+
+    bool m_allowspace;          //is set to true, it is possible to input a space character
 };
 
 #endif

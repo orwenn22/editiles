@@ -9,6 +9,8 @@
 CppStringField::CppStringField(WidgetManager* wm, int x, int y, int w, std::string* variableptr) : Widget(wm, x, y, w, 16) {
     m_variableptr = variableptr;
     m_isselected = false;
+
+    m_allowspace = true;
 }
 
 void CppStringField::Update() {
@@ -27,7 +29,13 @@ void CppStringField::Update() {
     if(m_isselected) {
         for(int i = KEY_A; i < KEY_Z; i++) {
             if(IsKeyPressed(i)) {
-                (*m_variableptr) += (char) (i+32);
+                if(IsKeyDown(KEY_LEFT_SHIFT)) {
+                    (*m_variableptr) += (char) i;
+                }
+                else {
+                    (*m_variableptr) += (char) (i+32);
+                }
+                
             }
         }
 
@@ -35,6 +43,10 @@ void CppStringField::Update() {
             if(m_variableptr->size() > 0) {
                 m_variableptr->erase(m_variableptr->begin() + m_variableptr->size() -1);
             }
+        }
+
+        if(IsKeyPressed(KEY_SPACE) && m_allowspace) {
+            (*m_variableptr) += ' ';
         }
     }
 }
