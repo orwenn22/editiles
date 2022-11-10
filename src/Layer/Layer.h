@@ -8,7 +8,7 @@ class TextureObject;
 
 class Layer {
     public:
-    Layer(Level* level, std::string name);
+    Layer(std::string name);
     virtual ~Layer();
 
     virtual void Update(int x, int y);
@@ -23,6 +23,7 @@ class Layer {
     int m_type;
 
     Level* m_parrent;
+    bool m_isinlevel;
 
     std::string m_name;
 

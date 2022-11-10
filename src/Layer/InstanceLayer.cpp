@@ -6,7 +6,7 @@
 #include "Instance.h"
 #include "LayerIDs.h"
 
-InstanceLayer::InstanceLayer(Level* level, std::string name) : Layer(level, name) {
+InstanceLayer::InstanceLayer(std::string name) : Layer(name) {
     m_type = LAYERID_INSTANCE;
     m_instancecount = 0;
 }
@@ -22,6 +22,9 @@ InstanceLayer::~InstanceLayer() {
 void InstanceLayer::Add(Instance* newinstance) {
     m_instances.push_back(newinstance);
     m_instancecount++;
+
+    newinstance->m_parrent = this;
+    newinstance->m_isinlayer = true;
 }
 
 Instance* InstanceLayer::Get(int index) {

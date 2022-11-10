@@ -3,10 +3,10 @@
 #include "../FileUtil/FileUtil.h"
 #include "LayerIDs.h"
 
-Layer::Layer(Level* level, std::string name) {
+Layer::Layer(std::string name) {
     m_type = LAYERID_STANDARD;
 
-    m_parrent = level;
+    m_isinlevel = false;
 
     m_name = name;
 

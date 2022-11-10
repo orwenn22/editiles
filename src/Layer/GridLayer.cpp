@@ -12,7 +12,7 @@
 #include <raylib.h>
 
 
-GridLayer::GridLayer(short gridwidth, short gridheight, Level* level, std::string name) : Layer(level, name) {
+GridLayer::GridLayer(short gridwidth, short gridheight, std::string name) : Layer(name) {
     m_type = LAYERID_GRID;
 
     m_width = gridwidth;

@@ -14,7 +14,7 @@ union InstancePropertyValue {
 
 class Instance {
     public:
-    Instance(ObjectTemplate* objtemplate, InstanceLayer* parrent, int x, int y);
+    Instance(ObjectTemplate* objtemplate, int x, int y);
     ~Instance();
 
     void Update(int levelx, int levely, int zoom);
@@ -30,6 +30,7 @@ class Instance {
     std::vector<InstancePropertyValue> m_properties;
 
     InstanceLayer* m_parrent;
+    bool m_isinlayer;
 
     int m_x;
     int m_y;

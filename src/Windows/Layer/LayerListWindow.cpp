@@ -13,12 +13,12 @@ extern Editor* g_editor;
 
 void NewGridLayerButtonAction(Button* but) {
     Level* level = g_editor->m_level;
-    level->AddLayer(new GridLayer(level->m_width, level->m_height, level, "newlayer"));
+    level->AddLayer(new GridLayer(level->m_width, level->m_height, "newlayer"));
 }
 
 void NewInstLayerButtonAction(Button* but) {
     Level* level = g_editor->m_level;
-    level->AddLayer(new InstanceLayer(level, "newlayer"));
+    level->AddLayer(new InstanceLayer("newlayer"));
 }
 
 LayerListWindow::LayerListWindow(WindowManager* winmanager) : Window(winmanager) {

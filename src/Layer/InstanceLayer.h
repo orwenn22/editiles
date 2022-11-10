@@ -13,7 +13,7 @@ struct ObjectProperty;
 
 class InstanceLayer : public Layer {
     public:
-    InstanceLayer(Level* level, std::string name);
+    InstanceLayer(std::string name);
     virtual ~InstanceLayer();
 
     void Update(int x, int y) override;

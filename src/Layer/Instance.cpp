@@ -18,10 +18,10 @@
 
 extern Editor* g_editor;
 
-Instance::Instance(ObjectTemplate* objtemplate, InstanceLayer* parrent, int x, int y) {
+Instance::Instance(ObjectTemplate* objtemplate, int x, int y) {
     m_objtemplateptr = objtemplate;
     m_objtemplateptr->AddChildren(this);
-    m_parrent = parrent;
+    m_isinlayer = false;
 
     for(int i = 0; i < m_objtemplateptr->m_propertycount; i++) {
         ObjectProperty* objectprop = m_objtemplateptr->GetProperty(i);
