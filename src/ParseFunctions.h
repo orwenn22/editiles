@@ -13,6 +13,8 @@ class ObjectTemplate;
 
 struct ObjectProperty;
 
+Level* ParseLVLFile(std::string filename);
+GridLayer* ParseTLMPFile(std::string filename);
 
 ObjectTemplate* ParseObjectTemplate(FILE* fileptr);
 ObjectProperty* ParseObjectProperty(FILE* fileptr);

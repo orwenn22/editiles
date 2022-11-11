@@ -2,6 +2,7 @@
 
 #include "../DragObjectIDs.h"
 #include "../Editor.h"
+#include "../Layer/GridLayer.h"
 #include "../Layer/Layer.h"
 #include "../Layer/LayerIDs.h"
 #include "../GUI/Mouse/DragAndDropObject.h"
@@ -9,6 +10,7 @@
 #include "../GUI/Window.h"
 #include "../GUI/WindowManager.h"
 #include "../Level.h"
+#include "../ParseFunctions.h"
 #include "../Windows/Layer/LayerInfoWindow.h"
 #include "../Windows/WinIDs.h"
 
@@ -105,4 +107,37 @@ int LayerList::GetSelectedElement() {
 
 void LayerList::SetSelectedElement(int newselection) {
     g_editor->m_level->m_selectedlayer = newselection;
+}
+
+
+void LayerList::PreInputCheck() {
+    Level* level = g_editor->m_level;
+    //Drag and drop file to list
+    if(g_mouse->m_havefiles) {
+        if(g_mouse->m_fileslist.count == 1) {
+            GridLayer* tempgridlayer = ParseTLMPFile(g_mouse->m_fileslist.paths[0]);
+
+            if(tempgridlayer != NULL) {
+                printf("LayerList : yay\n");
+                //"Resize" the layer to match the level's size
+                GridLayer* finalgridlayer = new GridLayer(level->m_width, level->m_height, tempgridlayer->m_name);
+
+                //copy
+                for(int y = 0; y < level->m_height; y++) {
+                    for(int x = 0; x < level->m_width; x++) {
+                        unsigned short tile = tempgridlayer->GetBoxValue(x, y);
+                        if(tile == (unsigned short)-1) tile = 0;
+
+                        finalgridlayer->SetBoxValue(x, y, tile);
+                    }
+                }
+
+                level->AddLayer(finalgridlayer);
+                delete tempgridlayer;
+            }
+            else {
+                printf("LayerList : null :(\n");
+            }
+        }
+    }
 }

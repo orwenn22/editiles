@@ -18,6 +18,7 @@ class GridLayer : public Layer {
     void SetBoxSize(unsigned short width, unsigned short height);
 
     void SetBoxValue(unsigned int xpos, unsigned int ypos, unsigned short value);
+    unsigned short GetBoxValue(unsigned int xpos, unsigned int ypos);
 
     void Save(FILE* fileptr) override;
     void SaveStandalone();

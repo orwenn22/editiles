@@ -103,6 +103,14 @@ void GridLayer::SetBoxValue(unsigned int xpos, unsigned int ypos, unsigned short
     }
 }
 
+unsigned short GridLayer::GetBoxValue(unsigned int xpos, unsigned int ypos) {
+    if(xpos >= 0 && xpos < m_width
+    && ypos >= 0 && ypos < m_height) {
+        return m_griddata[ypos*m_width+xpos];
+    }
+    return -1;  //out of grid
+}
+
 void GridLayer::Save(FILE* fileptr) {
     Layer::Save(fileptr);   //Layer type and name
 

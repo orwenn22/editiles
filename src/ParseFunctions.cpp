@@ -13,6 +13,83 @@
 
 #include <string>
 
+Level* ParseLVLFile(std::string filename) {
+    FILE* infile = fopen(filename.c_str(), "r");
+
+    if(infile == NULL) {
+        printf("File don't exist :(\n");
+        return NULL;
+    }
+
+    //check for signature
+    if(!(getc(infile) == 'L' && getc(infile) == 'V' && getc(infile) == 'L')) {
+        fclose(infile);
+        return NULL;
+    }
+
+    ///////////////////////////////
+    //size infos
+
+    unsigned short lvlwidth = ReadShort(infile);
+    unsigned short lvlheight = ReadShort(infile);
+    unsigned short boxwidth = ReadShort(infile);
+    unsigned short boxheight = ReadShort(infile);
+
+    printf("Creating : %i %i %i %i\n", lvlwidth, lvlheight, boxwidth, boxheight);
+    Level* newlevel = new Level(lvlwidth, lvlheight, boxwidth, boxheight);
+
+    /////////////////////////
+    //object templates
+
+    unsigned short objecttempcount = ReadShort(infile);
+    for(int i = 0; i < objecttempcount; i++) {
+        ObjectTemplate* objtemplate = ParseObjectTemplate(infile);
+
+        //Add object to level
+        newlevel->m_objectmanager->Add(objtemplate);
+    }
+
+
+    ///////////////////////////////////
+    //Layers
+
+    unsigned short layercount = ReadShort(infile);
+    for(int i = 0; i < layercount; i++) {
+        Layer* newlayer = ParseLayer(infile, newlevel);
+        newlevel->AddLayer(newlayer);
+    }
+
+    fclose(infile);
+    return newlevel;
+}
+
+GridLayer* ParseTLMPFile(std::string filename) {
+    FILE* infile = fopen(filename.c_str(), "r");
+    if(infile == NULL) {
+        return NULL;
+    }
+
+    if(!(getc(infile) == 't' && getc(infile) == 'l' && getc(infile) == 'm' && getc(infile) == 'p')) {
+        fclose(infile);
+        return NULL;
+    }
+
+    unsigned short width = ReadShort(infile);
+    unsigned short height = ReadShort(infile);
+    unsigned short type = ReadShort(infile);
+
+    if(type != LAYERID_GRID) {
+        fclose(infile);
+        return NULL;
+    }
+
+    GridLayer* newgridlayer = ParseGridLayer(infile, width, height);
+
+    fclose(infile);
+    return newgridlayer;
+}
+
+
 ObjectTemplate* ParseObjectTemplate(FILE* fileptr) {
     //get name of the object
     std::string objectname = ReadString(fileptr);

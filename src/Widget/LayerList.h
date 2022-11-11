@@ -18,6 +18,8 @@ class LayerList : public ElementList {
 
     int GetSelectedElement() override;
     void SetSelectedElement(int newselection) override;
+
+    void PreInputCheck() override;
 };
 
 #endif

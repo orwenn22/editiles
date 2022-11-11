@@ -173,61 +173,15 @@ void Editor::CreateNewLevel(int width, int height, int boxwidth, int boxheight) 
     m_havelevel = true;
 }
 
-//TODO : better system for loading file ?
 void Editor::LoadFromFile(const char* filename) {
-    FILE* infile = fopen(filename, "r");
+    Level* newlevel = ParseLVLFile(std::string(filename));    
 
-    if(infile == NULL) {
-        printf("File don't exist :(\n");
-        return;
-    }
-
-    //check for signature
-    if(!(getc(infile) == 'L' && getc(infile) == 'V' && getc(infile) == 'L')) {
-        fclose(infile);
-        return;
-    }
-
-
-    ///////////////////////////////
-    //size infos
-
-    unsigned short lvlwidth = ReadShort(infile);
-    unsigned short lvlheight = ReadShort(infile);
-    unsigned short boxwidth = ReadShort(infile);
-    unsigned short boxheight = ReadShort(infile);
-
-    printf("Creating : %i %i %i %i\n", lvlwidth, lvlheight, boxwidth, boxheight);
-    Level* newlevel = new Level(lvlwidth, lvlheight, boxwidth, boxheight);
-
-    //Add the new level to the editor
-    if(m_havelevel) {
-        delete m_level;
+    if(newlevel != NULL) {
+        //Add the new level to the editor
+        if(m_havelevel) {
+            delete m_level;
     }
     m_havelevel = true;
     m_level = newlevel;
-
-    /////////////////////////
-    //object templates
-
-    unsigned short objecttempcount = ReadShort(infile);
-    for(int i = 0; i < objecttempcount; i++) {
-        ObjectTemplate* objtemplate = ParseObjectTemplate(infile);
-
-        //Add object to level
-        newlevel->m_objectmanager->Add(objtemplate);
     }
-
-
-    ///////////////////////////////////
-    //Layers
-
-    unsigned short layercount = ReadShort(infile);
-    for(int i = 0; i < layercount; i++) {
-        Layer* newlayer = ParseLayer(infile, newlevel);
-        newlevel->AddLayer(newlayer);
-    }
-
-
-    fclose(infile);
 }
