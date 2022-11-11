@@ -6,6 +6,8 @@ class WidgetManager;
 
 class Widget {
     public:
+    //TODO : remove WidgetManager from Widget's constructor.
+    //       m_parrent will instead be set by WidgetManager::Add()
     Widget(WidgetManager* wm, int x, int y, int w, int h);
     virtual ~Widget();
 
@@ -14,6 +16,7 @@ class Widget {
     virtual void Update();
 
     //Recalculate m_x and m_y with m_parrent's base position and the offset from m_parrent's base position.
+    //Normally called by WidgetManager::UpdateAllPos()
     void UpdatePos();
 
     //Called by WidgetManager::Draw()

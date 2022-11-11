@@ -25,6 +25,12 @@ void DeleteLayerButton(Button* but) {
     g_editor->m_winmanager->Remove(win);
 }
 
+void ExportGridStandalonButton(Button* but) {
+    LayerInfoWindow* win = ((LayerInfoWindow*)(but->m_parrent->m_window));
+
+    ((GridLayer*)(win->m_layerpointer))->SaveStandalone();
+}
+
 LayerInfoWindow::LayerInfoWindow(WindowManager* winmanager, Layer* layerptr) : Window(winmanager) {
     m_id = WINID_LAYERINFO;
 
@@ -48,6 +54,11 @@ LayerInfoWindow::LayerInfoWindow(WindowManager* winmanager, Layer* layerptr) : W
     if(m_layerpointer->m_type == LAYERID_GRID) {
         m_widgetmanager->Add(new Label(m_widgetmanager, 5, 63, "tilemap name"));
         m_widgetmanager->Add(new CppStringField(m_widgetmanager, 70, 60, 77, &(((GridLayer*)m_layerpointer)->m_tilemapname)));
+
+        Button* exportbutton = new Button(m_widgetmanager, 60, 132, 50, 15);
+        exportbutton->SetText("Export");
+        exportbutton->SetAction(ExportGridStandalonButton);
+        m_widgetmanager->Add(exportbutton);
     }
     else if(m_layerpointer->m_type == LAYERID_INSTANCE) {
         m_widgetmanager->Add(new Label(m_widgetmanager, 5, 63, "Instance count :"));

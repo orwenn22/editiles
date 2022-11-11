@@ -14,10 +14,14 @@ class GridLayer : public Layer {
 
     void DrawNumbers(int x, int y) override;
 
+    //called by Level::AddLayer()
     void SetBoxSize(unsigned short width, unsigned short height);
-    void SetBoxValue(unsigned int xpos, unsigned int yps, unsigned short value);
+
+    void SetBoxValue(unsigned int xpos, unsigned int ypos, unsigned short value);
 
     void Save(FILE* fileptr) override;
+    void SaveStandalone();
+    void SaveGridData(FILE* fileptr);
 
     //private:
     unsigned short* m_griddata;

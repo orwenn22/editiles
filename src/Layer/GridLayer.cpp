@@ -104,8 +104,28 @@ void GridLayer::SetBoxValue(unsigned int xpos, unsigned int ypos, unsigned short
 }
 
 void GridLayer::Save(FILE* fileptr) {
-    Layer::Save(fileptr);
+    Layer::Save(fileptr);   //Layer type and name
 
+    SaveGridData(fileptr);
+}
+
+void GridLayer::SaveStandalone() {
+    std::string filename = m_name + ".tlmp";
+    FILE* exportfile = fopen(filename.c_str(), "w");
+
+    fputs("tlmp", exportfile);          //file signature
+    WriteShort(exportfile, m_width);    //tilemap width
+    WriteShort(exportfile, m_height);   //tilemap height
+    // //Maybe it would be better to also export the width and height of a tile ?
+    // WriteShort(exportfile, m_boxwidth);      //tile width
+    // WriteShort(exportfile, m_boxwidth);      //tile height
+
+    Save(exportfile);
+
+    fclose(exportfile);
+}
+
+void GridLayer::SaveGridData(FILE* fileptr) {
     //tilemap name
     fputs(m_tilemapname.c_str(), fileptr);
     putc(0, fileptr);
