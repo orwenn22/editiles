@@ -35,7 +35,7 @@ ObjectTemplate* ParseObjectTemplate(FILE* fileptr) {
             int propindex = objtemplate->GetPropertyIndex(propname);
             objtemplate->GetProperty(propindex)->SetValue(objprop->defaultvalue.as_int);
 
-            //destroy ppreviously created property
+            //destroy previously created property
             delete objprop;
         } else {        //custom property
             //Add property to object
@@ -95,9 +95,12 @@ Layer* ParseLayer(FILE* fileptr, Level* lvlptr) {
 }
 
 GridLayer* ParseGridLayer(FILE* fileptr, Level* lvlptr) {
+    return ParseGridLayer(fileptr, lvlptr->m_width, lvlptr->m_height);
+}
+
+GridLayer* ParseGridLayer(FILE* fileptr, int w, int h) {
     std::string layername = ReadString(fileptr);
-    GridLayer* newlayer = new GridLayer(lvlptr->m_width, lvlptr->m_height, layername);
-    newlayer->SetBoxSize(lvlptr->m_boxwidth, lvlptr->m_boxheight);
+    GridLayer* newlayer = new GridLayer(w, h, layername);
 
     newlayer->m_tilemapname = ReadString(fileptr);
 
@@ -108,6 +111,7 @@ GridLayer* ParseGridLayer(FILE* fileptr, Level* lvlptr) {
 
     return newlayer;
 }
+
 InstanceLayer* ParseInstanceLayer(FILE* fileptr, Level* lvlptr) {
     std::string layername = ReadString(fileptr);
 

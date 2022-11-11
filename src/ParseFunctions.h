@@ -17,10 +17,13 @@ struct ObjectProperty;
 ObjectTemplate* ParseObjectTemplate(FILE* fileptr);
 ObjectProperty* ParseObjectProperty(FILE* fileptr);
 
-Layer* ParseLayer(FILE* fileptr, Level* lvlptr);
-GridLayer* ParseGridLayer(FILE* fileptr, Level* lvlptr);
-InstanceLayer* ParseInstanceLayer(FILE* fileptr, Level* lvlptr);
 
+Layer* ParseLayer(FILE* fileptr, Level* lvlptr);
+
+GridLayer* ParseGridLayer(FILE* fileptr, Level* lvlptr);
+GridLayer* ParseGridLayer(FILE* fileptr, int w, int h);     //w and h are the number of tiles horizontally and vertically
+
+InstanceLayer* ParseInstanceLayer(FILE* fileptr, Level* lvlptr);
 Instance* ParseInstance(FILE* fileptr, Level* lvlptr);
 
 
