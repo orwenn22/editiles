@@ -5,7 +5,7 @@
 
 class ObjectList : public ElementList {
     public:
-    ObjectList(WidgetManager* widgetmanager, int x, int y, int w, int h);
+    ObjectList(int x, int y, int w, int h);
 
     void RightClickOn(int clickindex) override;
     void LeftClickOn(int clickindex) override;

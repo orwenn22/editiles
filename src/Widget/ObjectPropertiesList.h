@@ -7,7 +7,7 @@ class ObjectTemplate;
 
 class ObjectPropertiesList : public ElementList {
     public:
-    ObjectPropertiesList(WidgetManager* widgetmanager, int x, int y, int w, int h, ObjectTemplate* objptr);
+    ObjectPropertiesList(int x, int y, int w, int h, ObjectTemplate* objptr);
 
     int GetElementCount() override;
     void DrawElement(int painterx, int paintery, int elementindex) override;

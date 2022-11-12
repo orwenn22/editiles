@@ -18,7 +18,7 @@
 
 extern Editor* g_editor;
 
-LayerList::LayerList(WidgetManager* widgetmanager, int x, int y, int w, int h) : ElementList(widgetmanager, x, y, w, h) {
+LayerList::LayerList(int x, int y, int w, int h) : ElementList(x, y, w, h) {
     m_firstelementindex = 0;
     m_canselectelement = true;
     m_elementheight = 30;

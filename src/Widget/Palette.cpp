@@ -11,7 +11,7 @@
 
 extern Editor* g_editor;
 
-Palette::Palette(WidgetManager* widgetmanager, int x, int y, int w, int h) : Widget(widgetmanager, x, y, w, h) {
+Palette::Palette(int x, int y, int w, int h) : Widget(x, y, w, h) {
     m_firstelement = 0;
     m_zoom = 1;
 }

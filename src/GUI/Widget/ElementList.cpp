@@ -2,7 +2,7 @@
 
 #include "../Mouse/MouseObject.h"
 
-ElementList::ElementList(WidgetManager* widgetmanager, int x, int y, int w, int h) : Widget(widgetmanager, x, y, w, h) {
+ElementList::ElementList(int x, int y, int w, int h) : Widget(x, y, w, h) {
     m_firstelementindex = 0;
     m_elementheight = 30;
     m_canselectelement = false;

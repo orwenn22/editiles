@@ -5,7 +5,7 @@
 
 class TextureList : public ElementList {
     public:
-    TextureList(WidgetManager* wm, int x, int y, int w, int h);
+    TextureList(int x, int y, int w, int h);
 
 
     void RightClickOn(int clickindex) override;

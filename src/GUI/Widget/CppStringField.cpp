@@ -6,7 +6,7 @@
 
 #include <string>
 
-CppStringField::CppStringField(WidgetManager* wm, int x, int y, int w, std::string* variableptr) : Widget(wm, x, y, w, 16) {
+CppStringField::CppStringField(int x, int y, int w, std::string* variableptr) : Widget(x, y, w, 16) {
     m_variableptr = variableptr;
     m_isselected = false;
 

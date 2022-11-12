@@ -17,10 +17,10 @@ PaletteWindow::PaletteWindow(WindowManager* winmanager) : Window(winmanager) {
 
     SetPosition(200, 200);
 
-    IntField* palnumintfield = new IntField(m_widgetmanager, 5, 15, 120, &(g_editor->m_level->m_selectednumber));
+    IntField* palnumintfield = new IntField(5, 15, 120, &(g_editor->m_level->m_selectednumber));
     palnumintfield->AllowNegative(false);
     palnumintfield->SetMinMax(0, 65535);
     m_widgetmanager->Add(palnumintfield);
 
-    m_widgetmanager->Add(new Palette(m_widgetmanager, 5, 35, 290, 260));
+    m_widgetmanager->Add(new Palette(5, 35, 290, 260));
 }

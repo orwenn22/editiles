@@ -9,7 +9,7 @@
 // DrawElement() ; GetElementCount() ; GetSelectedElement ; SetSelectedElement()
 class ElementList : public Widget {
     public:
-    ElementList(WidgetManager* widgetmanager, int x, int y, int w, int h);
+    ElementList(int x, int y, int w, int h);
 
     void Update() override;
     void Draw() override;

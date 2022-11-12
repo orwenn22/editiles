@@ -6,16 +6,12 @@
 #include <raylib.h>
 #include <stdio.h>
 
-Widget::Widget(WidgetManager* wm, int x, int y, int w, int h) {
-    m_parrent = wm;
-
+Widget::Widget(int x, int y, int w, int h) {
     m_xoffset = x;
     m_yoffset = y;
 
     m_width = w;
     m_height = h;
-
-    UpdatePos();
 }
 
 Widget::~Widget() {

@@ -7,7 +7,7 @@ class Instance;
 
 class InstancePropertiesList : public ElementList {
     public:
-    InstancePropertiesList(WidgetManager* widgetmanager, Instance* instanceptr, int x, int y, int w, int h);
+    InstancePropertiesList(Instance* instanceptr, int x, int y, int w, int h);
 
     int GetElementCount() override;
     void DrawElement(int painterx, int paintery, int elementindex) override;

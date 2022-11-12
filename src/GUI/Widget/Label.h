@@ -8,7 +8,7 @@
 
 class Label : public Widget {
     public:
-    Label(WidgetManager* wm, int x, int y, std::string text);
+    Label(int x, int y, std::string text);
 
     void Draw() override;
 

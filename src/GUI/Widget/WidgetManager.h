@@ -15,6 +15,7 @@ class WidgetManager {
     //Call Widget::Update() on all widgets in m_widgets
     void Update();
     //Change the base (absolute) position of the widget manager. Will call UpdateAllPos().
+    //Called by Window::SetPosition() (when the window is moved)
     void ChangeBasePos(int x, int y);
     //Recalculate all the absolute position of the widgets in m_widgets. m_baseposx ant m_baseposy are used to do it.
     void UpdateAllPos();

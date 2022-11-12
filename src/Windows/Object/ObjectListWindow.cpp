@@ -31,9 +31,9 @@ ObjectListWindow::ObjectListWindow(WindowManager* winmanager) : Window(winmanage
     m_width = 200;
     m_height = 200;
 
-    m_widgetmanager->Add(new ObjectList(m_widgetmanager, 3, 15, 194, 150));
+    m_widgetmanager->Add(new ObjectList(3, 15, 194, 150));
 
-    Button* newbut = new Button(m_widgetmanager, 3, 168, 50, 15);
+    Button* newbut = new Button(3, 168, 50, 15);
     newbut->SetText("New");
     newbut->SetAction(NewObjectButtonAction);
     m_widgetmanager->Add(newbut);

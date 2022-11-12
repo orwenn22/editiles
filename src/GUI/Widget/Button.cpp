@@ -12,7 +12,7 @@ void DefaultButtonAction(Button* but) {
     printf("Defaut button action\n");
 }
 
-Button::Button(WidgetManager* wm, int x, int y, int w, int h) : Widget(wm, x, y, w, h) {
+Button::Button(int x, int y, int w, int h) : Widget(x, y, w, h) {
     m_action = DefaultButtonAction;
     m_text = "";
 }

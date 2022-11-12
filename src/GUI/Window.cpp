@@ -65,10 +65,11 @@ bool Window::PreUpdate() {
     }
 
     if(m_followmouse) {
-        m_x = g_mouse->m_x + m_xmouseoffset;
-        m_y = g_mouse->m_y + m_ymouseoffset;
-    
-        m_widgetmanager->ChangeBasePos(m_x, m_y);
+        //m_x = g_mouse->m_x + m_xmouseoffset;
+        //m_y = g_mouse->m_y + m_ymouseoffset;
+        //
+        //m_widgetmanager->ChangeBasePos(m_x, m_y);
+        SetPosition(g_mouse->m_x + m_xmouseoffset, g_mouse->m_y + m_ymouseoffset);
     }
 
     if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {

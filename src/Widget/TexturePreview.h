@@ -7,7 +7,7 @@ class TextureObject;
 
 class TexturePreview : public Widget {
     public:
-    TexturePreview(WidgetManager* widgetmanager, int x, int y, int w, int h, TextureObject* textureobject);
+    TexturePreview(int x, int y, int w, int h, TextureObject* textureobject);
 
     void Update() override;
     void Draw() override;

@@ -6,9 +6,7 @@ class WidgetManager;
 
 class Widget {
     public:
-    //TODO : remove WidgetManager from Widget's constructor.
-    //       m_parrent will instead be set by WidgetManager::Add()
-    Widget(WidgetManager* wm, int x, int y, int w, int h);
+    Widget(int x, int y, int w, int h);
     virtual ~Widget();
 
     //Called by WidgetManager::Update()
@@ -17,6 +15,7 @@ class Widget {
 
     //Recalculate m_x and m_y with m_parrent's base position and the offset from m_parrent's base position.
     //Normally called by WidgetManager::UpdateAllPos()
+    //Calling this if m_parrent is undefined will cause a crash
     void UpdatePos();
 
     //Called by WidgetManager::Draw()
@@ -28,7 +27,9 @@ class Widget {
     //Will also call UpdatePos()
     void SetPos(int x, int y);
 
-    WidgetManager* m_parrent;   //contain a pointer to the parrent WidgetManager. Can also be used to access the parrent Window (m_parrent->m_window).
+    //contain a pointer to the parrent WidgetManager. Can also be used to access the parrent Window (m_parrent->m_window).
+    //Given by WidgetManager::Add()
+    WidgetManager* m_parrent;
 
     //offset from the parrent WidgetManager's base position (relative position)
     //the x and y parameters from the constructor set these two valuess

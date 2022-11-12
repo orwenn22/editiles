@@ -29,9 +29,9 @@ TextureListWindow::TextureListWindow(WindowManager* winmanager) : Window(winmana
     m_titlebarcolor = RED;
     m_titlebartext = "Texture list";
 
-    m_widgetmanager->Add(new TextureList(m_widgetmanager, 3, 15, 194, 150));
+    m_widgetmanager->Add(new TextureList(3, 15, 194, 150));
 
-    Button* newbut = new Button(m_widgetmanager, 3, 168, 50, 15);
+    Button* newbut = new Button(3, 168, 50, 15);
     newbut->SetText("New");
     newbut->SetAction(OpenNewTextureWindow);
     m_widgetmanager->Add(newbut);

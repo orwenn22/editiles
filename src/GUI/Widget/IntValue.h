@@ -8,7 +8,7 @@
 //will also update. (well, technicly, we just draw the widget every frame ( ͡° ͜ʖ ͡°) )
 class IntValue : public Widget {
     public:
-    IntValue(WidgetManager* widgetmanager, int x, int y, int* value);
+    IntValue(int x, int y, int* value);
 
     void Draw() override;
 

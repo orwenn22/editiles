@@ -15,7 +15,7 @@
 
 extern Editor* g_editor;
 
-ObjectList::ObjectList(WidgetManager* widgetmanager, int x, int y, int w, int h) : ElementList(widgetmanager, x, y, w, h) {
+ObjectList::ObjectList(int x, int y, int w, int h) : ElementList(x, y, w, h) {
     m_elementheight = 30;
     m_canselectelement = false;
 }

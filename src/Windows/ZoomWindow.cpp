@@ -29,12 +29,12 @@ ZoomWindow::ZoomWindow(WindowManager* wm) : Window(wm) {
     m_titlebartext = "Zoom";
     m_titlebarcolor = RED;
 
-    Button* zoomintbutton = new Button(m_widgetmanager, 3, 16, 114, 15);
+    Button* zoomintbutton = new Button(3, 16, 114, 15);
     zoomintbutton->SetText("Zoom in");
     zoomintbutton->SetAction(ZoomIn);
     m_widgetmanager->Add(zoomintbutton);
 
-    Button* zoomoutbutton = new Button(m_widgetmanager, 3, 36, 114, 15);
+    Button* zoomoutbutton = new Button(3, 36, 114, 15);
     zoomoutbutton->SetText("Zoom out");
     zoomoutbutton->SetAction(ZoomOut);
     m_widgetmanager->Add(zoomoutbutton);

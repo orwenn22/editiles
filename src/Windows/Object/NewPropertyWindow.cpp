@@ -33,9 +33,9 @@ NewPropertyWindow::NewPropertyWindow(WindowManager* winmanager, ObjectTemplate* 
     m_titlebarcolor = {46, 41, 78, 255};
     m_titlebartext = "New prop";
 
-    m_widgetmanager->Add(new CppStringField(m_widgetmanager, 5, 15, 75, &m_newpropertyname));
+    m_widgetmanager->Add(new CppStringField(5, 15, 75, &m_newpropertyname));
 
-    Button* confirmbut = new Button(m_widgetmanager, 5, 32, 50, 16);
+    Button* confirmbut = new Button(5, 32, 50, 16);
     confirmbut->SetText("Create");
     confirmbut->SetAction(CreateNewProperty);
     m_widgetmanager->Add(confirmbut);

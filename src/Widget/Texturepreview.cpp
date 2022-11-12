@@ -5,7 +5,7 @@
 
 #include <raylib.h>
 
-TexturePreview::TexturePreview(WidgetManager* widgetmanager, int x, int y, int w, int h, TextureObject* textureobject) : Widget(widgetmanager, x, y, w, h) {
+TexturePreview::TexturePreview(int x, int y, int w, int h, TextureObject* textureobject) : Widget(x, y, w, h) {
     m_textureobj = textureobject;
 
     m_followmouse = false;

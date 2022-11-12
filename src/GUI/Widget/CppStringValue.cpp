@@ -2,7 +2,7 @@
 
 #include <raylib.h>
 
-CppStringValue::CppStringValue(WidgetManager* widgetmanager, int x, int y, std::string* stringptr) : Widget(widgetmanager, x, y, 0, 0) {
+CppStringValue::CppStringValue(int x, int y, std::string* stringptr) : Widget(x, y, 0, 0) {
     m_stringptr = stringptr;
 }
 

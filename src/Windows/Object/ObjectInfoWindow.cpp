@@ -82,23 +82,24 @@ ObjectInfoWindow::ObjectInfoWindow(WindowManager* winmanager, ObjectTemplate* ob
     m_width = 200;
     m_height = 200;
 
-    m_widgetmanager->Add(new Label(m_widgetmanager, 5, 15, "Name :"));
-    m_widgetmanager->Add(new CppStringValue(m_widgetmanager, 50, 15, &(m_objptr->m_name)));
+    m_widgetmanager->Add(new Label(5, 15, "Name :"));
+    m_widgetmanager->Add(new CppStringValue(50, 15, &(m_objptr->m_name)));
 
-    Button* deletebut = new Button(m_widgetmanager, 5, 28, 45, 16);
+    Button* deletebut = new Button(5, 28, 45, 16);
     deletebut->SetText("Delete");
     deletebut->SetAction(DeleteObjectTemplate);
     m_widgetmanager->Add(deletebut);
 
-    Button* renamebut = new Button(m_widgetmanager, 53, 28, 45, 16);
+    Button* renamebut = new Button(53, 28, 45, 16);
     renamebut->SetText("Rename");
     renamebut->SetAction(OpenRenameWindow);
     m_widgetmanager->Add(renamebut);
 
-    m_widgetmanager->Add(new ObjectPropertiesList(m_widgetmanager, 5, 50, 190, 120, m_objptr));
+
+    m_widgetmanager->Add(new ObjectPropertiesList(5, 50, 190, 120, m_objptr));
 
 
-    Button* newpropertybut = new Button(m_widgetmanager, 5, 173, 75, 16);
+    Button* newpropertybut = new Button(5, 173, 75, 16);
     newpropertybut->SetText("New property");
     newpropertybut->SetAction(OpenNewPropertyWindow);
     m_widgetmanager->Add(newpropertybut);

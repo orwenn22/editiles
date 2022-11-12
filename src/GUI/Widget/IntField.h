@@ -10,7 +10,7 @@
 //user press enter or desselect the IntField by clicking anywhere else.
 class IntField : public Widget {
     public:
-    IntField(WidgetManager* wm, int x, int y, int w, int* variableptr);
+    IntField(int x, int y, int w, int* variableptr);
 
     void Update() override;
     void Draw() override;

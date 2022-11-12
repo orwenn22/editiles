@@ -57,15 +57,15 @@ ChangeInstancePropWindow::ChangeInstancePropWindow(WindowManager* winmanager, In
 
     if(m_proptype == OPT_INT) {
         m_intval = m_instanceptr->m_properties[propindex].as_int;
-        m_widgetmanager->Add(new IntField(m_widgetmanager, 75, 15, 120, &m_intval));
+        m_widgetmanager->Add(new IntField(75, 15, 120, &m_intval));
     } 
     else if(m_proptype == OPT_STR) {
         m_strval = m_instanceptr->m_properties[propindex].as_str;
-        m_widgetmanager->Add(new CppStringField(m_widgetmanager, 75, 15, 120, &m_strval));
+        m_widgetmanager->Add(new CppStringField(75, 15, 120, &m_strval));
     }
 
 
-    Button* confirmbut = new Button(m_widgetmanager, 5, 49, 60, 16);
+    Button* confirmbut = new Button(5, 49, 60, 16);
     confirmbut->SetText("Confirm");
     confirmbut->SetAction(ChangeInstancePropertyValue);
     m_widgetmanager->Add(confirmbut);

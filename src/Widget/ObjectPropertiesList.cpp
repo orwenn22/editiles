@@ -13,8 +13,7 @@
 
 extern Editor* g_editor;
 
-ObjectPropertiesList::ObjectPropertiesList(WidgetManager* widgetmanager, int x, int y, int w, int h, ObjectTemplate* objptr)
-: ElementList(widgetmanager, x, y, w, h) {
+ObjectPropertiesList::ObjectPropertiesList(int x, int y, int w, int h, ObjectTemplate* objptr) : ElementList(x, y, w, h) {
     m_objptr = objptr;
     m_elementheight = 15;
     m_canselectelement = false;

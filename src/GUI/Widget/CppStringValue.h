@@ -10,7 +10,7 @@
 //(this is basicly a rip-off of IntValue but for a std::string)
 class CppStringValue : public Widget {
     public:
-    CppStringValue(WidgetManager* widgetmanager, int x, int y, std::string* stringptr);
+    CppStringValue(int x, int y, std::string* stringptr);
 
     void Draw() override;
 

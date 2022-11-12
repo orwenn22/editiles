@@ -11,7 +11,7 @@
 
 extern Editor* g_editor;
 
-ImageFileReceiver::ImageFileReceiver(WidgetManager* widgetmanager, int x, int y, int w, int h) : Widget(widgetmanager, x, y, w, h) {
+ImageFileReceiver::ImageFileReceiver(int x, int y, int w, int h) : Widget(x, y, w, h) {
 
 }
 

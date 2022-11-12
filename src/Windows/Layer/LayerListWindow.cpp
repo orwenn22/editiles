@@ -32,14 +32,14 @@ LayerListWindow::LayerListWindow(WindowManager* winmanager) : Window(winmanager)
     m_width = 200;
     m_height = 200;
 
-    m_widgetmanager->Add(new LayerList(m_widgetmanager, 3, 15, 194, 150));
+    m_widgetmanager->Add(new LayerList(3, 15, 194, 150));
 
-    Button* newgridbut = new Button(m_widgetmanager, 3, 168, 50, 15);
+    Button* newgridbut = new Button(3, 168, 50, 15);
     newgridbut->SetText("Grid");
     newgridbut->SetAction(NewGridLayerButtonAction);
     m_widgetmanager->Add(newgridbut);
 
-    Button* newinstbut = new Button(m_widgetmanager, 56, 168, 50, 15);
+    Button* newinstbut = new Button(56, 168, 50, 15);
     newinstbut->SetText("Instance");
     newinstbut->SetAction(NewInstLayerButtonAction);
     m_widgetmanager->Add(newinstbut);

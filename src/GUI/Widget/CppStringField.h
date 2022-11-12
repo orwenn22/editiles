@@ -10,7 +10,7 @@
 //The value stored at the pointer change as soon as the user type something.
 class CppStringField : public Widget {
     public:
-    CppStringField(WidgetManager* wm, int x, int y, int w, std::string* variableptr);
+    CppStringField(int x, int y, int w, std::string* variableptr);
 
     void Update() override;
     void Draw() override;

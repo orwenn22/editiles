@@ -13,5 +13,5 @@ NewTextureWindow::NewTextureWindow(WindowManager* winmanager) : Window(winmanage
     m_width = 82;
     m_height = 94;    
 
-    m_widgetmanager->Add(new ImageFileReceiver(m_widgetmanager, 4, 15, 75, 75));
+    m_widgetmanager->Add(new ImageFileReceiver(4, 15, 75, 75));
 }

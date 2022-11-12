@@ -13,7 +13,7 @@
 
 extern Editor* g_editor;
 
-TextureList::TextureList(WidgetManager* wm, int x, int y, int w, int h) : ElementList(wm, x, y, w, h) {
+TextureList::TextureList(int x, int y, int w, int h) : ElementList(x, y, w, h) {
     m_firstelementindex = 0;
     m_canselectelement = false;
     m_elementheight = 30;

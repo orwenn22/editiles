@@ -35,14 +35,14 @@ RenamePropertyWindow::RenamePropertyWindow(WindowManager* winmanager,  ObjectTem
     m_titlebarcolor = {46, 41, 78, 255};
     m_titlebartext = TextFormat("Rename prop %p", propptr);
 
-    m_widgetmanager->Add(new CppStringField(m_widgetmanager, 5, 15, 60, &m_newname));
+    m_widgetmanager->Add(new CppStringField(5, 15, 60, &m_newname));
 
-    Button* renamebut = new Button(m_widgetmanager, 5, 35, 75, 13);
+    Button* renamebut = new Button(5, 35, 75, 13);
     renamebut->SetText("Confirm");
     renamebut->SetAction(RenameObjectProperty);
     m_widgetmanager->Add(renamebut);
 
-    Button* deletebut = new Button(m_widgetmanager, 83, 35, 65, 13);
+    Button* deletebut = new Button(83, 35, 65, 13);
     deletebut->SetText("Delete");
     deletebut->SetAction(DeleteObjectProperty);
     m_widgetmanager->Add(deletebut);

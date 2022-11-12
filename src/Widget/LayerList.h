@@ -5,7 +5,7 @@
 
 class LayerList : public ElementList {
     public:
-    LayerList(WidgetManager* widgetmanager, int x, int y, int w, int h);
+    LayerList(int x, int y, int w, int h);
 
     void RightClickOn(int clickindex) override;
     void LeftClickOn(int clickindex) override;

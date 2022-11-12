@@ -42,33 +42,33 @@ LayerInfoWindow::LayerInfoWindow(WindowManager* winmanager, Layer* layerptr) : W
     m_layerpointer = layerptr;
 
     //Name
-    m_widgetmanager->Add(new Label(m_widgetmanager, 5, 18, "Name :"));
-    m_widgetmanager->Add(new CppStringField(m_widgetmanager , 40, 15, 107, &(m_layerpointer->m_name)));
+    m_widgetmanager->Add(new Label(5, 18, "Name :"));
+    m_widgetmanager->Add(new CppStringField(40, 15, 107, &(m_layerpointer->m_name)));
 
     //Address
-    m_widgetmanager->Add(new Label(m_widgetmanager, 5, 32, TextFormat("Address : %p", m_layerpointer)));
+    m_widgetmanager->Add(new Label(5, 32, TextFormat("Address : %p", m_layerpointer)));
 
     //Type
-    m_widgetmanager->Add(new Label(m_widgetmanager, 5, 46, TextFormat("Layer type : %i", m_layerpointer->m_type)));
+    m_widgetmanager->Add(new Label(5, 46, TextFormat("Layer type : %i", m_layerpointer->m_type)));
 
     if(m_layerpointer->m_type == LAYERID_GRID) {
-        m_widgetmanager->Add(new Label(m_widgetmanager, 5, 63, "tilemap name"));
-        m_widgetmanager->Add(new CppStringField(m_widgetmanager, 70, 60, 77, &(((GridLayer*)m_layerpointer)->m_tilemapname)));
+        m_widgetmanager->Add(new Label(5, 63, "tilemap name"));
+        m_widgetmanager->Add(new CppStringField(70, 60, 77, &(((GridLayer*)m_layerpointer)->m_tilemapname)));
 
-        Button* exportbutton = new Button(m_widgetmanager, 60, 132, 50, 15);
+        Button* exportbutton = new Button(60, 132, 50, 15);
         exportbutton->SetText("Export");
         exportbutton->SetAction(ExportGridStandalonButton);
         m_widgetmanager->Add(exportbutton);
     }
     else if(m_layerpointer->m_type == LAYERID_INSTANCE) {
-        m_widgetmanager->Add(new Label(m_widgetmanager, 5, 63, "Instance count :"));
-        m_widgetmanager->Add(new IntValue(m_widgetmanager, 100, 63, &(((InstanceLayer*)m_layerpointer)->m_instancecount)));
+        m_widgetmanager->Add(new Label(5, 63, "Instance count :"));
+        m_widgetmanager->Add(new IntValue(100, 63, &(((InstanceLayer*)m_layerpointer)->m_instancecount)));
     }
     else {
     }
 
     //Delete button
-    Button* deletebutton = new Button(m_widgetmanager, 5, 132, 50, 15);
+    Button* deletebutton = new Button(5, 132, 50, 15);
     deletebutton->SetText("Delete");
     deletebutton->SetAction(DeleteLayerButton);
     m_widgetmanager->Add(deletebutton);

@@ -36,9 +36,9 @@ NewObjectWindow::NewObjectWindow(WindowManager* winmanager) : Window(winmanager)
     
     m_height = 60;
 
-    m_widgetmanager->Add(new CppStringField(m_widgetmanager, 5, 15, 120, &m_newobjname));
+    m_widgetmanager->Add(new CppStringField(5, 15, 120, &m_newobjname));
     
-    Button* confirmbut = new Button(m_widgetmanager, 5, 36, 50, 16);
+    Button* confirmbut = new Button(5, 36, 50, 16);
     confirmbut->SetText("ok");
     confirmbut->SetAction(CreateNewObjectButton);
     m_widgetmanager->Add(confirmbut);

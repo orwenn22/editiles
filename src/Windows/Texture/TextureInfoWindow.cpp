@@ -57,15 +57,15 @@ TextureInfoWindow::TextureInfoWindow(WindowManager* winmanager, TextureObject* t
 
     m_titlebartext = TextFormat("Texture %p", textureobjectptr);
 
-    m_widgetmanager->Add(new Label(m_widgetmanager, 5, 18, "Name :"));
-    m_widgetmanager->Add(new CppStringField(m_widgetmanager , 40, 15, 107, &(m_textureobjectptr->m_name)));
+    m_widgetmanager->Add(new Label(5, 18, "Name :"));
+    m_widgetmanager->Add(new CppStringField(40, 15, 107, &(m_textureobjectptr->m_name)));
 
-    Button* deletebutton = new Button(m_widgetmanager, 5, 32, 50, 15);
+    Button* deletebutton = new Button(5, 32, 50, 15);
     deletebutton->SetText("Delete");
     deletebutton->SetAction(DeleteTextureButton);
     m_widgetmanager->Add(deletebutton);
 
 
-    m_widgetmanager->Add(new TexturePreview(m_widgetmanager, 5, 50, 140, 130, m_textureobjectptr));
+    m_widgetmanager->Add(new TexturePreview(5, 50, 140, 130, m_textureobjectptr));
 
 }

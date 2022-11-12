@@ -34,17 +34,17 @@ NewLevelWindow::NewLevelWindow(WindowManager* winmanager) : Window(winmanager) {
 
 
     //Labels
-    m_widgetmanager->Add(new Label(m_widgetmanager, 3, 15, "Grid Width :"));
-    m_widgetmanager->Add(new Label(m_widgetmanager, 3, 33, "Grid Height :"));
-    m_widgetmanager->Add(new Label(m_widgetmanager, 3, 51, "Box Width (in pixel) :"));
-    m_widgetmanager->Add(new Label(m_widgetmanager, 3, 69, "Box Height (in pixel) :"));
+    m_widgetmanager->Add(new Label(3, 15, "Grid Width :"));
+    m_widgetmanager->Add(new Label(3, 33, "Grid Height :"));
+    m_widgetmanager->Add(new Label(3, 51, "Box Width (in pixel) :"));
+    m_widgetmanager->Add(new Label(3, 69, "Box Height (in pixel) :"));
 
 
     //IntFields
-    IntField* gridwidthfield = new IntField(m_widgetmanager,  115, 15, 87, &m_vargridwidth);
-    IntField* gridheightfield = new IntField(m_widgetmanager, 115, 33, 87, &m_vargridheight);
-    IntField* boxwidthfield = new IntField(m_widgetmanager,   115, 51, 87, &m_varboxwidth);
-    IntField* boxheightfield = new IntField(m_widgetmanager,  115, 69, 87, &m_varboxheight);
+    IntField* gridwidthfield = new IntField( 115, 15, 87, &m_vargridwidth);
+    IntField* gridheightfield = new IntField(115, 33, 87, &m_vargridheight);
+    IntField* boxwidthfield = new IntField(  115, 51, 87, &m_varboxwidth);
+    IntField* boxheightfield = new IntField( 115, 69, 87, &m_varboxheight);
 
     gridwidthfield->AllowNegative(false);  gridwidthfield->SetMinMax(1, 65535);
     gridheightfield->AllowNegative(false); gridheightfield->SetMinMax(1, 65535);
@@ -58,7 +58,7 @@ NewLevelWindow::NewLevelWindow(WindowManager* winmanager) : Window(winmanager) {
 
 
     //Button
-    Button* confirmbutton = new Button(m_widgetmanager, 115, 92, 87, 16);
+    Button* confirmbutton = new Button(115, 92, 87, 16);
     confirmbutton->SetAction(CreateGrid);
     confirmbutton->SetText("Confirm");
     m_widgetmanager->Add(confirmbutton);

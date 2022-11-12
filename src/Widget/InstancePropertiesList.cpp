@@ -12,8 +12,7 @@
 
 extern Editor* g_editor;
 
-InstancePropertiesList::InstancePropertiesList(WidgetManager* widgetmanager, Instance* instanceptr, int x, int y, int w, int h)
-: ElementList(widgetmanager, x, y, w, h) {
+InstancePropertiesList::InstancePropertiesList(Instance* instanceptr, int x, int y, int w, int h) : ElementList(x, y, w, h) {
     m_instanceptr = instanceptr;
     m_elementheight = 15;
     m_canselectelement = false;

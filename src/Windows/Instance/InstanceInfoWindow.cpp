@@ -25,10 +25,10 @@ InstanceInfoWindow::InstanceInfoWindow(WindowManager* winmanager, Instance* inst
     m_titlebarcolor = {159, 187, 204, 255};
     m_titlebartextcolor = BLACK;
 
-    Button* deletebut = new Button(m_widgetmanager, 3, 25, 50, 16);
+    Button* deletebut = new Button(3, 25, 50, 16);
     deletebut->SetText("Delete");
     deletebut->SetAction(Deleteinstance);
     m_widgetmanager->Add(deletebut);
 
-    m_widgetmanager->Add(new InstancePropertiesList(m_widgetmanager, m_instanceptr, 5, 50, 190, 120));
+    m_widgetmanager->Add(new InstancePropertiesList(m_instanceptr, 5, 50, 190, 120));
 }

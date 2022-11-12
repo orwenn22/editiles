@@ -5,7 +5,7 @@
 
 class Palette : public Widget {
     public:
-    Palette(WidgetManager* widgetmanager, int x, int y, int w, int h);
+    Palette(int x, int y, int w, int h);
 
     void Update() override;
     void Draw() override;

@@ -6,7 +6,7 @@
 
 #include <raylib.h>
 
-IntField::IntField(WidgetManager* wm, int x, int y, int w, int* variableptr) : Widget(wm, x, y, w, 16) {
+IntField::IntField(int x, int y, int w, int* variableptr) : Widget(x, y, w, 16) {
     m_varriableptr = variableptr;
     m_tempvariable = *m_varriableptr;
 

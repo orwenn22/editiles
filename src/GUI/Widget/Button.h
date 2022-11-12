@@ -15,7 +15,7 @@ typedef void (*ButtonAction) (Button*);
 //If the Button is clicked, it can execute a function.
 class Button : public Widget {
     public:
-    Button(WidgetManager* wm, int x, int y, int w, int h);
+    Button(int x, int y, int w, int h);
 
     void Update() override;
     void Draw() override;

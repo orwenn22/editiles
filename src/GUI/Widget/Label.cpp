@@ -4,7 +4,7 @@
 
 #include <raylib.h>
 
-Label::Label(WidgetManager* wm, int x, int y, std::string text) : Widget(wm, x, y, 0, 0) {
+Label::Label(int x, int y, std::string text) : Widget(x, y, 0, 0) {
     m_text = text;
     m_color = {255, 255, 255, 255};
 }

@@ -44,18 +44,18 @@ ChangePropertyWindow::ChangePropertyWindow(WindowManager* winmanager, ObjectProp
         m_strval = m_propptr->defaultvalue.as_str;
     }
 
-    m_widgetmanager->Add(new Label(m_widgetmanager, 5, 15, "int :"));
-    m_widgetmanager->Add(new Label(m_widgetmanager, 5, 32, "str :"));
+    m_widgetmanager->Add(new Label(5, 15, "int :"));
+    m_widgetmanager->Add(new Label(5, 32, "str :"));
 
-    m_widgetmanager->Add(new IntField(m_widgetmanager, 75, 15, 120, &m_intval));
-    m_widgetmanager->Add(new CppStringField(m_widgetmanager, 75, 32, 120, &m_strval));
+    m_widgetmanager->Add(new IntField(75, 15, 120, &m_intval));
+    m_widgetmanager->Add(new CppStringField(75, 32, 120, &m_strval));
 
-    Button* confirmint = new Button(m_widgetmanager, 5, 49, 60, 16);
+    Button* confirmint = new Button(5, 49, 60, 16);
     confirmint->SetText("Confirm int");
     confirmint->SetAction(ChangePropertyDefaultValueint);
     m_widgetmanager->Add(confirmint);
 
-    Button* confirmstr = new Button(m_widgetmanager, 5, 67, 60, 16);
+    Button* confirmstr = new Button(5, 67, 60, 16);
     confirmstr->SetText("Confirm str");
     confirmstr->SetAction(ChangePropertyDefaultValuestring);
     m_widgetmanager->Add(confirmstr);

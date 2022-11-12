@@ -55,6 +55,9 @@ void WidgetManager::Draw() {
 void WidgetManager::Add(Widget* newwidget) {
     m_widgets.push_back(newwidget);
     m_count++;
+    
+    newwidget->m_parrent = this;
+    newwidget->UpdatePos();
 }
 
 void WidgetManager::Remove(Widget* widgetptr) {
