@@ -1,12 +1,10 @@
 #include "Button.h"
 
-#include "../../Editor.h"
 #include "../Mouse/MouseObject.h"
 
 #include <raylib.h>
 #include <stdio.h>
 
-extern Editor* g_editor;
 
 void DefaultButtonAction(Button* but) {
     printf("Defaut button action\n");
