@@ -19,6 +19,3 @@ srcdirs = ./src/*.cpp \
 
 executable: ${srcdirs} ${guisrcdir}
 	clang++ ${srcdirs} ${guisrcdir} -o executable -Wall -Wextra -Wno-unused-parameter -I${raylib} ./raylib/src/libraylib.a -ldl -lpthread
-
-lib/libGUI.so: ${guisrcdir}
-	g++ ${guisrcdir} -shared -fPIC -o lib/libGUI.so -I${raylib} -L${raylib} -lraylib -ldl -lpthread
