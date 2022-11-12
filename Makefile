@@ -17,11 +17,8 @@ srcdirs = ./src/*.cpp \
 		  ./src/Windows/Texture/*.cpp \
 		  ./src/Widget/*.cpp
 
-executable_static: ${srcdirs} ${guisrcdir}
-	clang++ ${srcdirs} ${guisrcdir} -o executable_static -Wall -Wextra -Wno-unused-parameter -I${raylib} ./raylib/src/libraylib.a -ldl -lpthread
-
-executable_shared: ${srcdirs} lib/libGUI.so
-	g++ ${srcdirs} -o executable_shared -I${raylib} -L${raylib} -L./lib lib/libraylib.so lib/libGUI.so -ldl -lpthread
+executable: ${srcdirs} ${guisrcdir}
+	clang++ ${srcdirs} ${guisrcdir} -o executable -Wall -Wextra -Wno-unused-parameter -I${raylib} ./raylib/src/libraylib.a -ldl -lpthread
 
 lib/libGUI.so: ${guisrcdir}
 	g++ ${guisrcdir} -shared -fPIC -o lib/libGUI.so -I${raylib} -L${raylib} -lraylib -ldl -lpthread
