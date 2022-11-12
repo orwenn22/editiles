@@ -1,6 +1,5 @@
 #include "ObjectTemplate.h"
 
-#include "../Editor.h"
 #include "../FileUtil/FileUtil.h"
 #include "../Layer/Instance.h"
 #include "../Layer/InstanceLayer.h"
@@ -8,8 +7,6 @@
 #include "../Layer/LayerIDs.h"
 #include "../Level.h"
 #include "ObjectProperty.h"
-
-extern Editor* g_editor;
 
 ObjectTemplate::ObjectTemplate(std::string name) {
     m_propertycount = 0;

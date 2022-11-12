@@ -3,12 +3,9 @@
 #include "../GUI/MainWindow.h"
 #include "../GUI/Widget/WidgetManager.h"
 #include "../GUI/Widget/Button.h"
-#include "../Editor.h"
 #include "../Level.h"
 #include "../Zoom.h"
 #include "WinIDs.h"
-
-extern Editor* g_editor;
 
 
 void ZoomIn(Button*) {
