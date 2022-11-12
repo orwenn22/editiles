@@ -26,7 +26,7 @@ void CreateNewObjectButton(Button* but) {
     g_editor->m_winmanager->Remove(win);
 }
 
-NewObjectWindow::NewObjectWindow(WindowManager* winmanager) : Window(winmanager) {
+NewObjectWindow::NewObjectWindow() : Window() {
     m_id = WINID_NEWOBJECT;
 
     m_titlebarcolor = {46, 41, 78, 255};

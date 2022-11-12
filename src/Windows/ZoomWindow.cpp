@@ -19,7 +19,7 @@ void ZoomOut(Button*) {
     Zoom(-1, g_winwidth / 2, g_winheight / 2);
 }
 
-ZoomWindow::ZoomWindow(WindowManager* wm) : Window(wm) {
+ZoomWindow::ZoomWindow() : Window() {
     SetPosition(100, 100);
     m_id = WINID_ZOOM;
 

@@ -36,7 +36,7 @@ void TextureList::RightClickOn(int clickindex) {
         }
     }
     if(needcreation) {
-        g_editor->m_winmanager->Add(new TextureInfoWindow(g_editor->m_winmanager ,g_editor->m_texturemanager->Get(clickindex)));
+        g_editor->m_winmanager->Add(new TextureInfoWindow(g_editor->m_texturemanager->Get(clickindex)));
     }
 }
 

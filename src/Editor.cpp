@@ -80,7 +80,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_W) && m_havelevel) {   //ZOOM
             Window* winptr = m_winmanager->FindWithID(WINID_ZOOM);
             if(winptr == NULL) {
-                m_winmanager->Add(new ZoomWindow(m_winmanager));
+                m_winmanager->Add(new ZoomWindow());
             }
             else {
                 m_winmanager->BringOnTop(winptr);
@@ -90,7 +90,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_T) && m_havelevel) {   //TEXTURE LIST
             Window* winptr = m_winmanager->FindWithID(WINID_TEXTURELIST);
             if(winptr == NULL) {
-                m_winmanager->Add(new TextureListWindow(m_winmanager));
+                m_winmanager->Add(new TextureListWindow());
             }
             else {
                 m_winmanager->BringOnTop(winptr);
@@ -100,7 +100,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_L) && m_havelevel) {   //LAYER LIST
             Window* winptr = m_winmanager->FindWithID(WINID_LAYERLIST);
             if(winptr == NULL) {
-                m_winmanager->Add(new LayerListWindow(m_winmanager));
+                m_winmanager->Add(new LayerListWindow());
             }
             else {
                 m_winmanager->BringOnTop(winptr);
@@ -110,7 +110,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_P) && m_havelevel) {   //PALETTE
             Window* winptr = m_winmanager->FindWithID(WINID_PALETTE);
             if(winptr == NULL) {
-                m_winmanager->Add(new PaletteWindow(m_winmanager));
+                m_winmanager->Add(new PaletteWindow());
             }
             else {
                 m_winmanager->BringOnTop(winptr);
@@ -120,7 +120,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_O) && m_havelevel) {                   //OBJECT LIST WINDOW
             Window* winptr = m_winmanager->FindWithID(WINID_OBJECTLIST);
             if(winptr == NULL) {
-                m_winmanager->Add(new ObjectListWindow(m_winmanager));
+                m_winmanager->Add(new ObjectListWindow());
             }
             else {
                 m_winmanager->BringOnTop(winptr);
@@ -130,7 +130,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_N)) {                   //NEW LEVEL WINDOW
             Window* winptr = m_winmanager->FindWithID(WINID_NEWLEVEL);
             if(winptr == NULL) {
-                m_winmanager->Add(new NewLevelWindow(m_winmanager));
+                m_winmanager->Add(new NewLevelWindow());
             }
             else {
                 m_winmanager->BringOnTop(winptr);

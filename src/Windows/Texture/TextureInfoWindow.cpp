@@ -44,7 +44,7 @@ void DeleteTextureButton(Button* but) {
     g_editor->m_winmanager->Remove(win);
 }
 
-TextureInfoWindow::TextureInfoWindow(WindowManager* winmanager, TextureObject* textureobjectptr) : Window(winmanager) {
+TextureInfoWindow::TextureInfoWindow(TextureObject* textureobjectptr) : Window() {
     m_id = WINID_TEXTUREINFO;
     SetPosition(100, 100);
     

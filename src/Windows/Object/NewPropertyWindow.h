@@ -9,7 +9,7 @@ class ObjectTemplate;
 
 class NewPropertyWindow : public Window {
     public:
-    NewPropertyWindow(WindowManager* winmanager, ObjectTemplate* objptr);
+    NewPropertyWindow(ObjectTemplate* objptr);
     
 
     ObjectTemplate* m_objptr;

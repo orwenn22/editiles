@@ -5,7 +5,7 @@
 
 class NewTextureWindow : public Window {
     public:
-    NewTextureWindow(WindowManager* winmanager);
+    NewTextureWindow();
 };
 
 #endif

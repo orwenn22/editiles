@@ -7,7 +7,7 @@ class WindowManager;
 
 class TextureListWindow : public Window {
     public:
-    TextureListWindow(WindowManager* winmanager);
+    TextureListWindow();
 };
 
 #endif

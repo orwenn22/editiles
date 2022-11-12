@@ -35,7 +35,7 @@ void ObjectList::RightClickOn(int clickindex) {
     }
 
     if(needcreation) {
-        g_editor->m_winmanager->Add(new ObjectInfoWindow(g_editor->m_winmanager, objptr));
+        g_editor->m_winmanager->Add(new ObjectInfoWindow(objptr));
     }
 }
 

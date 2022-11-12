@@ -17,7 +17,7 @@ void CreateGrid(Button* but) {
     g_editor->m_winmanager->Remove(win);
 }
 
-NewLevelWindow::NewLevelWindow(WindowManager* winmanager) : Window(winmanager) {
+NewLevelWindow::NewLevelWindow() : Window() {
     m_id = WINID_NEWLEVEL;
     SetPosition(100, 100);
 

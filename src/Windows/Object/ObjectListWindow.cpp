@@ -14,14 +14,14 @@ void NewObjectButtonAction(Button*) {
     //printf("placeholder: create object here.\n");
     Window* winptr = g_editor->m_winmanager->FindWithID(WINID_NEWOBJECT);
     if(winptr == NULL) {
-        g_editor->m_winmanager->Add(new NewObjectWindow(g_editor->m_winmanager));
+        g_editor->m_winmanager->Add(new NewObjectWindow());
     }
     else {
         g_editor->m_winmanager->BringOnTop(winptr);
     }
 }
 
-ObjectListWindow::ObjectListWindow(WindowManager* winmanager) : Window(winmanager) {
+ObjectListWindow::ObjectListWindow() : Window() {
     m_id = WINID_OBJECTLIST;
     SetPosition(100, 100);
 

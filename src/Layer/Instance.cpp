@@ -90,7 +90,7 @@ void Instance::CheckMouseInput() {
                     
                 }
                 if(needcreation) {
-                    g_editor->m_winmanager->Add(new InstanceInfoWindow(g_editor->m_winmanager, this));
+                    g_editor->m_winmanager->Add(new InstanceInfoWindow(this));
                 }
             }
             g_mouse->m_havebeenused = false;

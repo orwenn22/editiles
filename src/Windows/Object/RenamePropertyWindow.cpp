@@ -24,7 +24,7 @@ void DeleteObjectProperty(Button* but) {
     g_editor->m_winmanager->Remove(win);
 }
 
-RenamePropertyWindow::RenamePropertyWindow(WindowManager* winmanager,  ObjectTemplate* objptr, ObjectProperty* propptr) : Window(winmanager) {
+RenamePropertyWindow::RenamePropertyWindow(ObjectTemplate* objptr, ObjectProperty* propptr) : Window() {
     m_id = WINID_RENAMEPROPERTY;
 
     m_objptr = objptr;

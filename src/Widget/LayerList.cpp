@@ -43,7 +43,7 @@ void LayerList::RightClickOn(int clickindex) {
         }
     }
     if(needcreation) {      //the window don't exist
-        g_editor->m_winmanager->Add(new LayerInfoWindow(g_editor->m_winmanager ,g_editor->m_level->GetLayer(clickindex)));
+        g_editor->m_winmanager->Add(new LayerInfoWindow(g_editor->m_level->GetLayer(clickindex)));
     }
 
 }

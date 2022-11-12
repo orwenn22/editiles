@@ -8,13 +8,13 @@
 #include "../../Widget/InstancePropertiesList.h"
 #include "../WinIDs.h"
 
-void Deleteinstance(Button* but) {
+void DeleteInstance(Button* but) {
     InstanceInfoWindow* win = (InstanceInfoWindow*)(but->m_parrent->m_window);
     win->m_instanceptr->m_parrent->RemoveWithPtr(win->m_instanceptr);
     win->m_parrent->Remove(win);
 }
 
-InstanceInfoWindow::InstanceInfoWindow(WindowManager* winmanager, Instance* instranceptr) : Window(winmanager) {
+InstanceInfoWindow::InstanceInfoWindow(Instance* instranceptr) : Window() {
     m_id = WINID_INSTANCEINFO;
     m_instanceptr = instranceptr;
 
@@ -27,7 +27,7 @@ InstanceInfoWindow::InstanceInfoWindow(WindowManager* winmanager, Instance* inst
 
     Button* deletebut = new Button(3, 25, 50, 16);
     deletebut->SetText("Delete");
-    deletebut->SetAction(Deleteinstance);
+    deletebut->SetAction(DeleteInstance);
     m_widgetmanager->Add(deletebut);
 
     m_widgetmanager->Add(new InstancePropertiesList(m_instanceptr, 5, 50, 190, 120));

@@ -9,7 +9,7 @@ class ObjectTemplate;
 
 class RenameObjectWindow : public Window {
     public:
-    RenameObjectWindow(WindowManager* winmanager, ObjectTemplate* objptr);
+    RenameObjectWindow(ObjectTemplate* objptr);
 
     ObjectTemplate* m_objptr;
     std::string m_newname;

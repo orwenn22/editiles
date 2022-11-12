@@ -48,7 +48,7 @@ void OpenRenameWindow(Button* but) {
     }
 
     if(needcreation) {
-        g_editor->m_winmanager->Add(new RenameObjectWindow(g_editor->m_winmanager, win->m_objptr));
+        g_editor->m_winmanager->Add(new RenameObjectWindow(win->m_objptr));
     }
 }
 
@@ -68,11 +68,11 @@ void OpenNewPropertyWindow(Button* but) {
     }
     
     if(needcreation) {
-        g_editor->m_winmanager->Add(new NewPropertyWindow(g_editor->m_winmanager, win->m_objptr));
+        g_editor->m_winmanager->Add(new NewPropertyWindow(win->m_objptr));
     }
 }
 
-ObjectInfoWindow::ObjectInfoWindow(WindowManager* winmanager, ObjectTemplate* objptr) : Window(winmanager) {
+ObjectInfoWindow::ObjectInfoWindow(ObjectTemplate* objptr) : Window() {
     m_id = WINID_OBJECTINFO;
     m_objptr = objptr;
 

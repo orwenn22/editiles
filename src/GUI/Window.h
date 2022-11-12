@@ -10,7 +10,7 @@ class WindowManager;
 
 class Window {
     public:
-    Window(WindowManager* winmanager);
+    Window();
 
     //Called by WindowManager::~WindowManager()
     virtual ~Window();
@@ -40,7 +40,7 @@ class Window {
     void SetPosition(int x, int y);
 
     WidgetManager* m_widgetmanager;     //Pointer to the WidgetManager of the window. Contains all the Widgets of the window.
-    WindowManager* m_parrent;           //Pointer to the WindowManager the window is in. Specified in the constructor.
+    WindowManager* m_parrent;           //Pointer to the WindowManager the window is in. Given by WindowManager::Add().
 
     int m_x;
     int m_y;

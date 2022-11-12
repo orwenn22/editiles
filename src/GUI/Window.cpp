@@ -12,9 +12,7 @@
 #include <raylib.h>
 
 
-Window::Window(WindowManager* winmanager) {
-    m_parrent = winmanager;
-
+Window::Window() {
     m_x = 50;
     m_y = 50;
 

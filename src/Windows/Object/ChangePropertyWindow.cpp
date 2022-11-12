@@ -22,7 +22,7 @@ void ChangePropertyDefaultValuestring(Button* but) {
     win->m_parrent->Remove(win);
 }
 
-ChangePropertyWindow::ChangePropertyWindow(WindowManager* winmanager, ObjectProperty* propptr, ObjectTemplate* objptr) : Window(winmanager) {
+ChangePropertyWindow::ChangePropertyWindow(ObjectProperty* propptr, ObjectTemplate* objptr) : Window() {
     m_id = WINID_CHANGEPROPERTY;
     
     m_width = 200;

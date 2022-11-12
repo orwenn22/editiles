@@ -10,7 +10,7 @@ struct ObjectProperty;
 
 class RenamePropertyWindow : public Window {
     public:
-    RenamePropertyWindow(WindowManager* winmanager, ObjectTemplate* objptr, ObjectProperty* propptr);
+    RenamePropertyWindow(ObjectTemplate* objptr, ObjectProperty* propptr);
 
     std::string m_newname;
 

@@ -5,7 +5,7 @@
 
 class LayerListWindow : public Window {
     public:
-    LayerListWindow(WindowManager* winmanager);
+    LayerListWindow();
 };
 
 #endif

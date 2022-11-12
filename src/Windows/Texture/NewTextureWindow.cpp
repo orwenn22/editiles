@@ -4,7 +4,7 @@
 #include "../../Widget/ImageFileReceiver.h"
 #include "../WinIDs.h"
 
-NewTextureWindow::NewTextureWindow(WindowManager* winmanager) : Window(winmanager) {
+NewTextureWindow::NewTextureWindow() : Window() {
     m_id = WINID_NEWTEXTURE;
     m_titlebartext = "New Texture";
 

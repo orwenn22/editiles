@@ -9,7 +9,7 @@
 
 extern Editor* g_editor;
 
-PaletteWindow::PaletteWindow(WindowManager* winmanager) : Window(winmanager) {
+PaletteWindow::PaletteWindow() : Window() {
     m_id = WINID_PALETTE;
     
     m_width = 300;

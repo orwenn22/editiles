@@ -10,7 +10,7 @@ struct ObjectProperty;
 
 class ChangePropertyWindow : public Window {
     public:
-    ChangePropertyWindow(WindowManager* winmanager, ObjectProperty* propptr, ObjectTemplate* objptr);
+    ChangePropertyWindow(ObjectProperty* propptr, ObjectTemplate* objptr);
 
 
     int m_intval;

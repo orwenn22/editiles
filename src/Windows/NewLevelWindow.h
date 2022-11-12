@@ -7,7 +7,7 @@ class WindowManager;
 
 class NewLevelWindow : public Window {
     public:
-    NewLevelWindow(WindowManager* winmanager);
+    NewLevelWindow();
 
     int m_vargridwidth;
     int m_vargridheight;

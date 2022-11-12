@@ -29,6 +29,9 @@ void WindowManager::Draw() {
 void WindowManager::Add(Window* newwindow) {
     m_windows.push_back(newwindow);
     m_wincount++;
+
+    newwindow->m_parrent = this;
+
     BringOnTop(newwindow);
 }
 

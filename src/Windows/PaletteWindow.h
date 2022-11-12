@@ -5,7 +5,7 @@
 
 class PaletteWindow : public Window {
     public:
-    PaletteWindow(WindowManager* winmanager);
+    PaletteWindow();
 };
 
 #endif

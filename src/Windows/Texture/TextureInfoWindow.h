@@ -7,7 +7,7 @@ class TextureObject;
 
 class  TextureInfoWindow : public Window {
     public:
-    TextureInfoWindow(WindowManager* winmanager, TextureObject* textureobjectptr);
+    TextureInfoWindow(TextureObject* textureobjectptr);
 
 
     TextureObject* m_textureobjectptr;

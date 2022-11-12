@@ -31,7 +31,7 @@ void ExportGridStandalonButton(Button* but) {
     ((GridLayer*)(win->m_layerpointer))->SaveStandalone();
 }
 
-LayerInfoWindow::LayerInfoWindow(WindowManager* winmanager, Layer* layerptr) : Window(winmanager) {
+LayerInfoWindow::LayerInfoWindow(Layer* layerptr) : Window() {
     m_id = WINID_LAYERINFO;
 
     m_titlebarcolor = {52, 98, 63, 255};

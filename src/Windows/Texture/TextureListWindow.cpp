@@ -13,13 +13,13 @@ extern Editor* g_editor;
 void OpenNewTextureWindow(Button*) {
     Window* win = g_editor->m_winmanager->FindWithID(WINID_NEWTEXTURE);
     if(win==NULL) {
-        g_editor->m_winmanager->Add(new NewTextureWindow(g_editor->m_winmanager));
+        g_editor->m_winmanager->Add(new NewTextureWindow());
     } else {
         g_editor->m_winmanager->BringOnTop(win);
     }
 }
 
-TextureListWindow::TextureListWindow(WindowManager* winmanager) : Window(winmanager) {
+TextureListWindow::TextureListWindow() : Window() {
     m_id = WINID_TEXTURELIST;
     SetPosition(100, 100);
     

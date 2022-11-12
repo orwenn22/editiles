@@ -75,7 +75,7 @@ void ObjectPropertiesList::RightClickOn(int elementindex) {
                 }
             }
             if(needcreation) {
-                g_editor->m_winmanager->Add(new RenamePropertyWindow(g_editor->m_winmanager, m_objptr, prop));
+                g_editor->m_winmanager->Add(new RenamePropertyWindow(m_objptr, prop));
             }
         }
         
@@ -94,7 +94,7 @@ void ObjectPropertiesList::RightClickOn(int elementindex) {
                 }
             }
             if(needcreation) {
-                g_editor->m_winmanager->Add(new ChangePropertyWindow(g_editor->m_winmanager, prop, m_objptr));
+                g_editor->m_winmanager->Add(new ChangePropertyWindow(prop, m_objptr));
             }
         }
         

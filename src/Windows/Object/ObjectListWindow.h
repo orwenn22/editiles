@@ -5,7 +5,7 @@
 
 class ObjectListWindow : public Window {
     public:
-    ObjectListWindow(WindowManager* winmanager);
+    ObjectListWindow();
 };
 
 #endif

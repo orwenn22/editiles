@@ -55,6 +55,6 @@ void InstancePropertiesList::RightClickOn(int elementindex) {
     }
 
     if(needcreation) {
-        g_editor->m_winmanager->Add(new ChangeInstancePropWindow(g_editor->m_winmanager, m_instanceptr, propintemplate));
+        g_editor->m_winmanager->Add(new ChangeInstancePropWindow(m_instanceptr, propintemplate));
     }
 }

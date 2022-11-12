@@ -7,7 +7,7 @@ class Layer;
 
 class LayerInfoWindow : public Window {
     public:
-    LayerInfoWindow(WindowManager* winmanager, Layer* layerptr);
+    LayerInfoWindow(Layer* layerptr);
 
     Layer* m_layerpointer;
 };

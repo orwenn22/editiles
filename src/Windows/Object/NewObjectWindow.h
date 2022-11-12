@@ -7,7 +7,7 @@
 
 class NewObjectWindow : public Window {
     public:
-    NewObjectWindow(WindowManager* winmanager);
+    NewObjectWindow();
 
     std::string m_newobjname;
 };

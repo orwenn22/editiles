@@ -7,7 +7,7 @@ class ObjectTemplate;
 
 class ObjectInfoWindow : public Window {
     public:
-    ObjectInfoWindow(WindowManager* winmanager, ObjectTemplate* objptr);
+    ObjectInfoWindow(ObjectTemplate* objptr);
 
 
     ObjectTemplate* m_objptr;

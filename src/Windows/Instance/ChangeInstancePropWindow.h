@@ -10,7 +10,7 @@ struct ObjectProperty;
 
 class ChangeInstancePropWindow : public Window {
     public:
-    ChangeInstancePropWindow(WindowManager* winmanager, Instance* instanceptr, ObjectProperty* propertyptr);
+    ChangeInstancePropWindow(Instance* instanceptr, ObjectProperty* propertyptr);
 
     int m_proptype;     //property's variable type
 

@@ -24,7 +24,7 @@ void CreateNewProperty(Button* but) {
 }
 
 
-NewPropertyWindow::NewPropertyWindow(WindowManager* winmanager, ObjectTemplate* objptr) : Window(winmanager) {
+NewPropertyWindow::NewPropertyWindow(ObjectTemplate* objptr) : Window() {
     m_id = WINID_NEWPROPERTY;
     m_objptr = objptr;
 

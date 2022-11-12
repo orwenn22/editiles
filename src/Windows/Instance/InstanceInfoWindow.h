@@ -7,7 +7,7 @@ class Instance;
 
 class InstanceInfoWindow : public Window {
     public:
-    InstanceInfoWindow(WindowManager* winmanager, Instance* instranceptr);
+    InstanceInfoWindow(Instance* instranceptr);
 
     Instance* m_instanceptr;
 };

@@ -20,7 +20,7 @@ void RenameObjectTemplate(Button* but) {
     g_editor->m_winmanager->Remove(win);
 }
 
-RenameObjectWindow::RenameObjectWindow(WindowManager* winmanager, ObjectTemplate* objptr) : Window(winmanager) {
+RenameObjectWindow::RenameObjectWindow(ObjectTemplate* objptr) : Window() {
     m_id = WINID_RENAMEOBJECT;
 
     m_objptr = objptr;

@@ -36,8 +36,7 @@ void ChangeInstancePropertyValue(Button* but) {
     win->m_parrent->Remove(win);
 }
 
-ChangeInstancePropWindow::ChangeInstancePropWindow(WindowManager* winmanager, Instance* instanceptr, ObjectProperty* propertyptr)
-: Window(winmanager) {
+ChangeInstancePropWindow::ChangeInstancePropWindow(Instance* instanceptr, ObjectProperty* propertyptr) : Window() {
     m_id = WINID_CHANGEINSTANCEPROP;
 
     m_instanceptr = instanceptr;

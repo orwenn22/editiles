@@ -5,7 +5,7 @@
 
 class ZoomWindow : public Window {
     public:
-    ZoomWindow(WindowManager* wm);
+    ZoomWindow();
 };
 
 #endif

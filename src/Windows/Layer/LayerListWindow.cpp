@@ -21,7 +21,7 @@ void NewInstLayerButtonAction(Button* but) {
     level->AddLayer(new InstanceLayer("newlayer"));
 }
 
-LayerListWindow::LayerListWindow(WindowManager* winmanager) : Window(winmanager) {
+LayerListWindow::LayerListWindow() : Window() {
     m_id = WINID_LAYERLIST;
 
     SetPosition(100, 100);
