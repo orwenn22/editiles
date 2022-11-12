@@ -1,6 +1,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
+class BottomBar;
 class Level;
 class MouseObject;
 class TextureManager;
@@ -27,6 +28,7 @@ class Editor {
     TextureManager* m_texturemanager;
     WindowManager* m_winmanager;
 
+    BottomBar* m_bottombar;
     WindowCorner* m_corner;
 
     bool m_havelevel;

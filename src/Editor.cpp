@@ -1,6 +1,7 @@
 #include "Editor.h"
 
 #include "FileUtil/FileUtil.h"
+#include "GUI/BottomBar.h"
 #include "GUI/Mouse/MouseObject.h"
 #include "GUI/WindowCorner.h"
 #include "GUI/WindowManager.h"
@@ -38,6 +39,7 @@ Editor::Editor() {
     m_winmanager = new WindowManager();
     //m_winmanager->Add(new Window(m_winmanager));
 
+    m_bottombar = new BottomBar();
     m_corner = new WindowCorner(500, 500);
 }
 
@@ -55,6 +57,7 @@ Editor::~Editor() {
 void Editor::Update() {
     m_mouse->Update();
     m_corner->Update();
+    m_bottombar->Update();
     m_winmanager->Update();
     if(m_havelevel) {
         m_level->Update();
@@ -70,6 +73,7 @@ void Editor::Draw() {
         //m_texturemanager->Get(0)->DrawTile(0, 0, 0);
     }
     m_winmanager->Draw();
+    m_bottombar->Draw();
     m_corner->Draw();
     m_mouse->Draw();
 }

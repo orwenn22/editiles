@@ -3,6 +3,7 @@
 #include "DragObjectIDs.h"
 #include "Editor.h"
 #include "FileUtil/FileUtil.h"
+#include "GUI/BottomBar.h"
 #include "GUI/MainWindow.h"
 #include "GUI/Mouse/DragAndDropObject.h"
 #include "GUI/Mouse/MouseObject.h"
@@ -15,6 +16,8 @@
 
 #include <raylib.h>
 #include <stdio.h>
+
+extern Editor* g_editor;
 
 // This constructor is no longer used, but I still keep it just in case
 Level::Level() {
@@ -175,6 +178,16 @@ void Level::Update() {
     }
     ////////////////
 
+
+    //Bottom Bar update
+    if(g_mouse->m_havebeenused == false) {
+        g_editor->m_bottombar->TextAppend(
+            "X: " + std::to_string((g_mouse->m_x - m_x) / m_zoom) +
+            " | Y: " + std::to_string((g_mouse->m_y - m_y) / m_zoom) +
+            " | TX: " + std::to_string(m_overredboxx) +
+            " | TY: " + std::to_string(m_overredboxy)
+        );
+    }
 }
 
 void Level::Draw() {
