@@ -14,6 +14,8 @@ class ObjectList : public ElementList {
     void DrawElement(int painterx, int paintery, int elementindex) override;
 
     int GetElementCount() override;
+
+    void PreInputCheck() override;
 };
 
 #endif

@@ -12,11 +12,11 @@
 #include "Layer/Layer.h"
 #include "Layer/LayerIDs.h"
 #include "ObjectManager/ObjectManager.h"
-//#include "ObjectManager/ObjectTemplate.h"
 
 #include <raylib.h>
 #include <stdio.h>
 
+// This constructor is no longer used, but I still keep it just in case
 Level::Level() {
     m_boxwidth = 16;
     m_boxheight = 16;
@@ -43,7 +43,7 @@ Level::Level() {
     m_selectednumber = 1;
     m_ispainting = false;
 
-    m_objectmanager = new ObjectManager(this);
+    m_objectmanager = new ObjectManager();
 }
 
 Level::Level(int width, int height, int boxwidth, int boxheight) {
@@ -76,8 +76,7 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
     m_selectednumber = 1;
     m_ispainting = false;
 
-    m_objectmanager = new ObjectManager(this);
-    //m_objectmanager->Add(new ObjectTemplate("MyObject"));
+    m_objectmanager = new ObjectManager();
 }
 
 Level::~Level() {

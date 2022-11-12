@@ -9,13 +9,16 @@ class InstanceLayer;
 class Instance;
 class Layer;
 class Level;
+class ObjectManager;
 class ObjectTemplate;
 
 struct ObjectProperty;
 
 Level* ParseLVLFile(std::string filename);
 GridLayer* ParseTLMPFile(std::string filename);
+ObjectManager* ParseOBJTBFile(std::string filename);    //OBJTB = OBJect TaBle
 
+ObjectManager* ParseObjectTable(FILE* fileptr);
 ObjectTemplate* ParseObjectTemplate(FILE* fileptr);
 ObjectProperty* ParseObjectProperty(FILE* fileptr);
 

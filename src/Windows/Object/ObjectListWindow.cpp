@@ -4,6 +4,8 @@
 #include "../../GUI/Widget/Button.h"
 #include "../../GUI/Widget/WidgetManager.h"
 #include "../../GUI/WindowManager.h"
+#include "../../Level.h"
+#include "../../ObjectManager/ObjectManager.h"
 #include "../../Widget/ObjectList.h"
 #include "../WinIDs.h"
 #include "NewObjectWindow.h"
@@ -19,6 +21,10 @@ void NewObjectButtonAction(Button*) {
     else {
         g_editor->m_winmanager->BringOnTop(winptr);
     }
+}
+
+void ExportObjectListButtonAction(Button*) {
+    g_editor->m_level->m_objectmanager->SaveStandalone();
 }
 
 ObjectListWindow::ObjectListWindow() : Window() {
@@ -37,4 +43,9 @@ ObjectListWindow::ObjectListWindow() : Window() {
     newbut->SetText("New");
     newbut->SetAction(NewObjectButtonAction);
     m_widgetmanager->Add(newbut);
+
+    Button* exportbut = new Button(58, 168, 50, 15);
+    exportbut->SetText("Export");
+    exportbut->SetAction(ExportObjectListButtonAction);
+    m_widgetmanager->Add(exportbut);
 }

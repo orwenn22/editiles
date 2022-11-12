@@ -8,6 +8,7 @@
 #include "../Level.h"
 #include "../ObjectManager/ObjectManager.h"
 #include "../ObjectManager/ObjectTemplate.h"
+#include "../ParseFunctions.h"
 #include "../Windows/Object/ObjectInfoWindow.h"
 #include "../Windows/WinIDs.h"
 
@@ -63,4 +64,23 @@ void ObjectList::DrawElement(int painterx, int paintery, int elementindex) {
 
 int ObjectList::GetElementCount() {
     return g_editor->m_level->m_objectmanager->m_objectcount;
+}
+
+void ObjectList::PreInputCheck() {
+    Level* level = g_editor->m_level;
+    //Drag and drop file to list
+    if(g_mouse->m_havefiles && level->m_objectmanager->m_objectcount == 0) {
+        if(g_mouse->m_fileslist.count == 1) {
+            ObjectManager* newobjmanager = ParseOBJTBFile(g_mouse->m_fileslist.paths[0]);
+
+            if(newobjmanager != NULL) {
+                printf("ObjectList : yay\n");
+                delete level->m_objectmanager;
+                level->m_objectmanager = newobjmanager;
+            }
+            else {
+                printf("ObjectList : null :(\n");
+            }
+        }
+    }
 }

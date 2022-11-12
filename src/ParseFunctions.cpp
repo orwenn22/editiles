@@ -41,13 +41,8 @@ Level* ParseLVLFile(std::string filename) {
     /////////////////////////
     //object templates
 
-    unsigned short objecttempcount = ReadShort(infile);
-    for(int i = 0; i < objecttempcount; i++) {
-        ObjectTemplate* objtemplate = ParseObjectTemplate(infile);
-
-        //Add object to level
-        newlevel->m_objectmanager->Add(objtemplate);
-    }
+    delete newlevel->m_objectmanager;
+    newlevel->m_objectmanager = ParseObjectTable(infile);
 
 
     ///////////////////////////////////
@@ -89,6 +84,37 @@ GridLayer* ParseTLMPFile(std::string filename) {
     return newgridlayer;
 }
 
+ObjectManager* ParseOBJTBFile(std::string filename) {
+    FILE* infile = fopen(filename.c_str(), "r");
+    if(infile == NULL) {
+        return NULL;
+    }
+
+    if(!(getc(infile) == 'o' && getc(infile) == 'b' && getc(infile) == 'j' && getc(infile) == 't' && getc(infile) == 'b')) {
+        fclose(infile);
+        return NULL;
+    }
+
+    ObjectManager* r = ParseObjectTable(infile);
+
+    fclose(infile);
+    return r;
+}
+
+
+ObjectManager* ParseObjectTable(FILE* fileptr) {
+    ObjectManager* objman = new ObjectManager();
+
+    unsigned short objecttempcount = ReadShort(fileptr);
+    for(int i = 0; i < objecttempcount; i++) {
+        ObjectTemplate* objtemplate = ParseObjectTemplate(fileptr);
+
+        //Add object to level
+        objman->Add(objtemplate);
+    }
+
+    return objman;
+}
 
 ObjectTemplate* ParseObjectTemplate(FILE* fileptr) {
     //get name of the object

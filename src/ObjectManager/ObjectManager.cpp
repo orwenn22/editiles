@@ -8,8 +8,7 @@
 #include "../Level.h"
 #include "ObjectTemplate.h"
 
-ObjectManager::ObjectManager(Level* lvl) {
-    m_parrent = lvl;
+ObjectManager::ObjectManager() {
     m_objectcount = 0;
 }
 
@@ -86,4 +85,13 @@ void ObjectManager::Save(FILE* fileptr) {
     for(int i = 0; i < m_objectcount; i++) {
         m_objects[i]->Save(fileptr);
     }
+}
+
+void ObjectManager::SaveStandalone() {
+    FILE* exportfile = fopen("export.objtb", "w");
+
+    fputs("objtb", exportfile);
+    Save(exportfile);
+
+    fclose(exportfile);
 }

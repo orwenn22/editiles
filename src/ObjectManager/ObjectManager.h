@@ -9,7 +9,7 @@ class ObjectTemplate;
 
 class ObjectManager {
     public:
-    ObjectManager(Level* lvl);
+    ObjectManager();
     ~ObjectManager();
 
     int Add(ObjectTemplate* newobject);        //Add an object to m_objects
@@ -20,8 +20,8 @@ class ObjectManager {
     int RenameObject(std::string oldname, std::string newname);     //return 0 if the object was renamed correctly
 
     void Save(FILE* fileptr);
+    void SaveStandalone();
 
-    Level* m_parrent;
 
     //object templates have unique names
     std::vector<ObjectTemplate*> m_objects;
