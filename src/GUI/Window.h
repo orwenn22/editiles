@@ -22,7 +22,8 @@ class Window {
 
     //Called by MUpdate()
     //Will Update the window's postion, check if it is closed and check if it is off-screen.
-    bool PreUpdate();
+    //if this return true, the Update, PostUpdate and Draw mathods won't be executed.
+    virtual bool PreUpdate();
     //Called by MUpdate()
     //Will update all the widgets in m_widgetmanager.
     void Update();
@@ -34,7 +35,7 @@ class Window {
 
     //Called by WindowManager::Draw()
     //Will draw window border, title bar and all the widgets of m_widgetmanager.
-    void Draw();
+    virtual void Draw();
 
     //Set the x and y position of the window (top left corner).
     void SetPosition(int x, int y);
