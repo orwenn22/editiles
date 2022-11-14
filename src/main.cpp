@@ -6,8 +6,8 @@
 
 Editor* g_editor;
 
-int main(int argc, const char* argv[]) {
-    InitMainWindow(960, 540, "levedit");
+void OpenEditor(int argc, const char* argv[]) {
+    InitMainWindow(960, 540, "editiles");
     SetMainFPS(120000);
 
     Editor* editor = new Editor();
@@ -31,5 +31,20 @@ int main(int argc, const char* argv[]) {
     printf("QUITTING !!1!1!\n");
     delete editor;
     CloseWindow();
+};
+
+int main(int argc, const char* argv[]) {
+    if(argc == 1) {
+        OpenEditor(argc, argv);
+    }
+    else if(argc == 2) {
+        if(std::string(argv[1]) == "-help") {
+            printf("TODO : help command\n");
+        }
+        else {
+            OpenEditor(argc, argv);
+        }
+    }
+    
     return 0;
 }
