@@ -128,11 +128,18 @@ void Level::Update() {
     m_overredboxx = m_relativemouseposx / (m_boxwidth*m_zoom);
     m_overredboxy = m_relativemouseposy / (m_boxheight*m_zoom);
 
-    if(m_relativemouseposx < 0) {
-        m_overredboxx--;
+    //FIXME (?) : if m_boxwidth or m_bowheight is equal to 1, the calculation
+    //            of m_overredboxx and/or m_overredboxy is wrong (-1) without 
+    //            these weird zoom and boxsize condition.
+    if(!(m_zoom == 1 && m_boxwidth == 1)) {
+        if(m_relativemouseposx < 0) {
+            m_overredboxx--;
+        }
     }
-    if(m_relativemouseposy < 0) {
-        m_overredboxy--;
+    if(!(m_zoom == 1 && m_boxheight == 1)) {
+        if(m_relativemouseposy < 0) {
+            m_overredboxy--;
+        }
     }
     //////////////////
 
@@ -181,9 +188,15 @@ void Level::Update() {
 
     //Bottom Bar update
     if(g_mouse->m_havebeenused == false) {
+        //TODO: better way of doing this
+        int xtodisplay = m_relativemouseposx / m_zoom;
+        int ytodisplay = m_relativemouseposy / m_zoom;
+        if(m_relativemouseposx<0 && m_zoom > 1) xtodisplay--;
+        if(m_relativemouseposy<0 && m_zoom > 1) ytodisplay--;
+
         g_editor->m_bottombar->TextAppend(
-            "X: " + std::to_string((g_mouse->m_x - m_x) / m_zoom) +
-            " | Y: " + std::to_string((g_mouse->m_y - m_y) / m_zoom) +
+            "X: " +     std::to_string(xtodisplay) +
+            " | Y: " +  std::to_string(ytodisplay) +
             " | TX: " + std::to_string(m_overredboxx) +
             " | TY: " + std::to_string(m_overredboxy)
         );
@@ -236,14 +249,6 @@ void Level::Draw() {
         );
     }
 }
-
-//void Level::AddLayer(std::string name) {
-//    GridLayer* newlayer = new GridLayer(m_width, m_height, this, name);
-//    newlayer->SetBoxSize(m_boxwidth, m_boxheight);
-//
-//    m_layers.push_back(newlayer);
-//    m_layercount++;
-//}
 
 void Level::AddLayer(Layer* newlayer) {
     if(newlayer->m_type == LAYERID_GRID) {

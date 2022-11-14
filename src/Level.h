@@ -63,7 +63,7 @@ class Level {
     ////////////
 
     //overring
-    int m_relativemouseposx;    //X and Y relative position of the mouse from the origin of the grid
+    int m_relativemouseposx;    //X and Y relative position of the mouse from the origin of the grid (dont't take m_zoom into account)
     int m_relativemouseposy;
 
     int m_overredboxx;  //X and Y index of the overred box
