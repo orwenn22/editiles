@@ -46,6 +46,8 @@ Level::Level() {
     m_selectednumber = 1;
     m_ispainting = false;
 
+    m_selectedtool = 0;
+
     m_objectmanager = new ObjectManager();
 }
 
@@ -78,6 +80,8 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
 
     m_selectednumber = 1;
     m_ispainting = false;
+
+    m_selectedtool = 0;
 
     m_objectmanager = new ObjectManager();
 }
@@ -154,19 +158,16 @@ void Level::Update() {
     //Handle mouse interraction
     if(m_layercount >= 1) {
         Layer* curlayer = GetLayer(m_selectedlayer);
-        if(curlayer->m_type == LAYERID_GRID) {  //painting
-            if(g_mouse->m_havebeenused == false && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                m_ispainting = true;
-            }
 
-            if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-                m_ispainting = false;
-            }
+        if(curlayer->m_type == LAYERID_GRID) {
+            switch(m_selectedtool) {
+                case 0:     //painting
+                    PenUpdate((GridLayer*)curlayer);
+                break;
 
-            if(m_ispainting) {
-                if(curlayer->m_type == LAYERID_GRID) {
-                    ((GridLayer*)curlayer)->SetBoxValue(m_overredboxx, m_overredboxy, m_selectednumber);
-                }
+                case 1:     //rectangle
+                    //TODO : rectangle tool (and also a way to toogle it)
+                break;
             }
         }
         else if(curlayer->m_type == LAYERID_INSTANCE) {     //instance
@@ -200,6 +201,30 @@ void Level::Update() {
             " | TX: " + std::to_string(m_overredboxx) +
             " | TY: " + std::to_string(m_overredboxy)
         );
+
+        if(m_selectedlayer >= 0) {
+            if(GetLayer(m_selectedlayer)->m_type == LAYERID_GRID) {
+                g_editor->m_bottombar->TextAppend(" | Tool: " + std::to_string(m_selectedtool));
+                g_editor->m_bottombar->TextAppend(" | Palette: " + std::to_string(m_selectednumber));
+            }
+        }
+    }
+    ////////////////////
+}
+
+void Level::PenUpdate(GridLayer* curlayer) {
+    if(g_mouse->m_havebeenused == false && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        m_ispainting = true;
+    }
+
+    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+        m_ispainting = false;
+    }
+
+    if(m_ispainting) {
+        if(m_selectedtool == 0) {
+            curlayer->SetBoxValue(m_overredboxx, m_overredboxy, m_selectednumber);
+        }
     }
 }
 

@@ -4,8 +4,10 @@
 #include <string>
 #include <vector>
 
+class GridLayer;
 class Layer;
 class ObjectManager;
+
 class Level {
     public:
     Level();
@@ -13,6 +15,8 @@ class Level {
     ~Level();
 
     void Update();
+    void PenUpdate(GridLayer* curlayer);
+
     void Draw();
 
     //void AddLayer(std::string name);
@@ -51,8 +55,10 @@ class Level {
     //user selection
     int m_selectedlayer;
 
-    bool m_ispainting;      //if set to true, change the values of the tiles below the mouse.
+    bool m_ispainting;      //if set to true, change the values of the tiles below the mouse. (m_selectedtool = 0)
     int m_selectednumber;
+    
+    int m_selectedtool;
     /////////////
 
     //DRAG & DROP to move the grid around
