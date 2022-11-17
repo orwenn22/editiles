@@ -16,8 +16,11 @@ class Level {
 
     void Update();
     void PenUpdate(GridLayer* curlayer);
+    void RectUpdate(GridLayer* curlayer);
 
     void Draw();
+    void PenDraw();
+    void RectDraw();
 
     //void AddLayer(std::string name);
     void AddLayer(Layer* newlayer);
@@ -56,9 +59,12 @@ class Level {
     int m_selectedlayer;
 
     bool m_ispainting;      //if set to true, change the values of the tiles below the mouse. (m_selectedtool = 0)
-    int m_selectednumber;
+    int m_selectednumber;   //correspond to the selected tile in the palette
     
-    int m_selectedtool;
+    int m_selectedtool;     //selected tool. 0 = pen, 1 = rectangle
+
+    int m_rectoriginx;      //for rectangle tool, correspond to the tile indexes of the start of the rectangle
+    int m_rectoriginy;      //^^^
     /////////////
 
     //DRAG & DROP to move the grid around

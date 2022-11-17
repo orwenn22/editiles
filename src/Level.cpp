@@ -166,7 +166,7 @@ void Level::Update() {
                 break;
 
                 case 1:     //rectangle
-                    //TODO : rectangle tool (and also a way to toogle it)
+                    RectUpdate((GridLayer*)curlayer);
                 break;
             }
         }
@@ -228,6 +228,42 @@ void Level::PenUpdate(GridLayer* curlayer) {
     }
 }
 
+void Level::RectUpdate(GridLayer* curlayer) {
+    if(g_mouse->m_havebeenused == false && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        m_ispainting = true;
+        //get the start of the recangle (correspond to the overred tile on the click)
+        m_rectoriginx = m_overredboxx;
+        m_rectoriginy = m_overredboxy;
+    }
+
+    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && m_ispainting == true) {
+        m_ispainting = false;
+        //get the end of the rectangle (correspond to the overred box on the release)
+        int rectendx = m_overredboxx;
+        int rectendy = m_overredboxy;
+
+        //make it so the origin of the racangle correspond to the top left
+        if(rectendx < m_rectoriginx) {
+            int temp = rectendx;
+            rectendx = m_rectoriginx;
+            m_rectoriginx = temp;
+        }
+        if(rectendy < m_rectoriginy) {
+            int temp = rectendy;
+            rectendy = m_rectoriginy;
+            m_rectoriginy = temp;
+        }
+
+        //actually fill the rectangle
+        for(int y = m_rectoriginy; y < rectendy+1; y++) {
+            for(int x = m_rectoriginx; x < rectendx+1; x++) {
+                curlayer->SetBoxValue(x, y, m_selectednumber);
+            }
+        }
+    }
+}
+
+
 void Level::Draw() {
     //draw all layers content
     //Layer 0 is on top
@@ -273,7 +309,71 @@ void Level::Draw() {
             GREEN
         );
     }
+
+
+    //TOOL
+    if(m_selectedlayer >= 0) {
+        if(GetLayer(m_selectedlayer)->m_type == LAYERID_GRID) {
+            switch(m_selectedtool) {
+                case 0:     //pen
+                    PenDraw();
+                break;
+
+                case 1:     //rectangle
+                    RectDraw();
+                break;
+
+                default: break;
+            }
+        }
+    }
 }
+
+
+void Level::PenDraw() {
+    if(m_ispainting) {
+        DrawRectangleLines(
+            m_x + m_overredboxx * m_boxwidth * m_zoom,      //AKA m_x * totalboxwidth
+            m_y + m_overredboxy * m_boxheight * m_zoom,     //AKA m_y * totalboxheight
+            m_boxwidth * m_zoom,
+            m_boxheight * m_zoom,
+            ORANGE
+        );
+    }
+}
+
+void Level::RectDraw() {
+    if(m_ispainting) {
+        int rectoriginx = m_rectoriginx;    //Make a copy of these to not modify the original variables
+        int rectoriginy = m_rectoriginy;    //^^^
+        int rectendx = m_overredboxx;
+        int rectendy = m_overredboxy;
+
+        if(rectendx < rectoriginx) {
+            int temp = rectendx;
+            rectendx = rectoriginx;
+            rectoriginx = temp;
+        }
+        if(rectendy < rectoriginy) {
+            int temp = rectendy;
+            rectendy = rectoriginy;
+            rectoriginy = temp;
+        }
+
+        int rectwidth = rectendx - rectoriginx + 1;
+        int rectheight = rectendy - rectoriginy + 1;
+
+        DrawRectangleLines(
+            m_x + rectoriginx * m_boxwidth * m_zoom,      //AKA m_x * totalboxwidth
+            m_y + rectoriginy * m_boxheight * m_zoom,     //AKA m_y * totalboxheight
+            rectwidth * m_boxwidth * m_zoom,
+            rectheight * m_boxheight * m_zoom,
+            ORANGE
+        );
+    }
+}
+
+
 
 void Level::AddLayer(Layer* newlayer) {
     if(newlayer->m_type == LAYERID_GRID) {
