@@ -80,6 +80,19 @@ void Editor::Draw() {
 
 
 void Editor::KeyBinds() {
+    if(m_havelevel) {
+        //Switch tool
+        if(m_level->m_ispainting == false) {    //can't switch while the tool is being used
+            if(IsKeyPressed(KEY_ONE)) {
+                m_level->m_selectedtool = 0;    //pen
+            }
+            if(IsKeyPressed(KEY_TWO)) {
+                m_level->m_selectedtool = 1;    //rectangle
+            }
+        }
+    }
+
+    //Open windows
     if(IsKeyDown(KEY_LEFT_ALT)) {
         if(IsKeyPressed(KEY_W) && m_havelevel) {   //ZOOM
             Window* winptr = m_winmanager->FindWithID(WINID_ZOOM);
