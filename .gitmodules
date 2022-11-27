@@ -1,0 +1,3 @@
+[submodule "src/GUI"]
+	path = src/GUI
+	url = https://github.com/orwenn22/GUI
