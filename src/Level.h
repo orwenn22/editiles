@@ -30,6 +30,8 @@ class Level {
     void SwapLayers(int index1, int index2);
 
     void Save(std::string filename);
+    
+    void Resize(int newwidth, int newheight);
 
     //private:
     int m_x;

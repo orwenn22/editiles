@@ -437,3 +437,19 @@ void Level::Save(std::string filename) {
 
     fclose(savefile);
 }
+
+
+void Level::Resize(int newwidth, int newheight) {
+    if(newwidth < 1 || newheight < 1) {
+        return;
+    }
+
+    m_width = newwidth;
+    m_height = newheight;
+
+    for(Layer* l : m_layers) {
+        if(l->m_type == LAYERID_GRID) {
+            ((GridLayer*)l)->Resize(newwidth, newheight);
+        }
+    }
+}

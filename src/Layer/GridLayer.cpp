@@ -144,3 +144,32 @@ void GridLayer::SaveGridData(FILE* fileptr) {
         WriteShort(fileptr, m_griddata[i]);
     }
 }
+
+
+void GridLayer::Resize(int newwidth, int newheight) {
+    if(newwidth < 1 || newheight < 1) {
+        return;
+    }
+
+    unsigned short* newgriddata = (unsigned short*) malloc(sizeof(unsigned short) * newwidth * newheight);
+    for(int i = 0; i < newwidth * newheight; i++) newgriddata[i] = 0;
+
+    int xsizetocopy;
+    if(newwidth > m_width) xsizetocopy = m_width;
+    else xsizetocopy = newwidth;
+
+    int ysizetocopy;
+    if(newheight > m_width) ysizetocopy = m_height;
+    else ysizetocopy = newheight;
+
+    for(int y = 0; y < ysizetocopy; y++) {
+        for(int x = 0; x < xsizetocopy; x++) {
+            newgriddata[x+y*newwidth] = GetBoxValue(x, y);
+        }
+    }
+
+    free(m_griddata);
+    m_griddata = newgriddata;
+    m_width = newwidth;
+    m_height = newheight;
+}

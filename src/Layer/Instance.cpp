@@ -13,6 +13,7 @@
 #include "../TextureManager/TextureObject.h"
 #include "../Windows/Instance/InstanceInfoWindow.h"
 #include "../Windows/WinIDs.h"
+#include "InstanceLayer.h"
 
 #include <raylib.h>
 
@@ -119,7 +120,7 @@ void Instance::Draw() {
 }
 
 void Instance::Save(FILE* fileptr) {
-    unsigned short objtemplateindex = g_editor->m_level->m_objectmanager->GetIndex(m_objtemplateptr);
+    unsigned short objtemplateindex = m_parrent->m_parrent->m_objectmanager->GetIndex(m_objtemplateptr);
 
     WriteShort(fileptr, objtemplateindex);
 
