@@ -3,6 +3,7 @@
 #include "../FileUtil/FileUtil.h"
 #include "../Level.h"
 #include "../ObjectManager/ObjectProperty.h"
+#include "../ObjectManager/ObjectTemplate.h"
 #include "Instance.h"
 #include "LayerIDs.h"
 
@@ -77,5 +78,13 @@ void InstanceLayer::CheckMouseInput() {
 void InstanceLayer::Draw(int x, int y) {
     for(int i = 0; i < m_instancecount; i++) {
         m_instances[i]->Draw();
+    }
+}
+
+
+void InstanceLayer::Expand(int top, int left, int right, int bottom) {
+    for(Instance* i : m_instances) {
+        i->m_properties[i->m_objtemplateptr->GetPropertyIndex("x")].as_int += left*m_parrent->m_boxwidth;
+        i->m_properties[i->m_objtemplateptr->GetPropertyIndex("y")].as_int += top*m_parrent->m_boxheight;
     }
 }

@@ -25,6 +25,7 @@ class GridLayer : public Layer {
     void SaveGridData(FILE* fileptr);
 
     void Resize(int newwidth, int newheight);
+    void Expand(int top, int left, int right, int bottom);
 
     //private:
     unsigned short* m_griddata;

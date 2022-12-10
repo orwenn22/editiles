@@ -66,7 +66,49 @@ int ResizeCommand(int argc, const char* argv[]) {
     return 0;
 }
 
+int ExpandCommand(int argc, const char* argv[]) {
+    std::string inputfilename = argv[2];
 
+    int top = std::stoi(argv[3]);
+    int left = std::stoi(argv[4]);
+    int right = std::stoi(argv[5]);
+    int bottom = std::stoi(argv[6]);
+                
+    std::string outputfilename;
+    if(argc == 8) outputfilename = argv[7];
+    else {
+        outputfilename = inputfilename;
+        int lastslash = outputfilename.find_last_of("/");
+        outputfilename = outputfilename.substr(0, lastslash+1) 
+                        + "new_" 
+                        + outputfilename.substr(lastslash+1, outputfilename.size());
+    }
+
+    Level* inputlvl = ParseLVLFile(inputfilename);
+    if(inputlvl == NULL) return 1;
+
+    inputlvl->Expand(top, left, right, bottom);
+
+    inputlvl->Save(outputfilename);
+    delete inputlvl;
+
+    return 0;
+}
+
+int HelpCommand(int argc, const char* argv[]) {
+    printf("Editiles CLI help\n=================\n\n");
+
+    printf("Open editiles GUI\n");
+    printf("    %s\n\n", argv[0]);
+
+    printf("Open and edit a file with the GUI\n");
+    printf("    %s <input file .lvl>\n\n", argv[0]);
+
+    printf("Resize a lvl file\n");
+    printf("    %s -resize <input file> <new width> <new height> (<output name>)\n\n", argv[0]);
+
+    return 0; 
+}
 
 int main(int argc, const char* argv[]) {
     if(argc == 1) {
@@ -83,17 +125,15 @@ int main(int argc, const char* argv[]) {
                 printf("%s -resize <input file> <new width> <new height> (<output name>)\n", argv[0]);
             }
         }
+        else if(std::string(argv[1]) == "-expand") {
+            if(argc == 7 || argc == 8) {
+                ExpandCommand(argc, argv);
+            } else {
+                printf("%s -expand <input file> <top> <left> <right> <bottom> (<output name>)\n", argv[0]);
+            }
+        }
         else {      //help
-            printf("Editiles CLI help\n=================\n\n");
-
-            printf("Open editiles GUI\n");
-            printf("    %s\n\n", argv[0]);
-
-            printf("Open and edit a file with the GUI\n");
-            printf("    %s <input file .lvl>\n\n", argv[0]);
-
-            printf("Resize a lvl file\n");
-            printf("    %s -resize <input file> <new width> <new height> (<output name>)\n\n", argv[0]);
+            HelpCommand(argc, argv);
         }
     }
     

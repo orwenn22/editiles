@@ -28,6 +28,8 @@ class InstanceLayer : public Layer {
     void RemoveWithIndex(int index);
     void RemoveWithPtr(Instance* instanceptr);
 
+    void Expand(int top, int left, int right, int bottom);
+
 
     std::vector<Instance*> m_instances;
     int m_instancecount;

@@ -453,3 +453,25 @@ void Level::Resize(int newwidth, int newheight) {
         }
     }
 }
+
+void Level::Expand(int top, int left, int right, int bottom) {
+    int newwidth = m_width + left + right;
+    int newheight = m_height + top + bottom;
+    if(newwidth < 1 || newheight < 1) {
+        return;
+    }
+    printf("oldw %i l %i r %i\n", m_width, left, right);
+    printf("new size : %i %i\n", newwidth, newheight);
+
+    m_width = newwidth;
+    m_height = newheight;
+
+    for(Layer* l : m_layers) {
+        if(l->m_type == LAYERID_GRID) {
+            ((GridLayer*)l)->Expand(top, left, right, bottom);
+        }
+        else if(l->m_type == LAYERID_INSTANCE) {
+            ((InstanceLayer*)l)->Expand(top, left, right, bottom);
+        }
+    }
+}

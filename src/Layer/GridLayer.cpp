@@ -173,3 +173,29 @@ void GridLayer::Resize(int newwidth, int newheight) {
     m_width = newwidth;
     m_height = newheight;
 }
+
+void GridLayer::Expand(int top, int left, int right, int bottom) {
+    int newwidth = m_width + left + right;
+    int newheight = m_height + top + bottom;
+    if(newwidth < 1 || newheight < 1) {
+        return;
+    }
+
+    unsigned short* newgriddata = (unsigned short*) malloc(sizeof(unsigned short) * newwidth * newheight);
+    for(int i = 0; i < newwidth * newheight; i++) newgriddata[i] = 0;
+
+    for(int y = 0; y < m_height; y++) {
+        if(y+top >= 0 && y+top < newheight) {
+            for(int x = 0; x < m_width; x++) {
+                if(x+left >= 0 && x+left < newwidth) {
+                    newgriddata[(x+left)+(y+top)*newwidth] = GetBoxValue(x, y);
+                }
+            }
+        }
+    }
+
+    free(m_griddata);
+    m_griddata = newgriddata;
+    m_width = newwidth;
+    m_height = newheight;
+}

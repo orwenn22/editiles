@@ -32,6 +32,7 @@ class Level {
     void Save(std::string filename);
     
     void Resize(int newwidth, int newheight);
+    void Expand(int top, int left, int right, int bottom);
 
     //private:
     int m_x;
