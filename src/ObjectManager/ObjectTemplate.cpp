@@ -301,3 +301,12 @@ void ObjectTemplate::Save(FILE* fileptr) {
         }
     }
 }
+
+void ObjectTemplate::SaveStandalone(std::string filename) {
+    FILE* exportfile = fopen(filename.c_str(), "w");
+    fprintf(exportfile, "obj");
+
+    Save(exportfile);
+
+    fclose(exportfile);
+}

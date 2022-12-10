@@ -71,6 +71,7 @@ void ObjectList::PreInputCheck() {
     //Drag and drop file to list
     if(g_mouse->m_havefiles && level->m_objectmanager->m_objectcount == 0) {
         if(g_mouse->m_fileslist.count == 1) {
+            //FIXME: handle this in a better way
             ObjectManager* newobjmanager = ParseOBJTBFile(g_mouse->m_fileslist.paths[0]);
 
             if(newobjmanager != NULL) {
@@ -79,7 +80,11 @@ void ObjectList::PreInputCheck() {
                 level->m_objectmanager = newobjmanager;
             }
             else {
-                printf("ObjectList : null :(\n");
+                ObjectTemplate* newobj = ParseOBJFile(g_mouse->m_fileslist.paths[0]);
+                if(newobj != NULL) {
+                    printf("ObjectList : yay\n");
+                    level->m_objectmanager->Add(newobj);
+                }
             }
         }
     }

@@ -72,6 +72,12 @@ void OpenNewPropertyWindow(Button* but) {
     }
 }
 
+void ExportObjectAsFile(Button* but) {
+    ObjectInfoWindow* win = (ObjectInfoWindow*)(but->m_parrent->m_window);
+
+    win->m_objptr->SaveStandalone(win->m_objptr->m_name + ".obj");
+}
+
 ObjectInfoWindow::ObjectInfoWindow(ObjectTemplate* objptr) : Window() {
     m_id = WINID_OBJECTINFO;
     m_objptr = objptr;
@@ -103,4 +109,10 @@ ObjectInfoWindow::ObjectInfoWindow(ObjectTemplate* objptr) : Window() {
     newpropertybut->SetText("New property");
     newpropertybut->SetAction(OpenNewPropertyWindow);
     m_widgetmanager->Add(newpropertybut);
+
+
+    Button* exoprtbut = new Button(90, 173, 75, 16);
+    exoprtbut->SetText("Export");
+    exoprtbut->SetAction(ExportObjectAsFile);
+    m_widgetmanager->Add(exoprtbut);
 }

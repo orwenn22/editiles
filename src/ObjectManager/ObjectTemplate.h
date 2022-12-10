@@ -31,6 +31,7 @@ class ObjectTemplate {
     void RemoveChildren(Instance* inst);
 
     void Save(FILE* fileptr);
+    void SaveStandalone(std::string filename);
 
     std::string m_name;
 

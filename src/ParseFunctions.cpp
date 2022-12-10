@@ -101,6 +101,23 @@ ObjectManager* ParseOBJTBFile(std::string filename) {
     return r;
 }
 
+ObjectTemplate* ParseOBJFile(std::string filename) {
+    FILE* infile = fopen(filename.c_str(), "r");
+    if(infile == NULL) {
+        return NULL;
+    }
+
+    if(!(getc(infile) == 'o' && getc(infile) == 'b' && getc(infile) == 'j')) {
+        fclose(infile);
+        return NULL;
+    }
+
+    ObjectTemplate* r = ParseObjectTemplate(infile);
+
+    fclose(infile);
+    return r;
+}
+
 
 ObjectManager* ParseObjectTable(FILE* fileptr) {
     ObjectManager* objman = new ObjectManager();
@@ -120,7 +137,7 @@ ObjectTemplate* ParseObjectTemplate(FILE* fileptr) {
     //get name of the object
     std::string objectname = ReadString(fileptr);
 
-        //create the object template
+    //create the object template
     ObjectTemplate* objtemplate = new ObjectTemplate(objectname);
 
     ////////////////////////////////////

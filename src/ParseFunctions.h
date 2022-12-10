@@ -17,6 +17,7 @@ struct ObjectProperty;
 Level* ParseLVLFile(std::string filename);
 GridLayer* ParseTLMPFile(std::string filename);
 ObjectManager* ParseOBJTBFile(std::string filename);    //OBJTB = OBJect TaBle
+ObjectTemplate* ParseOBJFile(std::string filename);
 
 ObjectManager* ParseObjectTable(FILE* fileptr);
 ObjectTemplate* ParseObjectTemplate(FILE* fileptr);
