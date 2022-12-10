@@ -106,7 +106,7 @@ int HelpCommand(int argc, const char* argv[]) {
     printf("    %s -resize <input file> <new width> <new height> (<output name>)\n\n", argv[0]);
 
     printf("Expand a lvl file\n");
-    printf("    %s -expand <input file> <new width> <new height> (<output name>)\n\n", argv[0]);
+    printf("    %s -expand <input file> <top> <left> <right> <bottom> (<output name>)\n", argv[0]);
 
     return 0; 
 }
