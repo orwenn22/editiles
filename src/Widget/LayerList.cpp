@@ -51,10 +51,16 @@ void LayerList::RightClickOn(int clickindex) {
 
 void LayerList::LeftClickOn(int clickindex) {
     printf("left click on index %i, layer address %p\n", clickindex, g_editor->m_level->GetLayer(clickindex));
-    g_editor->m_level->m_selectedlayer = clickindex;
+    if(g_mouse->m_x < m_x + m_width - 25) {
+        g_editor->m_level->m_selectedlayer = clickindex;
 
-    //for layer d&d
-    g_mouse->GiveDragObject(DragAndDropObject(DRAG_OBJECT_LAYER, clickindex, "Layer " + g_editor->m_level->GetLayer(clickindex)->m_name));
+        //for layer d&d
+        g_mouse->GiveDragObject(DragAndDropObject(DRAG_OBJECT_LAYER, clickindex, "Layer " + g_editor->m_level->GetLayer(clickindex)->m_name));
+    }
+    else {
+        Layer* curlayer = g_editor->m_level->GetLayer(clickindex);
+        curlayer->m_visible = !curlayer->m_visible;
+    }
 
 }
 
@@ -75,6 +81,7 @@ void LayerList::LeftReleaseOn(int releaseindex) {
 void LayerList::DrawElement(int painterx, int paintery, int elementindex) {
     Layer* curlayer = g_editor->m_level->GetLayer(elementindex);
 
+    //Show the layer type on the left
     switch (curlayer->m_type)
     {
         case LAYERID_GRID:
@@ -90,10 +97,19 @@ void LayerList::DrawElement(int painterx, int paintery, int elementindex) {
         break;
     }
 
+    //Show the layer's name
     if(curlayer->m_name.empty()) {
         DrawText("[no name]", painterx+23, paintery+10, 10, WHITE);
     } else {
         DrawText(curlayer->m_name.c_str(), painterx+23, paintery+10, 10, WHITE);
+    }
+
+    //Show if it is visible or hidden
+    if(curlayer->m_visible) {
+        DrawText("[V]", painterx + m_width - 25, paintery + 10, 10, WHITE);
+    }
+    else {
+        DrawText("[H]", painterx + m_width - 25, paintery + 10, 10, GRAY);
     }
 }
 

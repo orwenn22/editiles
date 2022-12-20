@@ -30,6 +30,7 @@ class Layer {
     bool m_havetexture;
     TextureObject* m_textureobj;
 
+    bool m_visible;
 };
 
 #endif

@@ -39,6 +39,7 @@ class Level {
     int m_y;
 
     bool m_showgrid;
+    bool m_shownumbers;
 
     //Levels info
     unsigned short m_boxwidth;      //width of a box in pixel

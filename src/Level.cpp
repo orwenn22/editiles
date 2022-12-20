@@ -36,6 +36,7 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
     m_y = 10;
 
     m_showgrid = true;
+    m_shownumbers = true;
 
     m_zoom = 1;
 
@@ -134,29 +135,31 @@ void Level::Update() {
     if(m_layercount >= 1) {
         Layer* curlayer = GetLayer(m_selectedlayer);
 
-        if(curlayer->m_type == LAYERID_GRID) {
-            switch(m_selectedtool) {
-                case 0:     //painting
-                    PenUpdate((GridLayer*)curlayer);
-                break;
+        if(curlayer->m_visible) {   //Make interacting with a hidden layer impossible to prevent user mistakes
+            if(curlayer->m_type == LAYERID_GRID) {
+                switch(m_selectedtool) {
+                    case 0:     //painting
+                        PenUpdate((GridLayer*)curlayer);
+                    break;
 
-                case 1:     //rectangle
-                    RectUpdate((GridLayer*)curlayer);
-                break;
-            }
-        }
-        else if(curlayer->m_type == LAYERID_INSTANCE) {     //instance
-            if(g_mouse->m_havebeenused == false && IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && g_mouse->m_havedragobject) {
-                if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_OBJECTTEMPLATE) {
-                    //spawn new instance of object                   ptr given by ObjectList
-                    ((InstanceLayer*)curlayer)->Add(new Instance((ObjectTemplate*)(g_mouse->m_dragobject.m_data.as_ptr), m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight));
-                }
-                else if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_INSTANCE) {
-                    //Move the instance in dragobject at the correct position
-                    ((Instance*)(g_mouse->m_dragobject.m_data.as_ptr))->MoveTo(m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight);
+                    case 1:     //rectangle
+                        RectUpdate((GridLayer*)curlayer);
+                    break;
                 }
             }
-            ((InstanceLayer*)curlayer)->CheckMouseInput();
+            else if(curlayer->m_type == LAYERID_INSTANCE) {     //instance
+                if(g_mouse->m_havebeenused == false && IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && g_mouse->m_havedragobject) {
+                    if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_OBJECTTEMPLATE) {
+                        //spawn new instance of object                   ptr given by ObjectList
+                        ((InstanceLayer*)curlayer)->Add(new Instance((ObjectTemplate*)(g_mouse->m_dragobject.m_data.as_ptr), m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight));
+                    }
+                    else if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_INSTANCE) {
+                        //Move the instance in dragobject at the correct position
+                        ((Instance*)(g_mouse->m_dragobject.m_data.as_ptr))->MoveTo(m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight);
+                    }
+                }
+                ((InstanceLayer*)curlayer)->CheckMouseInput();
+            }
         }
     }
     ////////////////
@@ -245,30 +248,39 @@ void Level::Draw() {
     //Layer 1 is behind
     //etc
     for(int i = m_layercount-1; i >= 0; i--) {
-        m_layers[i]->Draw(m_x, m_y);
+        Layer* l = m_layers[i];
+        if(l->m_visible) {
+            l->Draw(m_x, m_y);
+        }
     }
 
-    //draw grid
-    if(m_layercount > 0 && m_showgrid) {
-        int firstxbox = -m_x / (m_boxwidth * m_zoom);
-        int firstybox = -m_y / (m_boxheight * m_zoom);
+    //Grid and numbers
+    if(m_layercount > 0) {
+        //draw grid
+        if(m_showgrid) {
+            int firstxbox = -m_x / (m_boxwidth * m_zoom);
+            int firstybox = -m_y / (m_boxheight * m_zoom);
 
-        int lastxbox = firstxbox + (g_winwidth  / (m_boxwidth * m_zoom) ) + 2;
-        int lastybox = firstybox + (g_winheight / (m_boxheight * m_zoom)) + 2;
+            int lastxbox = firstxbox + (g_winwidth  / (m_boxwidth * m_zoom) ) + 2;
+            int lastybox = firstybox + (g_winheight / (m_boxheight * m_zoom)) + 2;
 
-        if(firstxbox < 0) firstxbox = 0;
-        if(firstybox < 0) firstybox = 0;
+            if(firstxbox < 0) firstxbox = 0;
+            if(firstybox < 0) firstybox = 0;
 
-        if(lastxbox > m_width) lastxbox = m_width;
-        if(lastybox > m_height) lastybox = m_height;
+            if(lastxbox > m_width) lastxbox = m_width;
+            if(lastybox > m_height) lastybox = m_height;
 
-        for(int i = firstybox; i < lastybox; i++) { //Y
-            for(int j = firstxbox; j < lastxbox; j++) { //X
-                DrawRectangleLines(m_x + j * (m_boxwidth*m_zoom), m_y + i * (m_boxheight*m_zoom), m_boxwidth*m_zoom, m_boxheight*m_zoom, GRAY);
+            for(int i = firstybox; i < lastybox; i++) { //Y
+                for(int j = firstxbox; j < lastxbox; j++) { //X
+                    DrawRectangleLines(m_x + j * (m_boxwidth*m_zoom), m_y + i * (m_boxheight*m_zoom), m_boxwidth*m_zoom, m_boxheight*m_zoom, GRAY);
+                }
             }
         }
-    
-        GetLayer(m_selectedlayer)->DrawNumbers(m_x, m_y);
+
+        //Draw numbers
+        if(GetLayer(m_selectedlayer)->m_visible && m_shownumbers) {
+            GetLayer(m_selectedlayer)->DrawNumbers(m_x, m_y);
+        }
     }
 
     //red outline around level

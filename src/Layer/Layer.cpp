@@ -11,6 +11,8 @@ Layer::Layer(std::string name) {
     m_name = name;
 
     m_havetexture = false;
+
+    m_visible = true;
 }
 
 Layer::~Layer() {

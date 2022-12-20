@@ -155,27 +155,32 @@ void Editor::KeyBinds() {
         }
 
     }
+    else if(IsKeyDown(KEY_LEFT_CONTROL)) {
+        if(IsKeyPressed(KEY_KP_0) && m_havelevel) {
+            m_level->m_x = 10;
+            m_level->m_y = 10;
+        }
 
-    if(IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_KP_0) && m_havelevel) {
-        m_level->m_x = 10;
-        m_level->m_y = 10;
-    }
+        if(m_mouse->m_havebeenused == false) {
+            int wheelmovement = (int)GetMouseWheelMove();
+            if(wheelmovement != 0) {
+                Zoom(wheelmovement, m_mouse->m_x, m_mouse->m_y);
+            }
+        }
 
-    if(IsKeyDown(KEY_LEFT_CONTROL) && m_mouse->m_havebeenused == false) {
-        int wheelmovement = (int)GetMouseWheelMove();
-        if(wheelmovement != 0) {
-            Zoom(wheelmovement, m_mouse->m_x, m_mouse->m_y);
+        if(IsKeyPressed(KEY_S) && m_havelevel) {
+            m_level->Save("out.lvl");
+            printf("Level saved !\n");
         }
     }
+    else {
+        if(IsKeyPressed(KEY_G)) {
+            m_level->m_showgrid = !m_level->m_showgrid;
+        }
 
-    if(IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_S) && m_havelevel) {
-        m_level->Save("out.lvl");
-        printf("Level saved !\n");
-    }
-
-
-    if(IsKeyPressed(KEY_G)) {
-        m_level->m_showgrid = !m_level->m_showgrid;
+        if(IsKeyPressed(KEY_N)) {
+            m_level->m_shownumbers = !m_level->m_shownumbers;
+        }
     }
 }
 
