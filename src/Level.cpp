@@ -20,35 +20,8 @@
 extern Editor* g_editor;
 
 // This constructor is no longer used, but I still keep it just in case
-Level::Level() {
-    m_boxwidth = 16;
-    m_boxheight = 16;
-    m_width = 16;
-    m_height = 16;
-
-    m_x = 10;
-    m_y = 10;
-
-    m_zoom = 1;
-
-    m_followmouse = false;
-
-    m_relativemouseposx = 0;
-    m_relativemouseposy = 0;
-
-    m_overredboxx = 0;
-    m_overredboxy = 0;
-
-    m_layercount = 0;
+Level::Level() : Level(16, 16, 8, 8) {
     AddLayer(new GridLayer(m_width, m_height, "defaultlayer"));
-    m_selectedlayer = 0;
-
-    m_selectednumber = 1;
-    m_ispainting = false;
-
-    m_selectedtool = 0;
-
-    m_objectmanager = new ObjectManager();
 }
 
 Level::Level(int width, int height, int boxwidth, int boxheight) {
@@ -61,6 +34,8 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
 
     m_x = 10;
     m_y = 10;
+
+    m_showgrid = true;
 
     m_zoom = 1;
 
@@ -274,7 +249,7 @@ void Level::Draw() {
     }
 
     //draw grid
-    if(m_layercount > 0) {
+    if(m_layercount > 0 && m_showgrid) {
         int firstxbox = -m_x / (m_boxwidth * m_zoom);
         int firstybox = -m_y / (m_boxheight * m_zoom);
 

@@ -34,9 +34,11 @@ class Level {
     void Resize(int newwidth, int newheight);
     void Expand(int top, int left, int right, int bottom);
 
-    //private:
+    //Position of the level on screen
     int m_x;
     int m_y;
+
+    bool m_showgrid;
 
     //Levels info
     unsigned short m_boxwidth;      //width of a box in pixel

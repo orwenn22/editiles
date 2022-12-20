@@ -156,7 +156,7 @@ void Editor::KeyBinds() {
 
     }
 
-    if(IsKeyPressed(KEY_KP_0) && m_havelevel) {
+    if(IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_KP_0) && m_havelevel) {
         m_level->m_x = 10;
         m_level->m_y = 10;
     }
@@ -171,6 +171,11 @@ void Editor::KeyBinds() {
     if(IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_S) && m_havelevel) {
         m_level->Save("out.lvl");
         printf("Level saved !\n");
+    }
+
+
+    if(IsKeyPressed(KEY_G)) {
+        m_level->m_showgrid = !m_level->m_showgrid;
     }
 }
 
