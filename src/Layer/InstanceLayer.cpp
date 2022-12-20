@@ -84,7 +84,7 @@ void InstanceLayer::Draw(int x, int y) {
 
 void InstanceLayer::Expand(int top, int left, int right, int bottom) {
     for(Instance* i : m_instances) {
-        i->m_properties[i->m_objtemplateptr->GetPropertyIndex("x")].as_int += left*m_parrent->m_boxwidth;
-        i->m_properties[i->m_objtemplateptr->GetPropertyIndex("y")].as_int += top*m_parrent->m_boxheight;
+        i->m_properties[i->GetPropertyIndex("x")].as_int += left*m_parrent->m_boxwidth;
+        i->m_properties[i->GetPropertyIndex("y")].as_int += top*m_parrent->m_boxheight;
     }
 }

@@ -24,6 +24,7 @@ Instance::Instance(ObjectTemplate* objtemplate, int x, int y) {
     m_objtemplateptr->AddChildren(this);
     m_isinlayer = false;
 
+    //Add all the properties to the instance with their default values from the ObjectTemplate
     for(int i = 0; i < m_objtemplateptr->m_propertycount; i++) {
         ObjectProperty* objectprop = m_objtemplateptr->GetProperty(i);
 
@@ -57,11 +58,11 @@ Instance::~Instance() {
 }
 
 void Instance::Update(int levelx, int levely, int zoom) {
-    m_x = levelx + (m_properties[m_objtemplateptr->GetPropertyIndex("x")].as_int * zoom);
-    m_y = levely + (m_properties[m_objtemplateptr->GetPropertyIndex("y")].as_int * zoom);
+    m_x = levelx + (m_properties[GetPropertyIndex("x")].as_int * zoom);
+    m_y = levely + (m_properties[GetPropertyIndex("y")].as_int * zoom);
 
-    m_width = m_properties[m_objtemplateptr->GetPropertyIndex("width")].as_int * zoom;
-    m_height = m_properties[m_objtemplateptr->GetPropertyIndex("height")].as_int * zoom;
+    m_width = m_properties[GetPropertyIndex("width")].as_int * zoom;
+    m_height = m_properties[GetPropertyIndex("height")].as_int * zoom;
 
     m_drawonscreen = !(m_x+m_width < 0 || m_y+m_height < 0 || m_x > g_winwidth || m_y > g_winheight);
 }
@@ -129,7 +130,7 @@ void Instance::Save(FILE* fileptr) {
     //save all property values of the instance
     for(int i = 0; i < propertycount; i++) {
         
-        int propertytype = m_objtemplateptr->GetProperty(i)->type;
+        int propertytype = GetProperty(i)->type;
 
         if(propertytype == OPT_INT) {   //property is int
             WriteInt(fileptr, m_properties[i].as_int);
@@ -145,6 +146,15 @@ void Instance::Save(FILE* fileptr) {
 
 
 void Instance::MoveTo(int x, int y) {
-    m_properties[m_objtemplateptr->GetPropertyIndex("x")].as_int = x;
-    m_properties[m_objtemplateptr->GetPropertyIndex("y")].as_int = y;
+    m_properties[GetPropertyIndex("x")].as_int = x;
+    m_properties[GetPropertyIndex("y")].as_int = y;
+}
+
+
+int Instance::GetPropertyIndex(std::string propertyname) {
+    return m_objtemplateptr->GetPropertyIndex(propertyname);
+}
+
+ObjectProperty* Instance::GetProperty(int index) {
+    return m_objtemplateptr->GetProperty(index);
 }
