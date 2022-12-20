@@ -9,6 +9,7 @@
 Editor* g_editor;
 
 void OpenEditor(int argc, const char* argv[]) {
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(960, 540, "editiles");
     SetTargetFPS(120000);
 
