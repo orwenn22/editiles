@@ -9,8 +9,8 @@
 Editor* g_editor;
 
 void OpenEditor(int argc, const char* argv[]) {
-    InitMainWindow(960, 540, "editiles");
-    SetMainFPS(120000);
+    InitWindow(960, 540, "editiles");
+    SetTargetFPS(120000);
 
     Editor* editor = new Editor();
     g_editor = editor;
