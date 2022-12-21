@@ -9,10 +9,8 @@
 
 #include <raylib.h>
 
-extern Editor* g_editor;
-
-ImageFileReceiver::ImageFileReceiver(int x, int y, int w, int h) : Widget(x, y, w, h) {
-
+ImageFileReceiver::ImageFileReceiver(int x, int y, int w, int h, Editor* editor) : Widget(x, y, w, h) {
+    m_editor = editor;
 }
 
 void ImageFileReceiver::Update() {
@@ -25,8 +23,8 @@ void ImageFileReceiver::Update() {
                     if(newtxtrobj->m_texture.id <= 0) {     //loading failure
                         delete newtxtrobj;
                     } else {    //success
-                        g_editor->m_texturemanager->Add(newtxtrobj);
-                        g_editor->m_winmanager->Remove(m_parrent->m_window);
+                        m_editor->m_texturemanager->Add(newtxtrobj);
+                        m_editor->m_winmanager->Remove(m_parrent->m_window);
                     }
                 }
             }

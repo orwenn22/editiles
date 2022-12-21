@@ -4,7 +4,9 @@
 #include "../../Widget/ImageFileReceiver.h"
 #include "../WinIDs.h"
 
-NewTextureWindow::NewTextureWindow() : Window() {
+
+
+NewTextureWindow::NewTextureWindow(Editor* editor) : Window() {
     m_id = WINID_NEWTEXTURE;
     m_titlebartext = "New Texture";
 
@@ -13,5 +15,5 @@ NewTextureWindow::NewTextureWindow() : Window() {
     m_width = 82;
     m_height = 94;    
 
-    m_widgetmanager->Add(new ImageFileReceiver(4, 15, 75, 75));
+    m_widgetmanager->Add(new ImageFileReceiver(4, 15, 75, 75, editor));
 }

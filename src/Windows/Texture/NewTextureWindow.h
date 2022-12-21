@@ -3,9 +3,11 @@
 
 #include "../../GUI/Window.h"
 
+class Editor;
+
 class NewTextureWindow : public Window {
     public:
-    NewTextureWindow();
+    NewTextureWindow(Editor* editor);
 };
 
 #endif

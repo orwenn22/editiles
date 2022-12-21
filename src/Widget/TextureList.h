@@ -3,9 +3,11 @@
 
 #include "../GUI/Widget/ElementList.h"
 
+class Editor;
+
 class TextureList : public ElementList {
     public:
-    TextureList(int x, int y, int w, int h);
+    TextureList(int x, int y, int w, int h, Editor* editor);
 
 
     void RightClickOn(int clickindex) override;
@@ -16,6 +18,9 @@ class TextureList : public ElementList {
     int GetElementCount() override;
 
     void PreInputCheck() override;
+
+
+    Editor* m_editor;
 };
 
 #endif

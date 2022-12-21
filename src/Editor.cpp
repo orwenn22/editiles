@@ -106,7 +106,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_T) && m_havelevel) {   //TEXTURE LIST
             Window* winptr = m_winmanager->FindWithID(WINID_TEXTURELIST);
             if(winptr == NULL) {
-                m_winmanager->Add(new TextureListWindow());
+                m_winmanager->Add(new TextureListWindow(this));
             }
             else {
                 m_winmanager->BringOnTop(winptr);

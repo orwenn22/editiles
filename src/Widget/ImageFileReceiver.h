@@ -3,12 +3,16 @@
 
 #include "../GUI/Widget/Widget.h"
 
+class Editor;
+
 class ImageFileReceiver : public Widget {
     public:
-    ImageFileReceiver(int x, int y, int w, int h);
+    ImageFileReceiver(int x, int y, int w, int h, Editor* editor);
 
     void Update() override;
     void Draw() override;
+
+    Editor* m_editor;
 };
 
 #endif

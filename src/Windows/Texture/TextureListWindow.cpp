@@ -8,18 +8,21 @@
 #include "../WinIDs.h"
 #include "NewTextureWindow.h"
 
-extern Editor* g_editor;
+void OpenNewTextureWindow(Button* but) {
+    TextureListWindow* textlistwin = (TextureListWindow*) but->m_parrent->m_window; 
+    Editor* editor = textlistwin->m_editor;
 
-void OpenNewTextureWindow(Button*) {
-    Window* win = g_editor->m_winmanager->FindWithID(WINID_NEWTEXTURE);
+    Window* win = editor->m_winmanager->FindWithID(WINID_NEWTEXTURE);
     if(win==NULL) {
-        g_editor->m_winmanager->Add(new NewTextureWindow());
+        editor->m_winmanager->Add(new NewTextureWindow(editor));
     } else {
-        g_editor->m_winmanager->BringOnTop(win);
+        editor->m_winmanager->BringOnTop(win);
     }
 }
 
-TextureListWindow::TextureListWindow() : Window() {
+TextureListWindow::TextureListWindow(Editor* editor) : Window() {
+    m_editor = editor;
+
     m_id = WINID_TEXTURELIST;
     SetPosition(100, 100);
     
@@ -29,7 +32,7 @@ TextureListWindow::TextureListWindow() : Window() {
     m_titlebarcolor = RED;
     m_titlebartext = "Texture list";
 
-    m_widgetmanager->Add(new TextureList(3, 15, 194, 150));
+    m_widgetmanager->Add(new TextureList(3, 15, 194, 150, m_editor));
 
     Button* newbut = new Button(3, 168, 50, 15);
     newbut->SetText("New");

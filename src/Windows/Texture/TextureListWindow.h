@@ -3,11 +3,14 @@
 
 #include "../../GUI/Window.h"
 
+class Editor;
 class WindowManager;
 
 class TextureListWindow : public Window {
     public:
-    TextureListWindow();
+    TextureListWindow(Editor* editor);
+
+    Editor* m_editor;
 };
 
 #endif
