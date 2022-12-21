@@ -9,19 +9,21 @@
 #include "../../Widget/LayerList.h"
 #include "../WinIDs.h"
 
-extern Editor* g_editor;
-
 void NewGridLayerButtonAction(Button* but) {
-    Level* level = g_editor->m_level;
+    LayerListWindow* win = (LayerListWindow*) but->m_parrent->m_window;
+    Level* level = win->m_level;
     level->AddLayer(new GridLayer(level->m_width, level->m_height, "newlayer"));
 }
 
 void NewInstLayerButtonAction(Button* but) {
-    Level* level = g_editor->m_level;
+    LayerListWindow* win = (LayerListWindow*) but->m_parrent->m_window;
+    Level* level = win->m_level;
     level->AddLayer(new InstanceLayer("newlayer"));
 }
 
-LayerListWindow::LayerListWindow() : Window() {
+LayerListWindow::LayerListWindow(Level* level) : Window() {
+    m_level = level;
+
     m_id = WINID_LAYERLIST;
 
     SetPosition(100, 100);
@@ -32,7 +34,7 @@ LayerListWindow::LayerListWindow() : Window() {
     m_width = 200;
     m_height = 200;
 
-    m_widgetmanager->Add(new LayerList(3, 15, 194, 150));
+    m_widgetmanager->Add(new LayerList(3, 15, 194, 150, m_level));
 
     Button* newgridbut = new Button(3, 168, 50, 15);
     newgridbut->SetText("Grid");

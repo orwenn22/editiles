@@ -3,9 +3,13 @@
 
 #include "../../GUI/Window.h"
 
+class Level;
+
 class LayerListWindow : public Window {
     public:
-    LayerListWindow();
+    LayerListWindow(Level* level);
+
+    Level* m_level;
 };
 
 #endif

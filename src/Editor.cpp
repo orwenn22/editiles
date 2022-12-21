@@ -116,7 +116,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_L) && m_havelevel) {   //LAYER LIST
             Window* winptr = m_winmanager->FindWithID(WINID_LAYERLIST);
             if(winptr == NULL) {
-                m_winmanager->Add(new LayerListWindow());
+                m_winmanager->Add(new LayerListWindow(m_level));
             }
             else {
                 m_winmanager->BringOnTop(winptr);

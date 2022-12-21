@@ -3,9 +3,12 @@
 
 #include "../GUI/Widget/ElementList.h"
 
+class Editor;
+class Level;
+
 class LayerList : public ElementList {
     public:
-    LayerList(int x, int y, int w, int h);
+    LayerList(int x, int y, int w, int h, Level* level);
 
     void RightClickOn(int clickindex) override;
     void LeftClickOn(int clickindex) override;
@@ -20,6 +23,9 @@ class LayerList : public ElementList {
     void SetSelectedElement(int newselection) override;
 
     void PreInputCheck() override;
+
+
+    Editor* m_editor;
 };
 
 #endif

@@ -14,15 +14,14 @@
 #include "../../GUI/WindowManager.h"
 #include "../WinIDs.h"
 
-extern Editor* g_editor;
 
 void DeleteLayerButton(Button* but) {
     LayerInfoWindow* win = ((LayerInfoWindow*)(but->m_parrent->m_window));
     Layer* layer = win->m_layerpointer;
 
     //printf("%p\n", textureobject);
-    g_editor->m_level->RemoveLayer(layer);
-    g_editor->m_winmanager->Remove(win);
+    layer->m_parrent->RemoveLayer(layer);
+    win->m_parrent->Remove(win);
 }
 
 void ExportGridStandalonButton(Button* but) {
