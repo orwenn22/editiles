@@ -136,7 +136,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_O) && m_havelevel) {                   //OBJECT LIST WINDOW
             Window* winptr = m_winmanager->FindWithID(WINID_OBJECTLIST);
             if(winptr == NULL) {
-                m_winmanager->Add(new ObjectListWindow());
+                m_winmanager->Add(new ObjectListWindow(this));
             }
             else {
                 m_winmanager->BringOnTop(winptr);

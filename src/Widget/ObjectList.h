@@ -3,9 +3,11 @@
 
 #include "../GUI/Widget/ElementList.h"
 
+class Editor;
+
 class ObjectList : public ElementList {
     public:
-    ObjectList(int x, int y, int w, int h);
+    ObjectList(int x, int y, int w, int h, Editor* editor);
 
     void RightClickOn(int clickindex) override;
     void LeftClickOn(int clickindex) override;
@@ -16,6 +18,8 @@ class ObjectList : public ElementList {
     int GetElementCount() override;
 
     void PreInputCheck() override;
+
+    Editor* m_editor;
 };
 
 #endif

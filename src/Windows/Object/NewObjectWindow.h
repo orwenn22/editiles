@@ -5,11 +5,14 @@
 
 #include <string>
 
+class ObjectManager;
+
 class NewObjectWindow : public Window {
     public:
-    NewObjectWindow();
+    NewObjectWindow(ObjectManager* objectmanager);
 
     std::string m_newobjname;
+    ObjectManager* m_objectmanager;
 };
 
 #endif

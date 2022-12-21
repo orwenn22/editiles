@@ -10,24 +10,31 @@
 #include "../WinIDs.h"
 #include "NewObjectWindow.h"
 
-extern Editor* g_editor;
 
-void NewObjectButtonAction(Button*) {
-    //printf("placeholder: create object here.\n");
-    Window* winptr = g_editor->m_winmanager->FindWithID(WINID_NEWOBJECT);
-    if(winptr == NULL) {
-        g_editor->m_winmanager->Add(new NewObjectWindow());
+void NewObjectButtonAction(Button* but) {
+    ObjectListWindow* win = (ObjectListWindow*) but->m_parrent->m_window;
+    Editor* editor = win->m_editor;
+
+    //Open the object creation window. (or bring it on top if it already exists)
+    Window* newobjwinptr = editor->m_winmanager->FindWithID(WINID_NEWOBJECT);
+    if(newobjwinptr == NULL) {
+        editor->m_winmanager->Add(new NewObjectWindow(editor->m_level->m_objectmanager));
     }
     else {
-        g_editor->m_winmanager->BringOnTop(winptr);
+        editor->m_winmanager->BringOnTop(newobjwinptr);
     }
 }
 
-void ExportObjectListButtonAction(Button*) {
-    g_editor->m_level->m_objectmanager->SaveStandalone();
+void ExportObjectListButtonAction(Button* but) {
+    ObjectListWindow* win = (ObjectListWindow*) but->m_parrent->m_window;
+    Editor* editor = win->m_editor;
+
+    editor->m_level->m_objectmanager->SaveStandalone();
 }
 
-ObjectListWindow::ObjectListWindow() : Window() {
+ObjectListWindow::ObjectListWindow(Editor* editor) : Window() {
+    m_editor = editor;
+
     m_id = WINID_OBJECTLIST;
     SetPosition(100, 100);
 
@@ -37,7 +44,7 @@ ObjectListWindow::ObjectListWindow() : Window() {
     m_width = 200;
     m_height = 200;
 
-    m_widgetmanager->Add(new ObjectList(3, 15, 194, 150));
+    m_widgetmanager->Add(new ObjectList(3, 15, 194, 150, editor));
 
     Button* newbut = new Button(3, 168, 50, 15);
     newbut->SetText("New");

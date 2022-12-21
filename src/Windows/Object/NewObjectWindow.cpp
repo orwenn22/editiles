@@ -17,16 +17,18 @@ void CreateNewObjectButton(Button* but) {
 
     if(win->m_newobjname.empty() == false) {
         ObjectTemplate* newobj = new ObjectTemplate(win->m_newobjname);
-        int err = g_editor->m_level->m_objectmanager->Add(newobj);
+        int err = win->m_objectmanager->Add(newobj);
         if(err != 0) {
             delete newobj;
         }
     }
 
-    g_editor->m_winmanager->Remove(win);
+    win->m_parrent->Remove(win);
 }
 
-NewObjectWindow::NewObjectWindow() : Window() {
+NewObjectWindow::NewObjectWindow(ObjectManager* objectmanager) : Window() {
+    m_objectmanager = objectmanager;
+
     m_id = WINID_NEWOBJECT;
 
     m_titlebarcolor = {46, 41, 78, 255};
