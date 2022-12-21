@@ -212,6 +212,9 @@ void Editor::Zoom(int relativezoom, int zoomxcenter, int zoomycenter) {
 void Editor::CreateNewLevel(int width, int height, int boxwidth, int boxheight) { 
     if(m_havelevel) {
         delete m_level;
+        //Do this to avoid problem if the newly created level have different tile sizes.
+        delete m_texturemanager;
+        m_texturemanager = new TextureManager(this);
     }
 
     m_level = new Level(width, height, boxwidth, boxheight);

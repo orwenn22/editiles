@@ -51,16 +51,13 @@ void GridLayer::Draw(int x, int y) {
     if(lastybox > m_height) lastybox = m_height;
 
 
-    //bool drawnumbers = ((m_boxwidth * zoom)>40);
-
     for(int i = firstybox; i < lastybox; i++) { //Y
         for(int j = firstxbox; j < lastxbox; j++) { //X
             if(m_havetexture) {
-                m_textureobj->DrawTile(x + j * (m_boxwidth*zoom), y + i * (m_boxheight*zoom), m_griddata[i*m_width+j], zoom);
+                //I still can't deside which one is the best so I'm keeping both just in case.
+                //m_textureobj->DrawTile(x + j * (m_boxwidth*zoom), y + i * (m_boxheight*zoom), m_griddata[i*m_width+j], zoom);
+                m_textureobj->DrawTile(x + j * (m_boxwidth*zoom), y + i * (m_boxheight*zoom), m_boxwidth*zoom, m_boxheight*zoom, m_griddata[i*m_width+j]);
             }
-            //if(drawnumbers) {
-            //    DrawText(TextFormat("%i", m_griddata[i*m_width+j]),x + j * (m_boxwidth*zoom) +2, y + i * (m_boxheight*zoom) +2, 10, WHITE);
-            //}
         }
     }
 }
