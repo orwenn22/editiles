@@ -17,8 +17,6 @@
 #include <raylib.h>
 #include <stdio.h>
 
-extern Editor* g_editor;
-
 // This constructor is no longer used, but I still keep it just in case
 Level::Level() : Level(16, 16, 8, 8) {
     AddLayer(new GridLayer(m_width, m_height, "defaultlayer"));
@@ -31,6 +29,8 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
     m_boxheight = boxheight;
 
     //printf("BoxWidth: %i\n", m_boxwidth);
+    m_editor = NULL;
+    m_isineditor = false;
 
     m_x = 10;
     m_y = 10;
@@ -71,6 +71,9 @@ Level::~Level() {
     m_layers.clear();
     m_layercount = 0;
     m_selectedlayer = -1;
+
+    m_editor = NULL;
+    m_isineditor = false;
 }
 
 void Level::Update() {
@@ -173,7 +176,7 @@ void Level::Update() {
         if(m_relativemouseposx<0 && m_zoom > 1) xtodisplay--;
         if(m_relativemouseposy<0 && m_zoom > 1) ytodisplay--;
 
-        g_editor->m_bottombar->TextAppend(
+        m_editor->m_bottombar->TextAppend(
             "X: " +     std::to_string(xtodisplay) +
             " | Y: " +  std::to_string(ytodisplay) +
             " | TX: " + std::to_string(m_overredboxx) +
@@ -182,8 +185,8 @@ void Level::Update() {
 
         if(m_selectedlayer >= 0) {
             if(GetLayer(m_selectedlayer)->m_type == LAYERID_GRID) {
-                g_editor->m_bottombar->TextAppend(" | Tool: " + std::to_string(m_selectedtool));
-                g_editor->m_bottombar->TextAppend(" | Palette: " + std::to_string(m_selectednumber));
+                m_editor->m_bottombar->TextAppend(" | Tool: " + std::to_string(m_selectedtool));
+                m_editor->m_bottombar->TextAppend(" | Palette: " + std::to_string(m_selectednumber));
             }
         }
     }

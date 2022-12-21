@@ -22,7 +22,6 @@
 #include "Windows/Texture/TextureListWindow.h"
 #include "Windows/WinIDs.h"
 #include "Windows/ZoomWindow.h"
-#include "Zoom.h"
 
 #include "ParseFunctions.h"
 
@@ -97,7 +96,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_W) && m_havelevel) {   //ZOOM
             Window* winptr = m_winmanager->FindWithID(WINID_ZOOM);
             if(winptr == NULL) {
-                m_winmanager->Add(new ZoomWindow());
+                m_winmanager->Add(new ZoomWindow(this));
             }
             else {
                 m_winmanager->BringOnTop(winptr);
@@ -184,6 +183,31 @@ void Editor::KeyBinds() {
     }
 }
 
+void Editor::Zoom(int relativezoom, int zoomxcenter, int zoomycenter) {
+    if(m_havelevel == false) {
+        return;
+    }
+    
+    if(m_level->m_zoom + relativezoom < 1) {  //TODO : handle this correctly
+        return;
+    }
+
+    //calculate distance between zoom center and grid's top left
+    float distancex = (float)(m_level->m_x - zoomxcenter);
+    float distancey = (float)(m_level->m_y - zoomycenter);
+
+    //"cancel" old zoom and apply new zoom
+    float currentzoom = (float) m_level->m_zoom;
+    distancex = (distancex / currentzoom) * (currentzoom+(float)relativezoom);
+    distancey = (distancey / currentzoom) * (currentzoom+(float)relativezoom);
+
+    //apply new position
+    m_level->m_x = zoomxcenter + (int)distancex;
+    m_level->m_y = zoomycenter + (int)distancey;
+
+    //apply new zoom to grid
+    m_level->m_zoom += relativezoom;
+}
 
 void Editor::CreateNewLevel(int width, int height, int boxwidth, int boxheight) { 
     if(m_havelevel) {
@@ -198,6 +222,9 @@ void Editor::CreateNewLevel(int width, int height, int boxwidth, int boxheight) 
     }
 
     m_havelevel = true;
+
+    m_level->m_editor = this;
+    m_level->m_isineditor = true;
 }
 
 void Editor::LoadFromFile(const char* filename) {
@@ -207,8 +234,11 @@ void Editor::LoadFromFile(const char* filename) {
         //Add the new level to the editor
         if(m_havelevel) {
             delete m_level;
-    }
-    m_havelevel = true;
-    m_level = newlevel;
+        }
+        m_havelevel = true;
+        m_level = newlevel;
+
+        m_level->m_editor = this;
+        m_level->m_isineditor = true;
     }
 }

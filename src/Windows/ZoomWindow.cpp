@@ -1,22 +1,26 @@
 #include "ZoomWindow.h"
 
+#include "../Editor.h"
 #include "../GUI/MainWindow.h"
 #include "../GUI/Widget/WidgetManager.h"
 #include "../GUI/Widget/Button.h"
 #include "../Level.h"
-#include "../Zoom.h"
 #include "WinIDs.h"
 
 
-void ZoomIn(Button*) {
-    Zoom(1, g_winwidth / 2, g_winheight / 2);
+void ZoomIn(Button* but) {
+    ZoomWindow* win = (ZoomWindow*) but->m_parrent->m_window;
+    win->m_editor->Zoom(1, g_winwidth / 2, g_winheight / 2);
 }
 
-void ZoomOut(Button*) {
-    Zoom(-1, g_winwidth / 2, g_winheight / 2);
+void ZoomOut(Button* but) {
+    ZoomWindow* win = (ZoomWindow*) but->m_parrent->m_window;
+    win->m_editor->Zoom(-1, g_winwidth / 2, g_winheight / 2);
 }
 
-ZoomWindow::ZoomWindow() : Window() {
+ZoomWindow::ZoomWindow(Editor* editor) : Window() {
+    m_editor = editor;
+
     SetPosition(100, 100);
     m_id = WINID_ZOOM;
 

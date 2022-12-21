@@ -3,9 +3,13 @@
 
 #include "../GUI/Window.h"
 
+class Editor;
+
 class ZoomWindow : public Window {
     public:
-    ZoomWindow();
+    ZoomWindow(Editor* editor);
+
+    Editor* m_editor;
 };
 
 #endif

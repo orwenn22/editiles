@@ -18,6 +18,8 @@ class Editor {
 
     void KeyBinds();
 
+    void Zoom(int relativezoom, int zoomxcenter, int zoomycenter);
+
     void CreateNewLevel(int width, int height, int boxwidth, int boxheight);
 
     void LoadFromFile(const char* filename);
@@ -28,6 +30,7 @@ class Editor {
     TextureManager* m_texturemanager;
     WindowManager* m_winmanager;
 
+    //TODO : eventually move these two out of Editor
     BottomBar* m_bottombar;
     WindowCorner* m_corner;
 

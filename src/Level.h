@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+class Editor;
 class GridLayer;
 class Layer;
 class ObjectManager;
@@ -33,6 +34,13 @@ class Level {
     
     void Resize(int newwidth, int newheight);
     void Expand(int top, int left, int right, int bottom);
+
+
+    /////////////////
+
+
+    Editor* m_editor;       //parrent editor
+    bool m_isineditor;
 
     //Position of the level on screen
     int m_x;
