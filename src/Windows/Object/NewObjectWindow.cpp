@@ -10,7 +10,6 @@
 #include "../../ObjectManager/ObjectTemplate.h"
 #include "../WinIDs.h"
 
-extern Editor* g_editor;
 
 void CreateNewObjectButton(Button* but) {
     NewObjectWindow* win = (NewObjectWindow*)(but->m_parrent->m_window);

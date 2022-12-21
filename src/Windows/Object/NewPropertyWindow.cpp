@@ -1,6 +1,5 @@
 #include "NewPropertyWindow.h"
 
-#include "../../Editor.h"
 #include "../../GUI/Widget/Button.h"
 #include "../../GUI/Widget/CppStringField.h"
 #include "../../GUI/Widget/WidgetManager.h"
@@ -8,8 +7,6 @@
 #include "../../ObjectManager/ObjectProperty.h"
 #include "../../ObjectManager/ObjectTemplate.h"
 #include "../WinIDs.h"
-
-extern Editor* g_editor;
 
 void CreateNewProperty(Button* but) {
     NewPropertyWindow* win = (NewPropertyWindow*)(but->m_parrent->m_window);
@@ -20,7 +17,7 @@ void CreateNewProperty(Button* but) {
         delete newprop;
     }
 
-    g_editor->m_winmanager->Remove(win);
+    win->m_parrent->Remove(win);
 }
 
 

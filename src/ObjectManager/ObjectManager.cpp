@@ -21,6 +21,8 @@ ObjectManager::~ObjectManager() {
 }
 
 int ObjectManager::Add(ObjectTemplate* newobject) {
+    //TODO : handle the case where an ObjectTemplate is already in a manager.
+    
     for(int i = 0; i < m_objectcount; i++) {
         if(m_objects[i]->m_name == newobject->m_name) {
             return 1;     //don't add the object because it have the same name as another.
@@ -28,8 +30,10 @@ int ObjectManager::Add(ObjectTemplate* newobject) {
     }
     m_objects.push_back(newobject);
     m_objectcount++;
+    newobject->m_manager = this;
+    newobject->m_isinmanager = true;
     printf("Added object, count: %i\n", m_objectcount);
-    return 0;
+    return 0;   //success
 }
 
 void ObjectManager::Delete(ObjectTemplate* objectptr) {
@@ -39,6 +43,7 @@ void ObjectManager::Delete(ObjectTemplate* objectptr) {
             delete m_objects[i];
             m_objects.erase(m_objects.begin() + i);
             m_objectcount--;
+            printf("Deleted object, count: %i\n", m_objectcount);
             return;
         }
     }

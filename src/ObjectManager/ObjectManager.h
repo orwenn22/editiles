@@ -12,7 +12,7 @@ class ObjectManager {
     ObjectManager();
     ~ObjectManager();
 
-    int Add(ObjectTemplate* newobject);        //Add an object to m_objects
+    int Add(ObjectTemplate* newobject);         //Add an object to m_objects
     ObjectTemplate* Get(int objectindex);       //return the pointer at index objectindex in m_objects
     int GetIndex(ObjectTemplate* objectptr);    //return the index of objectptr in m_objects
     void Delete(ObjectTemplate* objectptr);     //Delete objectptr of m_objects (will free memory)

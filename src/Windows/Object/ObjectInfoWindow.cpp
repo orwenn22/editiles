@@ -14,22 +14,21 @@
 #include "RenameObjectWindow.h"
 #include "NewPropertyWindow.h"
 
-extern Editor* g_editor;
 
 void DeleteObjectTemplate(Button* but) {
     ObjectInfoWindow* win = (ObjectInfoWindow*)(but->m_parrent->m_window);
-    g_editor->m_level->m_objectmanager->Delete(win->m_objptr);
+    win->m_level->m_objectmanager->Delete(win->m_objptr);
 
-    for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
-        Window* currentwin = g_editor->m_winmanager->Get(i);
+    for(unsigned int i = 0; i < win->m_parrent->m_wincount; i++) {
+        Window* currentwin = win->m_parrent->Get(i);
         //TODO : better way to do this ? Only close the windows that contains the pointer to the corresponding object ?
         if(currentwin->m_id >= WINID_RENAMEOBJECT && currentwin->m_id <= WINID_CHANGEPROPERTY) {
-            g_editor->m_winmanager->Remove(currentwin);
+            win->m_parrent->Remove(currentwin);
             i--;
         }
     }
 
-    g_editor->m_winmanager->Remove(win);
+    win->m_parrent->Remove(win);
 }
 
 void OpenRenameWindow(Button* but) {
@@ -37,18 +36,18 @@ void OpenRenameWindow(Button* but) {
 
     bool needcreation = true;
 
-    for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
-        Window* currentwin = g_editor->m_winmanager->Get(i);
+    for(unsigned int i = 0; i < win->m_parrent->m_wincount; i++) {
+        Window* currentwin = win->m_parrent->Get(i);
         if(currentwin->m_id == WINID_RENAMEOBJECT) {
             if(((RenameObjectWindow*)currentwin)->m_objptr == win->m_objptr) {
-                g_editor->m_winmanager->BringOnTop(currentwin);
+                win->m_parrent->BringOnTop(currentwin);
                 needcreation = false;
             }
         }
     }
 
     if(needcreation) {
-        g_editor->m_winmanager->Add(new RenameObjectWindow(win->m_objptr));
+        win->m_parrent->Add(new RenameObjectWindow(win->m_objptr));
     }
 }
 
@@ -57,18 +56,18 @@ void OpenNewPropertyWindow(Button* but) {
 
     bool needcreation = true;
 
-    for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
-        Window* currentwin = g_editor->m_winmanager->Get(i);
+    for(unsigned int i = 0; i < win->m_parrent->m_wincount; i++) {
+        Window* currentwin = win->m_parrent->Get(i);
         if(currentwin->m_id == WINID_NEWPROPERTY) {
             if(((NewPropertyWindow*)currentwin)->m_objptr == win->m_objptr) {
-                g_editor->m_winmanager->BringOnTop(currentwin);
+                win->m_parrent->BringOnTop(currentwin);
                 needcreation = false;
             }
         }
     }
     
     if(needcreation) {
-        g_editor->m_winmanager->Add(new NewPropertyWindow(win->m_objptr));
+        win->m_parrent->Add(new NewPropertyWindow(win->m_objptr));
     }
 }
 
@@ -78,7 +77,9 @@ void ExportObjectAsFile(Button* but) {
     win->m_objptr->SaveStandalone(win->m_objptr->m_name + ".obj");
 }
 
-ObjectInfoWindow::ObjectInfoWindow(ObjectTemplate* objptr) : Window() {
+ObjectInfoWindow::ObjectInfoWindow(ObjectTemplate* objptr, Editor* editor) : Window() {
+    m_level = editor->m_level;
+
     m_id = WINID_OBJECTINFO;
     m_objptr = objptr;
 
@@ -102,7 +103,7 @@ ObjectInfoWindow::ObjectInfoWindow(ObjectTemplate* objptr) : Window() {
     m_widgetmanager->Add(renamebut);
 
 
-    m_widgetmanager->Add(new ObjectPropertiesList(5, 50, 190, 120, m_objptr));
+    m_widgetmanager->Add(new ObjectPropertiesList(5, 50, 190, 120, m_objptr, editor));
 
 
     Button* newpropertybut = new Button(5, 173, 75, 16);

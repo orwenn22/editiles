@@ -19,7 +19,8 @@ class ObjectList : public ElementList {
 
     void PreInputCheck() override;
 
-    Editor* m_editor;
+
+    Editor* m_editor;       //The editor containing the level with the objecttemplates.
 };
 
 #endif

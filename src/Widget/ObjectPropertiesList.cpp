@@ -3,21 +3,23 @@
 #include "../Editor.h"
 #include "../GUI/Mouse/MouseObject.h"
 #include "../GUI/WindowManager.h"
-#include "../ObjectManager/ObjectTemplate.h"
+#include "../ObjectManager/ObjectManager.h"
 #include "../ObjectManager/ObjectProperty.h"
+#include "../ObjectManager/ObjectTemplate.h"
 #include "../Windows/Object/ChangePropertyWindow.h"
 #include "../Windows/Object/RenamePropertyWindow.h"
 #include "../Windows/WinIDs.h"
 
 #include <raylib.h>
 
-extern Editor* g_editor;
 
-ObjectPropertiesList::ObjectPropertiesList(int x, int y, int w, int h, ObjectTemplate* objptr) : ElementList(x, y, w, h) {
+ObjectPropertiesList::ObjectPropertiesList(int x, int y, int w, int h, ObjectTemplate* objptr, Editor* editor) : ElementList(x, y, w, h) {
     m_objptr = objptr;
     m_elementheight = 15;
     m_canselectelement = false;
     m_firstelementindex = 0;
+
+    m_editor = editor;
 }
 
 
@@ -63,38 +65,38 @@ void ObjectPropertiesList::RightClickOn(int elementindex) {
     if(g_mouse->m_x < m_x+separatorx) {     //rename property
         if(prop->obligatory == false) {
             bool needcreation = true;
-            for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
-                Window* win = g_editor->m_winmanager->Get(i);
+            for(unsigned int i = 0; i < m_editor->m_winmanager->m_wincount; i++) {
+                Window* win = m_editor->m_winmanager->Get(i);
 
                 if(win->m_id == WINID_RENAMEPROPERTY) {
                     if(((RenamePropertyWindow*)win)->m_propptr == prop) {   //window already exist
                         needcreation = false;
-                        g_editor->m_winmanager->BringOnTop(win);
+                        m_editor->m_winmanager->BringOnTop(win);
                         break;
                     }
                 }
             }
             if(needcreation) {
-                g_editor->m_winmanager->Add(new RenamePropertyWindow(m_objptr, prop));
+                m_editor->m_winmanager->Add(new RenamePropertyWindow(m_objptr, prop));
             }
         }
         
     } else {                //change value
         if(prop->havedefaultvalue) {
             bool needcreation = true;
-            for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
-                Window* win = g_editor->m_winmanager->Get(i);
+            for(unsigned int i = 0; i < m_editor->m_winmanager->m_wincount; i++) {
+                Window* win = m_editor->m_winmanager->Get(i);
 
                 if(win->m_id == WINID_CHANGEPROPERTY) {
                     if(((ChangePropertyWindow*)win)->m_propptr == prop) {   //window already exist
                         needcreation = false;
-                        g_editor->m_winmanager->BringOnTop(win);
+                        m_editor->m_winmanager->BringOnTop(win);
                         break;
                     }
                 }
             }
             if(needcreation) {
-                g_editor->m_winmanager->Add(new ChangePropertyWindow(prop, m_objptr));
+                m_editor->m_winmanager->Add(new ChangePropertyWindow(prop, m_objptr));
             }
         }
         

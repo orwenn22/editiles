@@ -37,7 +37,7 @@ void ObjectList::RightClickOn(int clickindex) {
     }
 
     if(needcreation) {
-        m_editor->m_winmanager->Add(new ObjectInfoWindow(objptr));
+        m_editor->m_winmanager->Add(new ObjectInfoWindow(objptr, m_editor));
     }
 }
 
@@ -70,21 +70,33 @@ int ObjectList::GetElementCount() {
 void ObjectList::PreInputCheck() {
     Level* level = m_editor->m_level;
     //Drag and drop file to list
-    if(g_mouse->m_havefiles && level->m_objectmanager->m_objectcount == 0) {
+    if(g_mouse->m_havefiles) {
         if(g_mouse->m_fileslist.count == 1) {
+            printf("ObjectList : receiving something\n");
             //FIXME: handle this in a better way
             ObjectManager* newobjmanager = ParseOBJTBFile(g_mouse->m_fileslist.paths[0]);
 
-            if(newobjmanager != NULL) {
-                printf("ObjectList : yay\n");
-                delete level->m_objectmanager;
-                level->m_objectmanager = newobjmanager;
+            if(newobjmanager != NULL) {     ///newobjmanager is valid
+                if(level->m_objectmanager->m_objectcount == 0) {    //no object in current manager
+                    printf("ObjectList : yay\n");
+                    delete level->m_objectmanager;
+                    level->m_objectmanager = newobjmanager;
+                }
+                else {
+                    printf("Object list : can't load table because current one not empty :(\n");
+                    delete newobjmanager;
+                }
+                
             }
             else {
                 ObjectTemplate* newobj = ParseOBJFile(g_mouse->m_fileslist.paths[0]);
                 if(newobj != NULL) {
                     printf("ObjectList : yay\n");
-                    level->m_objectmanager->Add(newobj);
+                    int err = level->m_objectmanager->Add(newobj);
+                    if(err != 0) delete newobj;
+                }
+                else {
+                    printf("ObjectList : Not an object ?\n");
                 }
             }
         }

@@ -37,6 +37,9 @@ ObjectTemplate::ObjectTemplate(std::string name) {
     height->havedefaultvalue = true;
     height->SetValue(8);
     AddProperty(height);
+
+    m_manager = NULL;
+    m_isinmanager = false;
 }
 
 ObjectTemplate::~ObjectTemplate() {
@@ -55,6 +58,9 @@ ObjectTemplate::~ObjectTemplate() {
     //Do this just in case
     m_children.clear();
     m_childrencount = 0;
+
+    m_manager = NULL;
+    m_isinmanager = false;
 }
 
 int ObjectTemplate::AddProperty(ObjectProperty* newproperty) {

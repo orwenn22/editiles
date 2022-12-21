@@ -5,6 +5,7 @@
 #include <vector>
 
 class Instance;
+class ObjectManager;
 class TextureObject;
 
 struct ObjectProperty;
@@ -46,6 +47,9 @@ class ObjectTemplate {
     //make it so an object have a texture.
     bool m_havetexture;
     TextureObject* m_textureobj;
+
+    ObjectManager* m_manager;
+    bool m_isinmanager;
 };
 
 #endif
