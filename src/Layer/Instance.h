@@ -20,8 +20,9 @@ class Instance {
     Instance(ObjectTemplate* objtemplate, int x, int y);
     ~Instance();
 
+    //These 3 are called only while in the GUI editor
     void Update(int levelx, int levely, int zoom);
-    void CheckMouseInput();
+    void CheckMouseInput();     //check if the instance is clicked in the editor
     void Draw();
 
     //Called when the Instance is saved to a file.

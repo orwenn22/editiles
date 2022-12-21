@@ -3,6 +3,8 @@
 #include "../Editor.h"
 #include "../GUI/WindowManager.h"
 #include "../Layer/Instance.h"
+#include "../Layer/InstanceLayer.h"
+#include "../Level.h"
 #include "../ObjectManager/ObjectProperty.h"
 #include "../ObjectManager/ObjectTemplate.h"
 #include "../Windows/Instance/ChangeInstancePropWindow.h"
@@ -10,12 +12,15 @@
 
 #include <raylib.h>
 
-extern Editor* g_editor;
 
 InstancePropertiesList::InstancePropertiesList(Instance* instanceptr, int x, int y, int w, int h) : ElementList(x, y, w, h) {
     m_instanceptr = instanceptr;
     m_elementheight = 15;
     m_canselectelement = false;
+
+    //Get a pointer to the editor from the instance.
+    //            instance      layer      level     editor
+    m_editor = m_instanceptr->m_parrent->m_parrent->m_editor;
 }
 
 int InstancePropertiesList::GetElementCount() {
@@ -50,12 +55,12 @@ void InstancePropertiesList::RightClickOn(int elementindex) {
 
     //Show the window to change the property.
     bool needcreation = true;
-    for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
+    for(unsigned int i = 0; i < m_editor->m_winmanager->m_wincount; i++) {
         printf("%i\n", i);
-        Window* win = g_editor->m_winmanager->Get(i);
+        Window* win = m_editor->m_winmanager->Get(i);
         if(win->m_id == WINID_CHANGEINSTANCEPROP) {
             if(((ChangeInstancePropWindow*)win)->m_instanceptr == m_instanceptr && ((ChangeInstancePropWindow*)win)->m_propertyptr == property) {
-                g_editor->m_winmanager->BringOnTop(win);
+                m_editor->m_winmanager->BringOnTop(win);
                 needcreation = false;
                 break;
             }
@@ -63,6 +68,6 @@ void InstancePropertiesList::RightClickOn(int elementindex) {
     }
 
     if(needcreation) {
-        g_editor->m_winmanager->Add(new ChangeInstancePropWindow(m_instanceptr, property));
+        m_editor->m_winmanager->Add(new ChangeInstancePropWindow(m_instanceptr, property));
     }
 }

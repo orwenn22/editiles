@@ -3,6 +3,7 @@
 
 #include "../GUI/Widget/ElementList.h"
 
+class Editor;
 class Instance;
 
 class InstancePropertiesList : public ElementList {
@@ -15,6 +16,7 @@ class InstancePropertiesList : public ElementList {
     void RightClickOn(int elementindex) override;
 
     Instance* m_instanceptr;
+    Editor* m_editor;
 };
 
 #endif

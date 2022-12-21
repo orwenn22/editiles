@@ -17,7 +17,9 @@
 
 #include <raylib.h>
 
-extern Editor* g_editor;
+//TODO: find a better way to access the level's parrent editor from here ?
+//                  layer      level     editor
+#define leveditor m_parrent->m_parrent->m_editor
 
 Instance::Instance(ObjectTemplate* objtemplate, int x, int y) {
     m_objtemplateptr = objtemplate;
@@ -80,11 +82,11 @@ void Instance::CheckMouseInput() {
 
             if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
                 bool needcreation = true;
-                for(unsigned int i = 0; i < g_editor->m_winmanager->m_wincount; i++) {
-                    Window* win = g_editor->m_winmanager->Get(i);
+                for(unsigned int i = 0; i < leveditor->m_winmanager->m_wincount; i++) {
+                    Window* win = leveditor->m_winmanager->Get(i);
                     if(win->m_id == WINID_INSTANCEINFO) {
                             if(((InstanceInfoWindow*)win)->m_instanceptr == this) {
-                            g_editor->m_winmanager->BringOnTop(win);
+                            leveditor->m_winmanager->BringOnTop(win);
                             needcreation = false;
                             break;
                         }
@@ -92,7 +94,7 @@ void Instance::CheckMouseInput() {
                     
                 }
                 if(needcreation) {
-                    g_editor->m_winmanager->Add(new InstanceInfoWindow(this));
+                    leveditor->m_winmanager->Add(new InstanceInfoWindow(this));
                 }
             }
             g_mouse->m_havebeenused = false;
