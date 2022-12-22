@@ -3,9 +3,11 @@
 
 #include "../GUI/Window.h"
 
+class Editor;
+
 class PaletteWindow : public Window {
     public:
-    PaletteWindow();
+    PaletteWindow(Editor* editor);
 };
 
 #endif

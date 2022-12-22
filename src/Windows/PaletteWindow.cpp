@@ -7,9 +7,8 @@
 #include "../Widget/Palette.h"
 #include "WinIDs.h"
 
-extern Editor* g_editor;
 
-PaletteWindow::PaletteWindow() : Window() {
+PaletteWindow::PaletteWindow(Editor* editor) : Window() {
     m_id = WINID_PALETTE;
     
     m_width = 300;
@@ -17,10 +16,10 @@ PaletteWindow::PaletteWindow() : Window() {
 
     SetPosition(200, 200);
 
-    IntField* palnumintfield = new IntField(5, 15, 120, &(g_editor->m_level->m_selectednumber));
+    IntField* palnumintfield = new IntField(5, 15, 120, &(editor->m_level->m_selectednumber));
     palnumintfield->AllowNegative(false);
     palnumintfield->SetMinMax(0, 65535);
     m_widgetmanager->Add(palnumintfield);
 
-    m_widgetmanager->Add(new Palette(5, 35, 290, 260));
+    m_widgetmanager->Add(new Palette(5, 35, 290, 260, editor));
 }

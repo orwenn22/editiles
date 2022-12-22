@@ -29,8 +29,8 @@
 
 Editor::Editor() {
     m_havelevel = false;
-    //m_havelevel = true;
-    //m_level = new Level(this);
+    m_level = NULL;
+
     m_mouse = InitMouseGlobal();
 
     m_texturemanager = new TextureManager(this);
@@ -126,7 +126,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_P) && m_havelevel) {   //PALETTE
             Window* winptr = m_winmanager->FindWithID(WINID_PALETTE);
             if(winptr == NULL) {
-                m_winmanager->Add(new PaletteWindow());
+                m_winmanager->Add(new PaletteWindow(this));
             }
             else {
                 m_winmanager->BringOnTop(winptr);
