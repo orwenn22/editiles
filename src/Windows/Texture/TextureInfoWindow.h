@@ -3,14 +3,17 @@
 
 #include "../../GUI/Window.h"
 
+class Editor;
 class TextureObject;
 
+//Opened from TextureList
 class  TextureInfoWindow : public Window {
     public:
-    TextureInfoWindow(TextureObject* textureobjectptr);
+    TextureInfoWindow(TextureObject* textureobjectptr, Editor* editor);
 
 
     TextureObject* m_textureobjectptr;
+    Editor* m_editor;
 };
 
 #endif

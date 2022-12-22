@@ -15,15 +15,15 @@
 #include "../../Widget/TexturePreview.h"
 #include "../WinIDs.h"
 
-extern Editor* g_editor;
 
 void DeleteTextureButton(Button* but) {
     TextureInfoWindow* win = ((TextureInfoWindow*)(but->m_parrent->m_window));
     TextureObject* textureobject = win->m_textureobjectptr;
+    Editor* editor = win->m_editor;
 
     //check if texture is used by layers
-    for(int i = 0; i < g_editor->m_level->m_layercount; i++) {
-        Layer* layer = g_editor->m_level->GetLayer(i);
+    for(int i = 0; i < editor->m_level->m_layercount; i++) {
+        Layer* layer = editor->m_level->GetLayer(i);
         if(layer->m_havetexture && layer->m_textureobj == textureobject) {
             layer->m_havetexture = false;
             layer->m_textureobj = NULL;
@@ -31,8 +31,8 @@ void DeleteTextureButton(Button* but) {
     }
 
     //check if texture is used by object templates
-    for(int i = 0; i < g_editor->m_level->m_objectmanager->m_objectcount; i++) {
-        ObjectTemplate* object = g_editor->m_level->m_objectmanager->Get(i);
+    for(int i = 0; i < editor->m_level->m_objectmanager->m_objectcount; i++) {
+        ObjectTemplate* object = editor->m_level->m_objectmanager->Get(i);
         if(object->m_havetexture && object->m_textureobj == textureobject) {
             object->m_havetexture = false;
             object->m_textureobj = NULL;
@@ -40,11 +40,13 @@ void DeleteTextureButton(Button* but) {
     }
 
     //printf("%p\n", textureobject);
-    g_editor->m_texturemanager->Remove(textureobject);
-    g_editor->m_winmanager->Remove(win);
+    editor->m_texturemanager->Remove(textureobject);
+    win->m_parrent->Remove(win);
 }
 
-TextureInfoWindow::TextureInfoWindow(TextureObject* textureobjectptr) : Window() {
+TextureInfoWindow::TextureInfoWindow(TextureObject* textureobjectptr, Editor* editor) : Window() {
+    m_editor = editor;
+
     m_id = WINID_TEXTUREINFO;
     SetPosition(100, 100);
     
