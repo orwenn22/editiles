@@ -16,6 +16,11 @@ class Level {
     ~Level();
 
     void Update();
+    void UpdateInteraction();               //handle the mouse interraction stuff
+    void UpdateInteractionGridLayer();      //called by UpdateInteractionGridLayer if the selected layer is a GridLayer
+    void UpdateInteractionInstanceLayer();  //called by UpdateInteractionGridLayer if the selected layer is an InstanceLayer
+    void UpdateBottomBar();                 //update the bottombar if the editor is in an Application
+    
     void PenUpdate(GridLayer* curlayer);
     void RectUpdate(GridLayer* curlayer);
 

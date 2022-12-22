@@ -1,9 +1,7 @@
 #include "Editor.h"
 
 #include "FileUtil/FileUtil.h"
-#include "GUI/BottomBar.h"
 #include "GUI/Mouse/MouseObject.h"
-#include "GUI/WindowCorner.h"
 #include "GUI/WindowManager.h"
 #include "Layer/GridLayer.h"
 #include "Layer/Instance.h"
@@ -28,18 +26,20 @@
 #include <raylib.h>
 
 Editor::Editor() {
+    m_app = NULL;
+    
     m_havelevel = false;
     m_level = NULL;
-
-    m_mouse = InitMouseGlobal();
 
     m_texturemanager = new TextureManager(this);
 
     m_winmanager = new WindowManager();
     //m_winmanager->Add(new Window(m_winmanager));
+}
 
-    m_bottombar = new BottomBar();
-    m_corner = new WindowCorner(500, 500);
+Editor::Editor(int lvlwidth, int lvlheight, int tilewidth, int tileheight) : Editor() {
+    m_level = new Level(lvlwidth, lvlheight, tilewidth, tileheight);
+    m_havelevel = true;
 }
 
 Editor::~Editor() {
@@ -48,22 +48,16 @@ Editor::~Editor() {
     }
     delete m_texturemanager;
     delete m_winmanager;
-    delete m_mouse;
-
-    delete m_corner;
 }
 
 void Editor::Update() {
-    m_mouse->Update();
-    m_corner->Update();
-    m_bottombar->Update();
     m_winmanager->Update();
     if(m_havelevel) {
         m_level->Update();
     }
     KeyBinds();
 
-    m_mouse->PostUpdate();
+    
 }
 
 void Editor::Draw() {
@@ -72,9 +66,6 @@ void Editor::Draw() {
         //m_texturemanager->Get(0)->DrawTile(0, 0, 0);
     }
     m_winmanager->Draw();
-    m_bottombar->Draw();
-    m_corner->Draw();
-    m_mouse->Draw();
 }
 
 
@@ -146,7 +137,7 @@ void Editor::KeyBinds() {
         if(IsKeyPressed(KEY_N)) {                   //NEW LEVEL WINDOW
             Window* winptr = m_winmanager->FindWithID(WINID_NEWLEVEL);
             if(winptr == NULL) {
-                m_winmanager->Add(new NewLevelWindow());
+                m_winmanager->Add(new NewLevelWindow(this));
             }
             else {
                 m_winmanager->BringOnTop(winptr);
@@ -160,10 +151,10 @@ void Editor::KeyBinds() {
             m_level->m_y = 10;
         }
 
-        if(m_mouse->m_havebeenused == false) {
+        if(g_mouse->m_havebeenused == false) {
             int wheelmovement = (int)GetMouseWheelMove();
             if(wheelmovement != 0) {
-                Zoom(wheelmovement, m_mouse->m_x, m_mouse->m_y);
+                Zoom(wheelmovement, g_mouse->m_x, g_mouse->m_y);
             }
         }
 

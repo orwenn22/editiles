@@ -1,5 +1,6 @@
 #include "Level.h"
 
+#include "Application.h"
 #include "DragObjectIDs.h"
 #include "Editor.h"
 #include "FileUtil/FileUtil.h"
@@ -76,6 +77,9 @@ Level::~Level() {
     m_isineditor = false;
 }
 
+//////////////////////////
+//Update
+
 void Level::Update() {
     //selected layer
     if(m_selectedlayer >= m_layercount) {
@@ -134,41 +138,72 @@ void Level::Update() {
     }
     ////////////////
 
-    //Handle mouse interraction
+    //Handle mouse interaction
     if(m_layercount >= 1) {
-        Layer* curlayer = GetLayer(m_selectedlayer);
-
-        if(curlayer->m_visible) {   //Make interacting with a hidden layer impossible to prevent user mistakes
-            if(curlayer->m_type == LAYERID_GRID) {
-                switch(m_selectedtool) {
-                    case 0:     //painting
-                        PenUpdate((GridLayer*)curlayer);
-                    break;
-
-                    case 1:     //rectangle
-                        RectUpdate((GridLayer*)curlayer);
-                    break;
-                }
-            }
-            else if(curlayer->m_type == LAYERID_INSTANCE) {     //instance
-                if(g_mouse->m_havebeenused == false && IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && g_mouse->m_havedragobject) {
-                    if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_OBJECTTEMPLATE) {
-                        //spawn new instance of object                   ptr given by ObjectList
-                        ((InstanceLayer*)curlayer)->Add(new Instance((ObjectTemplate*)(g_mouse->m_dragobject.m_data.as_ptr), m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight));
-                    }
-                    else if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_INSTANCE) {
-                        //Move the instance in dragobject at the correct position
-                        ((Instance*)(g_mouse->m_dragobject.m_data.as_ptr))->MoveTo(m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight);
-                    }
-                }
-                ((InstanceLayer*)curlayer)->CheckMouseInput();
-            }
-        }
+        UpdateInteraction();
     }
     ////////////////
 
 
     //Bottom Bar update
+    if(m_editor->m_app != NULL) {
+        UpdateBottomBar();
+    }
+
+}
+
+/////////////////////////
+//Mouse interactions
+
+void Level::UpdateInteraction() {
+    Layer* curlayer = GetLayer(m_selectedlayer);
+
+    if(curlayer->m_visible) {   //Make interacting with a hidden layer impossible to prevent user mistakes
+        if(curlayer->m_type == LAYERID_GRID) {
+            UpdateInteractionGridLayer();
+        }
+        else if(curlayer->m_type == LAYERID_INSTANCE) {     //instance
+            UpdateInteractionInstanceLayer();
+        }
+    }
+}
+
+void Level::UpdateInteractionGridLayer() {
+    Layer* curlayer = GetLayer(m_selectedlayer);
+
+    switch(m_selectedtool) {
+        case 0:     //painting
+            PenUpdate((GridLayer*)curlayer);
+        break;
+
+        case 1:     //rectangle
+            RectUpdate((GridLayer*)curlayer);
+        break;
+    }
+}
+
+void Level::UpdateInteractionInstanceLayer() {
+    Layer* curlayer = GetLayer(m_selectedlayer);
+
+    if(g_mouse->m_havebeenused == false && IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && g_mouse->m_havedragobject) {
+        if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_OBJECTTEMPLATE) {
+            //spawn new instance of object                   ptr given by ObjectList
+            ((InstanceLayer*)curlayer)->Add(new Instance((ObjectTemplate*)(g_mouse->m_dragobject.m_data.as_ptr), m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight));
+        }
+        else if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_INSTANCE) {
+            //Move the instance in dragobject at the correct position
+            ((Instance*)(g_mouse->m_dragobject.m_data.as_ptr))->MoveTo(m_overredboxx * m_boxwidth, m_overredboxy * m_boxheight);
+        }
+    }
+
+    //Check if an instance of the selected layer is clicked by the user
+    ((InstanceLayer*)curlayer)->CheckMouseInput();
+}
+
+////////////////////
+
+void Level::UpdateBottomBar() {
+    BottomBar* bottombar = m_editor->m_app->m_bottombar;
     if(g_mouse->m_havebeenused == false) {
         //TODO: better way of doing this
         int xtodisplay = m_relativemouseposx / m_zoom;
@@ -176,7 +211,7 @@ void Level::Update() {
         if(m_relativemouseposx<0 && m_zoom > 1) xtodisplay--;
         if(m_relativemouseposy<0 && m_zoom > 1) ytodisplay--;
 
-        m_editor->m_bottombar->TextAppend(
+        bottombar->TextAppend(
             "X: " +     std::to_string(xtodisplay) +
             " | Y: " +  std::to_string(ytodisplay) +
             " | TX: " + std::to_string(m_overredboxx) +
@@ -185,13 +220,15 @@ void Level::Update() {
 
         if(m_selectedlayer >= 0) {
             if(GetLayer(m_selectedlayer)->m_type == LAYERID_GRID) {
-                m_editor->m_bottombar->TextAppend(" | Tool: " + std::to_string(m_selectedtool));
-                m_editor->m_bottombar->TextAppend(" | Palette: " + std::to_string(m_selectednumber));
+                bottombar->TextAppend(" | Tool: " + std::to_string(m_selectedtool));
+                bottombar->TextAppend(" | Palette: " + std::to_string(m_selectednumber));
             }
         }
     }
-    ////////////////////
 }
+
+///////////////////////////////
+//Tools
 
 void Level::PenUpdate(GridLayer* curlayer) {
     if(g_mouse->m_havebeenused == false && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -244,6 +281,8 @@ void Level::RectUpdate(GridLayer* curlayer) {
     }
 }
 
+//////////////////////////////////
+//Draw
 
 void Level::Draw() {
     //draw all layers content

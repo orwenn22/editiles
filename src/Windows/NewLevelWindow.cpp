@@ -9,15 +9,18 @@
 #include "../GUI/WindowManager.h"
 #include "WinIDs.h"
 
-extern Editor* g_editor;
 
 void CreateGrid(Button* but) {
     NewLevelWindow* win = (NewLevelWindow*)(but->m_parrent->m_window);
-    g_editor->CreateNewLevel(win->m_vargridwidth, win->m_vargridheight, win->m_varboxwidth, win->m_varboxheight);
-    g_editor->m_winmanager->Remove(win);
+    Editor* editor = win->m_editor;
+    
+    editor->CreateNewLevel(win->m_vargridwidth, win->m_vargridheight, win->m_varboxwidth, win->m_varboxheight);
+    win->m_parrent->Remove(win);
 }
 
-NewLevelWindow::NewLevelWindow() : Window() {
+NewLevelWindow::NewLevelWindow(Editor* editor) : Window() {
+    m_editor = editor;
+
     m_id = WINID_NEWLEVEL;
     SetPosition(100, 100);
 
