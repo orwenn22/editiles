@@ -1,6 +1,8 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
+#include <string>
+
 class Application;
 class BottomBar;
 class Level;
@@ -13,6 +15,7 @@ class Editor {
     public:
     Editor();
     Editor(int lvlwidth, int lvlheight, int tilewidth, int tileheight);
+    Editor(std::string filename);
     ~Editor();
 
     void Update();
@@ -34,6 +37,8 @@ class Editor {
     Application* m_app;
 
     bool m_havelevel;
+
+    std::string m_name;
 };
 
 #endif

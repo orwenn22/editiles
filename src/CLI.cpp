@@ -14,15 +14,7 @@ void OpenEditor(int argc, const char* argv[]) {
     Application* app = new Application();
 
     if(argc == 2) {
-        Editor* editor = new Editor();
-
-        if(argc == 2) {
-            editor->LoadFromFile(argv[1]);
-        }
-        app->AddEditor(editor);
-    }
-    else {
-        app->AddEditor(new Editor());
+        app->LoadFile(argv[1]);
     }
 
     while (!WindowShouldClose()) {
@@ -32,7 +24,7 @@ void OpenEditor(int argc, const char* argv[]) {
             ClearBackground(BLACK);
             app->Draw();
             //DrawPixel(g_winwidth/2, g_winheight/2, RED);
-            DrawFPS(10, 10);
+            DrawFPS(10, 30);
         EndDrawing();
     }
 

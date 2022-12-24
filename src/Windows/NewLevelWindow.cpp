@@ -1,5 +1,6 @@
 #include "NewLevelWindow.h"
 
+#include "../Application.h"
 #include "../Editor.h"
 #include "../GUI/Widget/Button.h"
 #include "../GUI/Widget/IntField.h"
@@ -12,14 +13,14 @@
 
 void CreateGrid(Button* but) {
     NewLevelWindow* win = (NewLevelWindow*)(but->m_parrent->m_window);
-    Editor* editor = win->m_editor;
-    
-    editor->CreateNewLevel(win->m_vargridwidth, win->m_vargridheight, win->m_varboxwidth, win->m_varboxheight);
+    Application* app = win->m_app;
+
+    app->AddEditor(new Editor(win->m_vargridwidth, win->m_vargridheight, win->m_varboxwidth, win->m_varboxheight));
     win->m_parrent->Remove(win);
 }
 
-NewLevelWindow::NewLevelWindow(Editor* editor) : Window() {
-    m_editor = editor;
+NewLevelWindow::NewLevelWindow(Application* app) : Window() {
+    m_app = app;
 
     m_id = WINID_NEWLEVEL;
     SetPosition(100, 100);

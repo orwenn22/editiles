@@ -3,14 +3,12 @@
 
 #include "../GUI/Window.h"
 
-class Editor;
+class Application;
 class WindowManager;
 
-//TODO make this window create a new editor instead of a window.
-//     this will require to make the window a part of the Application and not the Editor.
 class NewLevelWindow : public Window {
     public:
-    NewLevelWindow(Editor* editor);
+    NewLevelWindow(Application* app);
 
     int m_vargridwidth;
     int m_vargridheight;
@@ -18,7 +16,7 @@ class NewLevelWindow : public Window {
     int m_varboxwidth;
     int m_varboxheight;
 
-    Editor* m_editor;
+    Application* m_app;
 };
 
 #endif

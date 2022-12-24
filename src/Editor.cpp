@@ -14,7 +14,6 @@
 #include "TextureManager/TextureManager.h"
 #include "TextureManager/TextureObject.h"
 #include "Windows/Layer/LayerListWindow.h"
-#include "Windows/NewLevelWindow.h"
 #include "Windows/Object/ObjectListWindow.h"
 #include "Windows/PaletteWindow.h"
 #include "Windows/Texture/TextureListWindow.h"
@@ -27,6 +26,8 @@
 
 Editor::Editor() {
     m_app = NULL;
+
+    m_name = "Untitled";
     
     m_havelevel = false;
     m_level = NULL;
@@ -38,9 +39,13 @@ Editor::Editor() {
 }
 
 Editor::Editor(int lvlwidth, int lvlheight, int tilewidth, int tileheight) : Editor() {
-    m_level = new Level(lvlwidth, lvlheight, tilewidth, tileheight);
-    m_havelevel = true;
+    CreateNewLevel(lvlwidth, lvlheight, tilewidth, tileheight);
 }
+
+Editor::Editor(std::string filename) : Editor() {
+    LoadFromFile(filename.c_str());
+}
+
 
 Editor::~Editor() {
     if(m_havelevel) {
@@ -52,12 +57,17 @@ Editor::~Editor() {
 
 void Editor::Update() {
     m_winmanager->Update();
+    for(Window* w : m_winmanager->m_windows) {
+        if(w->m_y < 21) {
+            w->SetPosition(w->m_x, 21);
+        }
+    }
+
+
     if(m_havelevel) {
         m_level->Update();
     }
     KeyBinds();
-
-    
 }
 
 void Editor::Draw() {
@@ -134,16 +144,6 @@ void Editor::KeyBinds() {
             }
         }
 
-        if(IsKeyPressed(KEY_N)) {                   //NEW LEVEL WINDOW
-            Window* winptr = m_winmanager->FindWithID(WINID_NEWLEVEL);
-            if(winptr == NULL) {
-                m_winmanager->Add(new NewLevelWindow(this));
-            }
-            else {
-                m_winmanager->BringOnTop(winptr);
-            }
-        }
-
     }
     else if(IsKeyDown(KEY_LEFT_CONTROL)) {
         if(IsKeyPressed(KEY_KP_0) && m_havelevel) {
@@ -164,11 +164,11 @@ void Editor::KeyBinds() {
         }
     }
     else {
-        if(IsKeyPressed(KEY_G)) {
+        if(IsKeyPressed(KEY_G) && m_havelevel) {
             m_level->m_showgrid = !m_level->m_showgrid;
         }
 
-        if(IsKeyPressed(KEY_N)) {
+        if(IsKeyPressed(KEY_N) && m_havelevel) {
             m_level->m_shownumbers = !m_level->m_shownumbers;
         }
     }
@@ -234,5 +234,7 @@ void Editor::LoadFromFile(const char* filename) {
 
         m_level->m_editor = this;
         m_level->m_isineditor = true;
+
+        m_name = std::string(filename);
     }
 }

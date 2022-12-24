@@ -34,7 +34,7 @@ Level::Level(int width, int height, int boxwidth, int boxheight) {
     m_isineditor = false;
 
     m_x = 10;
-    m_y = 10;
+    m_y = 30;
 
     m_showgrid = true;
     m_shownumbers = true;
