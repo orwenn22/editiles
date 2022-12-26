@@ -11,6 +11,7 @@
 #include "../GUI/WindowManager.h"
 #include "../Level.h"
 #include "../ParseFunctions.h"
+#include "../TextureManager/TextureManager.h"
 #include "../Windows/Layer/LayerInfoWindow.h"
 #include "../Windows/WinIDs.h"
 
@@ -74,8 +75,13 @@ void LayerList::LeftReleaseOn(int releaseindex) {
     }
     //type texture
     else if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_TEXTURE) {
-        m_editor->m_level->GetLayer(releaseindex)->m_havetexture = true;
-        m_editor->m_level->GetLayer(releaseindex)->m_textureobj = (TextureObject*) g_mouse->m_dragobject.m_data.as_ptr;
+        TextureObject* txtrobj = (TextureObject*)(g_mouse->m_dragobject.m_data.as_ptr);
+
+        if(m_editor->m_texturemanager->GetIndex(txtrobj) != -1) {   //verify if the texture don't come from another tab
+            m_editor->m_level->GetLayer(releaseindex)->m_havetexture = true;
+            m_editor->m_level->GetLayer(releaseindex)->m_textureobj = (TextureObject*) g_mouse->m_dragobject.m_data.as_ptr;
+        }
+        
     }
 }
 

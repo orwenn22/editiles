@@ -36,3 +36,10 @@ TextureObject* TextureManager::Get(int index) {
     }
     return NULL;
 }
+
+int TextureManager::GetIndex(TextureObject* txtrobj) {
+    for(int i = 0; i < m_texturecount; i++) {
+        if(m_textures[i] == txtrobj) return i;
+    }
+    return -1;
+}

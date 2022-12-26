@@ -14,7 +14,7 @@ class TextureManager {
     void Add(TextureObject* newtxtr);
     void Remove(TextureObject* txtrptr);
     TextureObject* Get(int index);
-
+    int GetIndex(TextureObject* txtrobj);
 
     Editor* m_parrent;
 

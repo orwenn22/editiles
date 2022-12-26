@@ -9,6 +9,7 @@
 #include "../ObjectManager/ObjectManager.h"
 #include "../ObjectManager/ObjectTemplate.h"
 #include "../ParseFunctions.h"
+#include "../TextureManager/TextureManager.h"
 #include "../Windows/Object/ObjectInfoWindow.h"
 #include "../Windows/WinIDs.h"
 
@@ -52,9 +53,13 @@ void ObjectList::LeftReleaseOn(int releaseindex) {
     ObjectTemplate* objptr = m_editor->m_level->m_objectmanager->Get(releaseindex);
 
     if(g_mouse->m_havedragobject /* && g_mouse->m_havebeenused == false */) {
-        if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_TEXTURE) {
-            objptr->m_havetexture = true;
-            objptr->m_textureobj = (TextureObject*)(g_mouse->m_dragobject.m_data.as_ptr);
+        if(g_mouse->m_dragobject.m_type == DRAG_OBJECT_TEXTURE) {       //verify if the texture don't come from another tab
+            TextureObject* txtrobj = (TextureObject*)(g_mouse->m_dragobject.m_data.as_ptr);
+            
+            if(m_editor->m_texturemanager->GetIndex(txtrobj) != -1) {
+                objptr->m_havetexture = true;
+                objptr->m_textureobj = (TextureObject*)(g_mouse->m_dragobject.m_data.as_ptr);
+            }
         }
     }
 }
