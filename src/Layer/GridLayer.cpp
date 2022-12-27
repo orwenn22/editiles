@@ -52,11 +52,14 @@ void GridLayer::Draw(int x, int y) {
 
 
     for(int i = firstybox; i < lastybox; i++) { //Y
+        int paintery = y + i * (m_boxheight*zoom);
         for(int j = firstxbox; j < lastxbox; j++) { //X
             if(m_havetexture) {
+                int painterx = x + j * (m_boxwidth*zoom);
+                
                 //I still can't deside which one is the best so I'm keeping both just in case.
                 //m_textureobj->DrawTile(x + j * (m_boxwidth*zoom), y + i * (m_boxheight*zoom), m_griddata[i*m_width+j], zoom);
-                m_textureobj->DrawTile(x + j * (m_boxwidth*zoom), y + i * (m_boxheight*zoom), m_boxwidth*zoom, m_boxheight*zoom, m_griddata[i*m_width+j]);
+                m_textureobj->DrawTile(painterx, paintery, m_boxwidth*zoom, m_boxheight*zoom, m_griddata[i*m_width+j]);
             }
         }
     }
@@ -82,8 +85,10 @@ void GridLayer::DrawNumbers(int x, int y) {
 
     if(drawnumbers)
     for(int i = firstybox; i < lastybox; i++) { //Y
+        int paintery = y + i * (m_boxheight*zoom) + 2;  //+2 for "padding"
         for(int j = firstxbox; j < lastxbox; j++) { //X
-            DrawText(TextFormat("%i", m_griddata[i*m_width+j]),x + j * (m_boxwidth*zoom) +2, y + i * (m_boxheight*zoom) +2, 10, WHITE);
+            int painterx = x + j * (m_boxwidth*zoom) + 2;
+            DrawText( TextFormat("%i", GetBoxValue(j, i) ), painterx, paintery, 10, WHITE);
         }
     }
 }

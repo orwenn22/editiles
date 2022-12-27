@@ -25,6 +25,7 @@ class Level {
     void RectUpdate(GridLayer* curlayer);
 
     void Draw();
+    void GridDraw();
     void PenDraw();
     void RectDraw();
 

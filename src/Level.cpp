@@ -300,23 +300,7 @@ void Level::Draw() {
     if(m_layercount > 0) {
         //draw grid
         if(m_showgrid) {
-            int firstxbox = -m_x / (m_boxwidth * m_zoom);
-            int firstybox = -m_y / (m_boxheight * m_zoom);
-
-            int lastxbox = firstxbox + (g_winwidth  / (m_boxwidth * m_zoom) ) + 2;
-            int lastybox = firstybox + (g_winheight / (m_boxheight * m_zoom)) + 2;
-
-            if(firstxbox < 0) firstxbox = 0;
-            if(firstybox < 0) firstybox = 0;
-
-            if(lastxbox > m_width) lastxbox = m_width;
-            if(lastybox > m_height) lastybox = m_height;
-
-            for(int i = firstybox; i < lastybox; i++) { //Y
-                for(int j = firstxbox; j < lastxbox; j++) { //X
-                    DrawRectangleLines(m_x + j * (m_boxwidth*m_zoom), m_y + i * (m_boxheight*m_zoom), m_boxwidth*m_zoom, m_boxheight*m_zoom, GRAY);
-                }
-            }
+            GridDraw();
         }
 
         //Draw numbers
@@ -358,6 +342,29 @@ void Level::Draw() {
     }
 }
 
+void Level::GridDraw() {
+    int firstxbox = -m_x / (m_boxwidth * m_zoom);
+    int firstybox = -m_y / (m_boxheight * m_zoom);
+
+    int lastxbox = firstxbox + (g_winwidth  / (m_boxwidth * m_zoom) ) + 2;
+    int lastybox = firstybox + (g_winheight / (m_boxheight * m_zoom)) + 2;
+
+    if(firstxbox < 0) firstxbox = 0;
+    if(firstybox < 0) firstybox = 0;
+
+    if(lastxbox > m_width) lastxbox = m_width;
+    if(lastybox > m_height) lastybox = m_height;
+
+    for(int i = firstybox; i < lastybox; i++) { //Y
+        int ypainter = m_y + i * (m_boxheight*m_zoom);
+
+        for(int j = firstxbox; j < lastxbox; j++) { //X
+            int xpainter = m_x + j * (m_boxwidth*m_zoom);
+            
+            DrawRectangleLines(xpainter, ypainter, m_boxwidth*m_zoom, m_boxheight*m_zoom, GRAY);
+        }
+    }
+}
 
 void Level::PenDraw() {
     if(m_ispainting) {
