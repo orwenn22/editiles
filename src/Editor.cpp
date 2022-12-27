@@ -17,6 +17,7 @@
 #include "Windows/Object/ObjectListWindow.h"
 #include "Windows/PaletteWindow.h"
 #include "Windows/Texture/TextureListWindow.h"
+#include "Windows/SaveWindow.h"
 #include "Windows/WinIDs.h"
 #include "Windows/ZoomWindow.h"
 
@@ -159,8 +160,13 @@ void Editor::KeyBinds() {
         }
 
         if(IsKeyPressed(KEY_S) && m_havelevel) {
-            m_level->Save("out.lvl");
-            printf("Level saved !\n");
+            Window* winptr = m_winmanager->FindWithID(WINID_SAVELEVEL);
+            if(winptr == NULL) {
+                m_winmanager->Add(new SaveWindow(this));
+            }
+            else {
+                m_winmanager->BringOnTop(winptr);
+            }
         }
     }
     else {
