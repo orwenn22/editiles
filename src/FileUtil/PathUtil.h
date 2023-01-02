@@ -4,5 +4,6 @@
 #include <string>
 
 std::string GetNameFromPath(std::string path);
+std::string GetPathFromPath(std::string path);
 
 #endif

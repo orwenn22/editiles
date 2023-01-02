@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Editor.h"
+#include "FileUtil/PathUtil.h"
 #include "GUI/MainWindow.h"
 #include "GUI/Mouse/MouseObject.h"
 #include "Level.h"
@@ -42,11 +43,9 @@ int ResizeCommand(int argc, const char* argv[]) {
     std::string outputfilename;
     if(argc == 6) outputfilename = argv[5];
     else {
-        outputfilename = inputfilename;
-        int lastslash = outputfilename.find_last_of("/");
-        outputfilename = outputfilename.substr(0, lastslash+1) 
-                        + "new_" 
-                        + outputfilename.substr(lastslash+1, outputfilename.size());
+        outputfilename = GetPathFromPath(inputfilename)
+                        + "new_"
+                        + GetNameFromPath(inputfilename);
     }
 
     printf("%s\n", outputfilename.c_str());
@@ -73,11 +72,9 @@ int ExpandCommand(int argc, const char* argv[]) {
     std::string outputfilename;
     if(argc == 8) outputfilename = argv[7];
     else {
-        outputfilename = inputfilename;
-        int lastslash = outputfilename.find_last_of("/");
-        outputfilename = outputfilename.substr(0, lastslash+1) 
-                        + "new_" 
-                        + outputfilename.substr(lastslash+1, outputfilename.size());
+        outputfilename = GetPathFromPath(inputfilename)
+                        + "new_"
+                        + GetNameFromPath(inputfilename);
     }
 
     Level* inputlvl = ParseLVLFile(inputfilename);
