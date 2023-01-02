@@ -7,6 +7,7 @@
 #include "../Layer/LayerIDs.h"
 #include "../GUI/Mouse/DragAndDropObject.h"
 #include "../GUI/Mouse/MouseObject.h"
+#include "../GUI/Themes/ColorTheme.h"
 #include "../GUI/Window.h"
 #include "../GUI/WindowManager.h"
 #include "../Level.h"
@@ -106,17 +107,17 @@ void LayerList::DrawElement(int painterx, int paintery, int elementindex) {
 
     //Show the layer's name
     if(curlayer->m_name.empty()) {
-        DrawText("[no name]", painterx+23, paintery+10, 10, WHITE);
+        DrawText("[no name]", painterx+23, paintery+10, 10, g_colortheme.TextColor);
     } else {
-        DrawText(curlayer->m_name.c_str(), painterx+23, paintery+10, 10, WHITE);
+        DrawText(curlayer->m_name.c_str(), painterx+23, paintery+10, 10, g_colortheme.TextColor);
     }
 
     //Show if it is visible or hidden
     if(curlayer->m_visible) {
-        DrawText("[V]", painterx + m_width - 25, paintery + 10, 10, WHITE);
+        DrawText("[V]", painterx + m_width - 25, paintery + 10, 10, g_colortheme.TextColor);
     }
     else {
-        DrawText("[H]", painterx + m_width - 25, paintery + 10, 10, GRAY);
+        DrawText("[H]", painterx + m_width - 25, paintery + 10, 10, g_colortheme.OutlineSecondary); //TODO : dedicated color and not OutlineSecondary ?
     }
 }
 

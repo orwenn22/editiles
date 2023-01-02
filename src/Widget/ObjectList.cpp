@@ -4,6 +4,7 @@
 #include "../Editor.h"
 #include "../GUI/Mouse/DragAndDropObject.h"
 #include "../GUI/Mouse/MouseObject.h"
+#include "../GUI/Themes/ColorTheme.h"
 #include "../GUI/WindowManager.h"
 #include "../Level.h"
 #include "../ObjectManager/ObjectManager.h"
@@ -65,7 +66,7 @@ void ObjectList::LeftReleaseOn(int releaseindex) {
 }
 
 void ObjectList::DrawElement(int painterx, int paintery, int elementindex) {
-    DrawText(m_editor->m_level->m_objectmanager->Get(elementindex)->m_name.c_str(), painterx+3, paintery+10, 10, WHITE);
+    DrawText(m_editor->m_level->m_objectmanager->Get(elementindex)->m_name.c_str(), painterx+3, paintery+10, 10, g_colortheme.TextColor);
 }
 
 int ObjectList::GetElementCount() {

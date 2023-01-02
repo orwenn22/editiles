@@ -3,6 +3,7 @@
 #include "Editor.h"
 #include "GUI/BottomBar.h"
 #include "GUI/Mouse/MouseObject.h"
+#include "GUI/Themes/ColorTheme.h"
 #include "GUI/WindowCorner.h"
 #include "GUI/WindowManager.h"
 #include "Windows/NewLevelWindow.h"
@@ -75,6 +76,8 @@ void Application::UpdateEditor() {
 
 
 void Application::Draw() {
+    ClearBackground(g_colortheme.Background);
+
     DrawEditor();
 
     m_tabbar->Draw();

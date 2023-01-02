@@ -2,6 +2,7 @@
 
 #include "../Editor.h"
 #include "../GUI/Mouse/MouseObject.h"
+#include "../GUI/Themes/ColorTheme.h"
 #include "../GUI/Widget/WidgetManager.h"
 #include "../GUI/WindowManager.h"
 #include "../Level.h"
@@ -34,18 +35,18 @@ void ImageFileReceiver::Update() {
 }
 
 void ImageFileReceiver::Draw() {
-    DrawLine(m_x, m_y, m_x+20, m_y, WHITE);
-    DrawLine(m_x, m_y, m_x, m_y+20, WHITE);
+    DrawLine(m_x, m_y, m_x+20, m_y, g_colortheme.TextColor);
+    DrawLine(m_x, m_y, m_x, m_y+20, g_colortheme.TextColor);
 
-    DrawLine(m_x+m_width, m_y, m_x+m_width-20, m_y, WHITE);
-    DrawLine(m_x+m_width, m_y, m_x+m_width, m_y+20, WHITE);
+    DrawLine(m_x+m_width, m_y, m_x+m_width-20, m_y, g_colortheme.TextColor);
+    DrawLine(m_x+m_width, m_y, m_x+m_width, m_y+20, g_colortheme.TextColor);
 
-    DrawLine(m_x, m_y+m_height, m_x+20, m_y+m_height, WHITE);
-    DrawLine(m_x, m_y+m_height, m_x, m_y+m_height-20, WHITE);
+    DrawLine(m_x, m_y+m_height, m_x+20, m_y+m_height, g_colortheme.TextColor);
+    DrawLine(m_x, m_y+m_height, m_x, m_y+m_height-20, g_colortheme.TextColor);
 
-    DrawLine(m_x+m_width, m_y+m_height, m_x+m_width-20, m_y+m_height, WHITE);
-    DrawLine(m_x+m_width, m_y+m_height, m_x+m_width, m_y-20+m_height, WHITE);
+    DrawLine(m_x+m_width, m_y+m_height, m_x+m_width-20, m_y+m_height, g_colortheme.TextColor);
+    DrawLine(m_x+m_width, m_y+m_height, m_x+m_width, m_y-20+m_height, g_colortheme.TextColor);
 
-    DrawText("Drag & Drop", m_x, m_y + m_width/2 - 10, 10, WHITE);
-    DrawText("a file here", m_x, m_y + m_width/2 + 10, 10, WHITE);
+    DrawText("Drag & Drop", m_x, m_y + m_width/2 - 10, 10, g_colortheme.TextColor);
+    DrawText("a file here", m_x, m_y + m_width/2 + 10, 10, g_colortheme.TextColor);
 }

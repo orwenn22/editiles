@@ -2,6 +2,7 @@
 
 #include "../Editor.h"
 #include "../GUI/Mouse/MouseObject.h"
+#include "../GUI/Themes/ColorTheme.h"
 #include "../GUI/WindowManager.h"
 #include "../ObjectManager/ObjectManager.h"
 #include "../ObjectManager/ObjectProperty.h"
@@ -34,14 +35,14 @@ void ObjectPropertiesList::DrawElement(int painterx, int paintery, int elementin
     ObjectProperty* prop = m_objptr->GetProperty(elementindex);
 
     //vertical separator
-    DrawLine(painterx+separatorx, paintery+1, painterx+separatorx, paintery+m_elementheight, GRAY);
+    DrawLine(painterx+separatorx, paintery+1, painterx+separatorx, paintery+m_elementheight, g_colortheme.OutlineSecondary);
 
     //Draw property name
     if(prop->obligatory) {
-        DrawText(prop->name.c_str(), painterx+3, paintery+2, 10, GRAY);
+        DrawText(prop->name.c_str(), painterx+3, paintery+2, 10, g_colortheme.OutlineSecondary);
     }
     else {
-        DrawText(prop->name.c_str(), painterx+3, paintery+2, 10, WHITE);
+        DrawText(prop->name.c_str(), painterx+3, paintery+2, 10, g_colortheme.TextColor);
     }
 
     //Draw property default value
@@ -50,9 +51,9 @@ void ObjectPropertiesList::DrawElement(int painterx, int paintery, int elementin
     }
     else {
         if(prop->type == OPT_INT) {
-            DrawText(TextFormat("%i", prop->defaultvalue.as_int), painterx + separatorx + 3, paintery+2, 10, WHITE);
+            DrawText(TextFormat("%i", prop->defaultvalue.as_int), painterx + separatorx + 3, paintery+2, 10, g_colortheme.TextColor);
         } else if(prop->type == OPT_STR) {
-            DrawText(TextFormat("%s", prop->defaultvalue.as_str), painterx + separatorx + 3, paintery+2, 10, WHITE);
+            DrawText(TextFormat("%s", prop->defaultvalue.as_str), painterx + separatorx + 3, paintery+2, 10, g_colortheme.TextColor);
         }
     }
 }

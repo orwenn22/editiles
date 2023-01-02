@@ -2,6 +2,7 @@
 
 #include "../Editor.h"
 #include "../GUI/Mouse/MouseObject.h"
+#include "../GUI/Themes/ColorTheme.h"
 #include "../Layer/Layer.h"
 #include "../Layer/LayerIDs.h"
 #include "../Level.h"
@@ -100,7 +101,7 @@ void Palette::Draw() {
     }
 
     //widget outline
-    DrawRectangleLines(m_x, m_y, m_width, m_height, WHITE);
+    DrawRectangleLines(m_x, m_y, m_width, m_height, g_colortheme.OutlineColor);
 }
 
 void Palette::DrawTiles(Layer* layer) {

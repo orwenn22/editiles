@@ -22,7 +22,6 @@ void OpenEditor(int argc, const char* argv[]) {
         app->Update();
         
         BeginDrawing();
-            ClearBackground(BLACK);
             app->Draw();
             //DrawPixel(g_winwidth/2, g_winheight/2, RED);
             DrawFPS(10, 30);

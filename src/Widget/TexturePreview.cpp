@@ -1,6 +1,7 @@
 #include "TexturePreview.h"
 
 #include "../GUI/Mouse/MouseObject.h"
+#include "../GUI/Themes/ColorTheme.h"
 #include "../TextureManager/TextureObject.h"
 
 #include <raylib.h>
@@ -39,7 +40,7 @@ void TexturePreview::Update() {
 }
 
 void TexturePreview::Draw() {
-    DrawRectangleLines(m_x, m_y, m_width, m_height, WHITE);
+    DrawRectangleLines(m_x, m_y, m_width, m_height, g_colortheme.OutlineColor);
     DrawTextureRec(
         m_textureobj->m_texture,
         {(float)-m_texturex, (float)-m_texturey, (float)(m_width-2), (float)(m_height-2)},
