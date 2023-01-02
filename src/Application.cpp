@@ -135,6 +135,12 @@ void Application::KeyBindsUpdate() {
     if(IsKeyDown(KEY_LEFT_ALT) && IsKeyPressed(KEY_N)) {                   //NEW LEVEL WINDOW
         OpenNewLevelWindow();
     }
+
+    //TODO : add a way to switch theme from the GUI and remove this
+    if(IsKeyPressed(KEY_TAB)) {
+        if(g_colortheme == (ColorTheme*)&DefaultDarkTheme) g_colortheme = (ColorTheme*)&DefaultLightTheme;
+        else g_colortheme = (ColorTheme*)&DefaultDarkTheme;
+    }
 }
 
 void Application::OpenNewLevelWindow() {
