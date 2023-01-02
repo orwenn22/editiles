@@ -2,6 +2,7 @@
 
 #include "../DragObjectIDs.h"
 #include "../Editor.h"
+#include "../FileUtil/PathUtil.h"
 #include "../GUI/Mouse/MouseObject.h"
 #include "../GUI/WindowManager.h"
 #include "../Level.h"
@@ -66,7 +67,7 @@ void TextureList::PreInputCheck() {
     //Drag and drop file to list            
     if(g_mouse->m_havefiles) {
         if(g_mouse->m_fileslist.count == 1) {
-            TextureObject* newtxtrobj =  new TextureObject(g_mouse->m_fileslist.paths[0], "Imported Texture", m_editor->m_level->m_boxwidth, m_editor->m_level->m_boxheight);
+            TextureObject* newtxtrobj =  new TextureObject(g_mouse->m_fileslist.paths[0], GetNameFromPath(g_mouse->m_fileslist.paths[0]), m_editor->m_level->m_boxwidth, m_editor->m_level->m_boxheight);
             if(newtxtrobj->m_texture.id <= 0) {     //loading failure
                 delete newtxtrobj;
             } else {    //success
