@@ -76,7 +76,7 @@ void Application::UpdateEditor() {
 
 
 void Application::Draw() {
-    ClearBackground(g_colortheme.Background);
+    ClearBackground(g_colortheme->Background);
 
     DrawEditor();
 

@@ -53,9 +53,9 @@ void TextureList::LeftClickOn(int clickindex) {
 void TextureList::DrawElement(int painterx, int paintery, int elementindex) {
         //label
         if(m_editor->m_texturemanager->Get(elementindex)->m_name.empty()) {
-            DrawText("[no name]", painterx+3, paintery+10, 10, g_colortheme.TextColor);
+            DrawText("[no name]", painterx+3, paintery+10, 10, g_colortheme->TextColor);
         } else {
-            DrawText(m_editor->m_texturemanager->Get(elementindex)->m_name.c_str(), painterx+3, paintery+10, 10, g_colortheme.TextColor);
+            DrawText(m_editor->m_texturemanager->Get(elementindex)->m_name.c_str(), painterx+3, paintery+10, 10, g_colortheme->TextColor);
         }
 
 }

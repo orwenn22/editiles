@@ -40,7 +40,7 @@ void TexturePreview::Update() {
 }
 
 void TexturePreview::Draw() {
-    DrawRectangleLines(m_x, m_y, m_width, m_height, g_colortheme.OutlineColor);
+    DrawRectangleLines(m_x, m_y, m_width, m_height, g_colortheme->OutlineColor);
     DrawTextureRec(
         m_textureobj->m_texture,
         {(float)-m_texturex, (float)-m_texturey, (float)(m_width-2), (float)(m_height-2)},

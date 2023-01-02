@@ -107,17 +107,17 @@ void LayerList::DrawElement(int painterx, int paintery, int elementindex) {
 
     //Show the layer's name
     if(curlayer->m_name.empty()) {
-        DrawText("[no name]", painterx+23, paintery+10, 10, g_colortheme.TextColor);
+        DrawText("[no name]", painterx+23, paintery+10, 10, g_colortheme->TextColor);
     } else {
-        DrawText(curlayer->m_name.c_str(), painterx+23, paintery+10, 10, g_colortheme.TextColor);
+        DrawText(curlayer->m_name.c_str(), painterx+23, paintery+10, 10, g_colortheme->TextColor);
     }
 
     //Show if it is visible or hidden
     if(curlayer->m_visible) {
-        DrawText("[V]", painterx + m_width - 25, paintery + 10, 10, g_colortheme.TextColor);
+        DrawText("[V]", painterx + m_width - 25, paintery + 10, 10, g_colortheme->TextColor);
     }
     else {
-        DrawText("[H]", painterx + m_width - 25, paintery + 10, 10, g_colortheme.OutlineSecondary); //TODO : dedicated color and not OutlineSecondary ?
+        DrawText("[H]", painterx + m_width - 25, paintery + 10, 10, g_colortheme->OutlineSecondary); //TODO : dedicated color and not OutlineSecondary ?
     }
 }
 

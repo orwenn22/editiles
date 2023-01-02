@@ -36,17 +36,17 @@ void InstancePropertiesList::DrawElement(int painterx, int paintery, int element
     ObjectProperty* property = m_instanceptr->GetProperty(elementindex);
     
     //Display the name of the property at the left
-    DrawText(property->name.c_str() ,painterx + 2, paintery + 2, 10, g_colortheme.TextColor);
+    DrawText(property->name.c_str() ,painterx + 2, paintery + 2, 10, g_colortheme->TextColor);
 
     //Separator in the middle
-    DrawLine(painterx + xcenter, paintery, painterx + xcenter, paintery + m_elementheight, g_colortheme.OutlineSecondary);
+    DrawLine(painterx + xcenter, paintery, painterx + xcenter, paintery + m_elementheight, g_colortheme->OutlineSecondary);
 
     //Display the value of the property on the right
     if(property->type == OPT_INT) {
-        DrawText(TextFormat("%i", m_instanceptr->m_properties[elementindex].as_int), painterx + xcenter + 2, paintery + 2, 10, g_colortheme.TextColor);
+        DrawText(TextFormat("%i", m_instanceptr->m_properties[elementindex].as_int), painterx + xcenter + 2, paintery + 2, 10, g_colortheme->TextColor);
     }
     else if(property->type == OPT_STR) {
-        DrawText(m_instanceptr->m_properties[elementindex].as_str, painterx + xcenter + 2, paintery + 2, 10, g_colortheme.TextColor);
+        DrawText(m_instanceptr->m_properties[elementindex].as_str, painterx + xcenter + 2, paintery + 2, 10, g_colortheme->TextColor);
     }
 }
 

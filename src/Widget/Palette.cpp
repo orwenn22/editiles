@@ -101,7 +101,7 @@ void Palette::Draw() {
     }
 
     //widget outline
-    DrawRectangleLines(m_x, m_y, m_width, m_height, g_colortheme.OutlineColor);
+    DrawRectangleLines(m_x, m_y, m_width, m_height, g_colortheme->OutlineColor);
 }
 
 void Palette::DrawTiles(Layer* layer) {
