@@ -25,6 +25,7 @@ Instance::Instance(ObjectTemplate* objtemplate, int x, int y) {
     m_objtemplateptr = objtemplate;
     m_objtemplateptr->AddChildren(this);
     m_isinlayer = false;
+    m_drawonscreen = false;
 
     //Add all the properties to the instance with their default values from the ObjectTemplate
     for(int i = 0; i < m_objtemplateptr->m_propertycount; i++) {
@@ -70,36 +71,37 @@ void Instance::Update(int levelx, int levely, int zoom) {
 }
 
 void Instance::CheckMouseInput() {
-    if(g_mouse->m_havebeenused == false) {
-        if(g_mouse->m_x >= m_x && g_mouse->m_x < m_x+m_width
-        && g_mouse->m_y >= m_y && g_mouse->m_y < m_y+m_height) {
-            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                    printf("WOW\n");
-                    printf("property count : %li\n", m_properties.size());
+    if(g_mouse->m_havebeenused) return;
 
-                    g_mouse->GiveDragObject(DragAndDropObject(DRAG_OBJECT_INSTANCE, this, "Instance"));
-            }
+    if(g_mouse->m_x >= m_x && g_mouse->m_x < m_x+m_width
+    && g_mouse->m_y >= m_y && g_mouse->m_y < m_y+m_height) {
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            printf("WOW\n");
+            printf("property count : %li\n", m_properties.size());
 
-            if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
-                bool needcreation = true;
-                for(unsigned int i = 0; i < leveditor->m_winmanager->GetWindowCount(); i++) {
-                    Window* win = leveditor->m_winmanager->Get(i);
-                    if(win->m_id == WINID_INSTANCEINFO) {
-                            if(((InstanceInfoWindow*)win)->m_instanceptr == this) {
-                            leveditor->m_winmanager->BringOnTop(win);
-                            needcreation = false;
-                            break;
-                        }
-                    }
-                    
-                }
-                if(needcreation) {
-                    leveditor->m_winmanager->Add(new InstanceInfoWindow(this));
-                }
-            }
-            g_mouse->m_havebeenused = false;
+            g_mouse->GiveDragObject(DragAndDropObject(DRAG_OBJECT_INSTANCE, this, "Instance"));
         }
+
+        if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+            bool needcreation = true;
+            for(unsigned int i = 0; i < leveditor->m_winmanager->GetWindowCount(); i++) {
+                Window* win = leveditor->m_winmanager->Get(i);
+                if(win->m_id == WINID_INSTANCEINFO) {
+                    if(((InstanceInfoWindow*)win)->m_instanceptr == this) {
+                        leveditor->m_winmanager->BringOnTop(win);
+                        needcreation = false;
+                        break;
+                    }
+                }
+                    
+            }
+            if(needcreation) {
+                leveditor->m_winmanager->Add(new InstanceInfoWindow(this));
+            }
+        }
+        g_mouse->m_havebeenused = false;
     }
+
 }
 
 void Instance::Draw() {

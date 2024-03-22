@@ -52,7 +52,7 @@ ObjectTemplate::~ObjectTemplate() {
     //delete all the instances in the level that uses this object
     while(m_childrencount != 0) {
         Instance* inst = m_children[0];
-        inst->m_parrent->RemoveWithPtr(inst);   //this will also deallocate the instance and remove it from m_children
+        inst->m_parrent->RemoveWithPtrNoTrashcan(inst);   //this will also deallocate the instance and remove it from m_children
     }
 
     //Do this just in case
