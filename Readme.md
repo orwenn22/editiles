@@ -1,5 +1,5 @@
 # Editiles
-## A "_small_" and "_simple_" tilemap editor.
+## A tilemap editor.
 
 ![](screenshots/screenshot_27_12_22.png)
 
@@ -13,17 +13,17 @@ But if you really want to try it out, on linux you can compile it like this:
 ```sh
 git clone --recurse-submodules https://github.com/orwenn22/editiles
 cd editiles
-git clone https://github.com/raysan5/raylib
-cd raylib/src
-make
-cd ../..
-make
+git clone https://github.com/raysan5/raylib --depth=1
+mkdir build
+cd build
+cmake .. -G Ninja
+ninja
 ```
 On other platforms, you might need to modify the Makefile.
 
 The only real dependency is [raylib](https://github.com/raysan5/raylib), a library that can handle stuff like drawing on a window, input, etc... If you already have it installed you probably don't need to clone it.
 
-There is no documentation (_yet_) so your only way to know how it works and how to use it is to look at the source code (but please don't do it because it is really poorly written, your eyes might explode).
+There is no documentation so your only way to know how it works and how to use it is to look at the source code (but please don't do it because it is really poorly written, your eyes might explode).
 
 ## License
 
