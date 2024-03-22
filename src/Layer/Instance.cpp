@@ -82,7 +82,7 @@ void Instance::CheckMouseInput() {
 
             if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
                 bool needcreation = true;
-                for(unsigned int i = 0; i < leveditor->m_winmanager->m_wincount; i++) {
+                for(unsigned int i = 0; i < leveditor->m_winmanager->GetWindowCount(); i++) {
                     Window* win = leveditor->m_winmanager->Get(i);
                     if(win->m_id == WINID_INSTANCEINFO) {
                             if(((InstanceInfoWindow*)win)->m_instanceptr == this) {

@@ -28,7 +28,7 @@ void ObjectList::RightClickOn(int clickindex) {
     ObjectTemplate* objptr = m_editor->m_level->m_objectmanager->Get(clickindex);
     bool needcreation = true;
 
-    for(unsigned int i = 0; i < m_editor->m_winmanager->m_wincount; i++) {
+    for(unsigned int i = 0; i < m_editor->m_winmanager->GetWindowCount(); i++) {
         Window* win = m_editor->m_winmanager->Get(i);
         if(win->m_id == WINID_OBJECTINFO) {
             if(((ObjectInfoWindow*)win)->m_objptr == objptr) {

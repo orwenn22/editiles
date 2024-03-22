@@ -66,7 +66,7 @@ void ObjectPropertiesList::RightClickOn(int elementindex) {
     if(g_mouse->m_x < m_x+separatorx) {     //rename property
         if(prop->obligatory == false) {
             bool needcreation = true;
-            for(unsigned int i = 0; i < m_editor->m_winmanager->m_wincount; i++) {
+            for(unsigned int i = 0; i < m_editor->m_winmanager->GetWindowCount(); i++) {
                 Window* win = m_editor->m_winmanager->Get(i);
 
                 if(win->m_id == WINID_RENAMEPROPERTY) {
@@ -85,7 +85,7 @@ void ObjectPropertiesList::RightClickOn(int elementindex) {
     } else {                //change value
         if(prop->havedefaultvalue) {
             bool needcreation = true;
-            for(unsigned int i = 0; i < m_editor->m_winmanager->m_wincount; i++) {
+            for(unsigned int i = 0; i < m_editor->m_winmanager->GetWindowCount(); i++) {
                 Window* win = m_editor->m_winmanager->Get(i);
 
                 if(win->m_id == WINID_CHANGEPROPERTY) {

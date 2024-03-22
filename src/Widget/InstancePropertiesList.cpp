@@ -56,7 +56,7 @@ void InstancePropertiesList::RightClickOn(int elementindex) {
 
     //Show the window to change the property.
     bool needcreation = true;
-    for(unsigned int i = 0; i < m_editor->m_winmanager->m_wincount; i++) {
+    for(unsigned int i = 0; i < m_editor->m_winmanager->GetWindowCount(); i++) {
         printf("%i\n", i);
         Window* win = m_editor->m_winmanager->Get(i);
         if(win->m_id == WINID_CHANGEINSTANCEPROP) {

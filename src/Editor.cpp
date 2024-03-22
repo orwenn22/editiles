@@ -58,7 +58,8 @@ Editor::~Editor() {
 
 void Editor::Update() {
     m_winmanager->Update();
-    for(Window* w : m_winmanager->m_windows) {
+    for(unsigned int i = 0; i < m_winmanager->GetWindowCount(); ++i) {
+        Window *w = m_winmanager->Get(i);
         if(w->m_y < 21) {
             w->SetPosition(w->m_x, 21);
         }
@@ -217,7 +218,7 @@ void Editor::CreateNewLevel(int width, int height, int boxwidth, int boxheight) 
     m_level = new Level(width, height, boxwidth, boxheight);
     printf("Allocated level at %p, layer count : %i\n", m_level, m_level->m_layercount);
 
-    while(m_winmanager->m_wincount > 0) {
+    while(m_winmanager->GetWindowCount() > 0) {
         m_winmanager->Remove(m_winmanager->Get(0));
     }
 

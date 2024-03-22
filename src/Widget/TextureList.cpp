@@ -27,7 +27,7 @@ void TextureList::RightClickOn(int clickindex) {
     printf("right click on index %i, texture address %p\n", clickindex, m_editor->m_texturemanager->Get(clickindex));
     bool needcreation = true;
 
-    for(unsigned int i = 0; i < m_editor->m_winmanager->m_wincount; i++) {
+    for(unsigned int i = 0; i < m_editor->m_winmanager->GetWindowCount(); i++) {
         Window* win = m_editor->m_winmanager->Get(i);
         if(win->m_id == WINID_TEXTUREINFO) {
             if(((TextureInfoWindow*)win)->m_textureobjectptr == m_editor->m_texturemanager->Get(clickindex)) {
