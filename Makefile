@@ -2,6 +2,7 @@ raylib = raylib/src
 
 
 guisrcdir = ./src/GUI/*.cpp \
+			./src/GUI/Themes/*.cpp \
 		    ./src/GUI/Mouse/*.cpp \
 		    ./src/GUI/Widget/*.cpp \
 
