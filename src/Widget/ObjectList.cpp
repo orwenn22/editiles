@@ -70,7 +70,7 @@ void ObjectList::DrawElement(int painterx, int paintery, int elementindex) {
 }
 
 int ObjectList::GetElementCount() {
-    return m_editor->m_level->m_objectmanager->m_objectcount;
+    return m_editor->m_level->m_objectmanager->GetObjectTemplateCount();
 }
 
 void ObjectList::PreInputCheck() {
@@ -83,7 +83,7 @@ void ObjectList::PreInputCheck() {
             ObjectManager* newobjmanager = ParseOBJTBFile(g_mouse->m_fileslist.paths[0]);
 
             if(newobjmanager != NULL) {     ///newobjmanager is valid
-                if(level->m_objectmanager->m_objectcount == 0) {    //no object in current manager
+                if(level->m_objectmanager->GetObjectTemplateCount() == 0) {    //no object in current manager
                     printf("ObjectList : yay\n");
                     delete level->m_objectmanager;
                     level->m_objectmanager = newobjmanager;

@@ -17,6 +17,7 @@ ObjectManager::~ObjectManager() {
         delete m_objects[i];    //unload memory
     }
     m_objects.clear();          //clear vector
+    EmptyTrashcan();
     printf("deleted objectmanager\n");
 }
 
@@ -40,13 +41,18 @@ void ObjectManager::Delete(ObjectTemplate* objectptr) {
     //delete object from manager
     for(int i = 0; i < m_objectcount; i++) {
         if(m_objects[i] == objectptr) {
-            delete m_objects[i];
+            //delete m_objects[i];
+            m_trashcan.push_back(m_objects[i]);
             m_objects.erase(m_objects.begin() + i);
             m_objectcount--;
             printf("Deleted object, count: %i\n", m_objectcount);
             return;
         }
     }
+}
+
+int ObjectManager::GetObjectTemplateCount() {
+    return m_objectcount;
 }
 
 ObjectTemplate* ObjectManager::Get(int index) {
@@ -99,4 +105,9 @@ void ObjectManager::SaveStandalone() {
     Save(exportfile);
 
     fclose(exportfile);
+}
+
+void ObjectManager::EmptyTrashcan() {
+    for(ObjectTemplate *obj : m_trashcan) delete obj;
+    m_trashcan.clear();
 }

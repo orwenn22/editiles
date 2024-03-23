@@ -31,7 +31,7 @@ void DeleteTextureButton(Button* but) {
     }
 
     //check if texture is used by object templates
-    for(int i = 0; i < editor->m_level->m_objectmanager->m_objectcount; i++) {
+    for(int i = 0; i < editor->m_level->m_objectmanager->GetObjectTemplateCount(); i++) {
         ObjectTemplate* object = editor->m_level->m_objectmanager->Get(i);
         if(object->m_havetexture && object->m_textureobj == textureobject) {
             object->m_havetexture = false;

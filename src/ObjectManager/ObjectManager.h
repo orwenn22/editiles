@@ -16,6 +16,7 @@ class ObjectManager {
     ObjectTemplate* Get(int objectindex);       //return the pointer at index objectindex in m_objects
     int GetIndex(ObjectTemplate* objectptr);    //return the index of objectptr in m_objects
     void Delete(ObjectTemplate* objectptr);     //Delete objectptr of m_objects (will free memory)
+    int GetObjectTemplateCount();
 
     int RenameObject(std::string oldname, std::string newname);     //return 0 if the object was renamed correctly
 
@@ -23,9 +24,13 @@ class ObjectManager {
     void SaveStandalone();
 
 
+    void EmptyTrashcan();
+
+private:
     //object templates have unique names
     std::vector<ObjectTemplate*> m_objects;
     int m_objectcount;
+    std::vector<ObjectTemplate*> m_trashcan;
 };
 
 #endif

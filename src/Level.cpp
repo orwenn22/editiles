@@ -150,6 +150,8 @@ void Level::Update() {
         UpdateBottomBar();
     }
 
+    //If object templates were deleted, deallocate them
+    m_objectmanager->EmptyTrashcan();
 }
 
 /////////////////////////
