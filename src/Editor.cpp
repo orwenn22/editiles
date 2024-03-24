@@ -26,12 +26,11 @@
 #include <raylib.h>
 
 Editor::Editor() {
-    m_app = NULL;
+    m_app = nullptr;
 
     m_name = "Untitled";
-    
-    m_havelevel = false;
-    m_level = NULL;
+
+    m_level = nullptr;
 
     m_texturemanager = new TextureManager(this);
 
@@ -49,7 +48,7 @@ Editor::Editor(std::string filename) : Editor() {
 
 
 Editor::~Editor() {
-    if(m_havelevel) {
+    if(HaveLevel()) {
         delete m_level;
     }
     delete m_texturemanager;
@@ -66,14 +65,14 @@ void Editor::Update() {
     }
 
 
-    if(m_havelevel) {
+    if(HaveLevel()) {
         m_level->Update();
     }
     KeyBinds();
 }
 
 void Editor::Draw() {
-    if(m_havelevel) {
+    if(HaveLevel()) {
         m_level->Draw();
         //m_texturemanager->Get(0)->DrawTile(0, 0, 0);
     }
@@ -82,7 +81,7 @@ void Editor::Draw() {
 
 
 void Editor::KeyBinds() {
-    if(m_havelevel) {
+    if(HaveLevel()) {
         //Switch tool
         if(m_level->m_ispainting == false) {    //can't switch while the tool is being used
             if(IsKeyPressed(KEY_ONE)) {
@@ -96,7 +95,7 @@ void Editor::KeyBinds() {
 
     //Open windows
     if(IsKeyDown(KEY_LEFT_ALT)) {
-        if(IsKeyPressed(KEY_W) && m_havelevel) {   //ZOOM
+        if(IsKeyPressed(KEY_W) && HaveLevel()) {   //ZOOM
             Window* winptr = m_winmanager->FindWithID(WINID_ZOOM);
             if(winptr == NULL) {
                 m_winmanager->Add(new ZoomWindow(this));
@@ -106,7 +105,7 @@ void Editor::KeyBinds() {
             }
         }
 
-        if(IsKeyPressed(KEY_T) && m_havelevel) {   //TEXTURE LIST
+        if(IsKeyPressed(KEY_T) && HaveLevel()) {   //TEXTURE LIST
             Window* winptr = m_winmanager->FindWithID(WINID_TEXTURELIST);
             if(winptr == NULL) {
                 m_winmanager->Add(new TextureListWindow(this));
@@ -116,7 +115,7 @@ void Editor::KeyBinds() {
             }
         }
 
-        if(IsKeyPressed(KEY_L) && m_havelevel) {   //LAYER LIST
+        if(IsKeyPressed(KEY_L) && HaveLevel()) {   //LAYER LIST
             Window* winptr = m_winmanager->FindWithID(WINID_LAYERLIST);
             if(winptr == NULL) {
                 m_winmanager->Add(new LayerListWindow(m_level));
@@ -126,7 +125,7 @@ void Editor::KeyBinds() {
             }
         }
 
-        if(IsKeyPressed(KEY_P) && m_havelevel) {   //PALETTE
+        if(IsKeyPressed(KEY_P) && HaveLevel()) {   //PALETTE
             Window* winptr = m_winmanager->FindWithID(WINID_PALETTE);
             if(winptr == NULL) {
                 m_winmanager->Add(new PaletteWindow(this));
@@ -136,7 +135,7 @@ void Editor::KeyBinds() {
             }
         }
 
-        if(IsKeyPressed(KEY_O) && m_havelevel) {                   //OBJECT LIST WINDOW
+        if(IsKeyPressed(KEY_O) && HaveLevel()) {                   //OBJECT LIST WINDOW
             Window* winptr = m_winmanager->FindWithID(WINID_OBJECTLIST);
             if(winptr == NULL) {
                 m_winmanager->Add(new ObjectListWindow(this));
@@ -148,7 +147,7 @@ void Editor::KeyBinds() {
 
     }
     else if(IsKeyDown(KEY_LEFT_CONTROL)) {
-        if(IsKeyPressed(KEY_KP_0) && m_havelevel) {
+        if(IsKeyPressed(KEY_KP_0) && HaveLevel()) {
             m_level->m_x = 10;
             m_level->m_y = 10;
         }
@@ -160,7 +159,7 @@ void Editor::KeyBinds() {
             }
         }
 
-        if(IsKeyPressed(KEY_S) && m_havelevel) {
+        if(IsKeyPressed(KEY_S) && HaveLevel()) {
             Window* winptr = m_winmanager->FindWithID(WINID_SAVELEVEL);
             if(winptr == NULL) {
                 m_winmanager->Add(new SaveWindow(this));
@@ -170,23 +169,23 @@ void Editor::KeyBinds() {
             }
         }
 
-        if(IsKeyPressed(KEY_I) && m_havelevel) {
+        if(IsKeyPressed(KEY_I) && HaveLevel()) {
             m_level->SaveAsImage("image_export");
         }
     }
     else {
-        if(IsKeyPressed(KEY_G) && m_havelevel) {
+        if(IsKeyPressed(KEY_G) && HaveLevel()) {
             m_level->m_showgrid = !m_level->m_showgrid;
         }
 
-        if(IsKeyPressed(KEY_N) && m_havelevel) {
+        if(IsKeyPressed(KEY_N) && HaveLevel()) {
             m_level->m_shownumbers = !m_level->m_shownumbers;
         }
     }
 }
 
 void Editor::Zoom(int relativezoom, int zoomxcenter, int zoomycenter) {
-    if(m_havelevel == false) {
+    if(HaveLevel() == false) {
         return;
     }
     
@@ -212,7 +211,7 @@ void Editor::Zoom(int relativezoom, int zoomxcenter, int zoomycenter) {
 }
 
 void Editor::CreateNewLevel(int width, int height, int boxwidth, int boxheight) { 
-    if(m_havelevel) {
+    if(HaveLevel()) {
         delete m_level;
         //Do this to avoid problem if the newly created level have different tile sizes.
         delete m_texturemanager;
@@ -226,26 +225,27 @@ void Editor::CreateNewLevel(int width, int height, int boxwidth, int boxheight) 
         m_winmanager->Remove(m_winmanager->Get(0));
     }
 
-    m_havelevel = true;
-
     m_level->m_editor = this;
     m_level->m_isineditor = true;
 }
 
 void Editor::LoadFromFile(const char* filename) {
-    Level* newlevel = ParseLVLFile(std::string(filename));    
+    Level* newlevel = ParseLVLFile(std::string(filename));
 
-    if(newlevel != NULL) {
-        //Add the new level to the editor
-        if(m_havelevel) {
-            delete m_level;
-        }
-        m_havelevel = true;
-        m_level = newlevel;
-
-        m_level->m_editor = this;
-        m_level->m_isineditor = true;
-
-        m_name = std::string(filename);
+    //Add the new level to the editor
+    if(HaveLevel()) {
+        delete m_level;
     }
+    m_level = newlevel;
+
+    if(m_level == nullptr) return;
+
+    m_level->m_editor = this;
+    m_level->m_isineditor = true;
+
+    m_name = std::string(filename);
+}
+
+bool Editor::HaveLevel() {
+    return (m_level != nullptr);
 }

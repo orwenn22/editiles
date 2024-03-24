@@ -126,7 +126,7 @@ std::string Application::GetEditorName(int index) {
 void Application::LoadFile(std::string filename) {
     Editor* neweditor = new Editor(filename.c_str());
 
-    if(neweditor->m_havelevel) AddEditor(neweditor);
+    if(neweditor->HaveLevel()) AddEditor(neweditor);
     else delete neweditor;
 
 }

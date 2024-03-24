@@ -29,14 +29,14 @@ class Editor {
 
     void LoadFromFile(const char* filename);
 
+    bool HaveLevel();
+
     //private:
     Level* m_level;
     TextureManager* m_texturemanager;
     WindowManager* m_winmanager;
 
     Application* m_app;
-
-    bool m_havelevel;
 
     std::string m_name;
 };
