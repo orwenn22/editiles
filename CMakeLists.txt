@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.1)
 set(CMAKE_CXX_STANDARD 17)
 
+# dirty hack to force disable wayland for glfw (idk how to do it properly)
+option(GLFW_BUILD_WAYLAND "yolo" OFF)
+
 project(editiles)
 add_subdirectory(raylib)
 
