@@ -23,6 +23,7 @@ class GridLayer : public Layer {
     void Save(FILE* fileptr) override;
     void SaveStandalone();
     void SaveGridData(FILE* fileptr);
+    void SaveAsImage(std::string filename);
 
     void Resize(int newwidth, int newheight);
     void Expand(int top, int left, int right, int bottom);

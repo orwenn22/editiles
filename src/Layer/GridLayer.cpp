@@ -147,6 +147,28 @@ void GridLayer::SaveGridData(FILE* fileptr) {
     }
 }
 
+void GridLayer::SaveAsImage(std::string filename) {
+    RenderTexture render = LoadRenderTexture(m_width*m_boxwidth, m_height*m_boxheight);
+
+    if(m_havetexture) {
+        BeginTextureMode(render);
+        for (int i = 0; i < m_height; i++) { //Y
+            int paintery = i * m_boxheight;
+            for (int j = 0; j < m_width; j++) { //X
+                int painterx = j * m_boxwidth;
+                m_textureobj->DrawTile(painterx, paintery, m_boxwidth, m_boxheight, m_griddata[i * m_width + j]);
+            }
+        }
+        EndTextureMode();
+    }
+
+    Image export_image = LoadImageFromTexture(render.texture);
+    UnloadRenderTexture(render);
+    ImageFlipVertical(&export_image);
+    ExportImage(export_image, filename.c_str());
+    UnloadImage(export_image);
+}
+
 
 void GridLayer::Resize(int newwidth, int newheight) {
     if(newwidth < 1 || newheight < 1) {

@@ -37,6 +37,7 @@ class Level {
     void SwapLayers(int index1, int index2);
 
     void Save(std::string filename);
+    void SaveAsImage(std::string filename);
     
     void Resize(int newwidth, int newheight);
     void Expand(int top, int left, int right, int bottom);

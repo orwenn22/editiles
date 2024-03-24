@@ -476,6 +476,15 @@ void Level::Save(std::string filename) {
     fclose(savefile);
 }
 
+void Level::SaveAsImage(std::string filename) {
+    //save all layers
+    for(int i = 0; i < m_layercount; i++) {
+        if(m_layers[i]->m_type == LAYERID_GRID)  {
+            ((GridLayer *)(m_layers[i]))->SaveAsImage(filename + std::to_string(i) + ".png");
+        }
+    }
+}
+
 
 void Level::Resize(int newwidth, int newheight) {
     if(newwidth < 1 || newheight < 1) {

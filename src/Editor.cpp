@@ -169,6 +169,10 @@ void Editor::KeyBinds() {
                 m_winmanager->BringOnTop(winptr);
             }
         }
+
+        if(IsKeyPressed(KEY_I) && m_havelevel) {
+            m_level->SaveAsImage("image_export");
+        }
     }
     else {
         if(IsKeyPressed(KEY_G) && m_havelevel) {
